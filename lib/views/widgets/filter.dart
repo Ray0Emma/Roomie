@@ -11,7 +11,10 @@ class FilterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: BorderSide(color: Color(0xff7C7B90), width: 1),
+      ),
       child: SizedBox(
         height: 29,
         width: MediaQuery.of(context).size.width * 0.29,
