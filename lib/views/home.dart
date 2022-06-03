@@ -6,6 +6,8 @@ import 'package:roomie/views/widgets/appbar.dart';
 // import 'package:roomie/views/widgets/request_card.dart';
 import 'package:roomie/views/widgets/filter.dart';
 
+import 'widgets/filterNumber.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -27,10 +29,14 @@ class _HomePageState extends State<HomePage> {
             children: [
               // ****AppBar start****
               MyAppBar(),
+              SizedBox(
+                height: 36,
+              ),
               // ****AppBar End****
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
+                padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
@@ -39,17 +45,26 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                 ),
                 // ***filters***
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Row(
-                    children: [
-                      FilterCard(text: "Filter 0"),
-                      FilterCard(text: "man x"),
-                      FilterCard(text: "woman x"),
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 36,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          FiltreNumber("Filtre"),
+                          FilterCard("room "),
+                          FilterCard("man "),
+                          FilterCard("woman "),
+                          FilterCard("appartement "),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              )
+
+                // *** end filters
+              ),
             ],
           ),
         ),
