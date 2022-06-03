@@ -63,13 +63,7 @@ class _MyAppBarState extends State<MyAppBar> {
             ],
           ),
         ),
-        Positioned(
-          top: 80.0,
-          left: 0.0,
-          right: 0.0,
-          // **** search bar ****
-          child: SearchBar(),
-        ),
+        SearchBar(),
       ],
     );
   }

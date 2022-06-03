@@ -18,11 +18,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xff30816F),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
+    return Scaffold(
+      bottomNavigationBar: MyNavigationBar(),
+      body: SingleChildScrollView(
+        child: Container(
           decoration: BoxDecoration(
             color: Color(0xff30816F),
           ),
