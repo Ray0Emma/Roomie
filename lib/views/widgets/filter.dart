@@ -22,11 +22,11 @@ Widget FilterCard(String name) {
               name,
               style: TextStyle(fontSize: 15),
             ),
-            // Icon(
-            //   Icons.remove_circle,
-            //   color: Color(0xffE74040),
-            //   size: 15,
-            // )
+            Icon(
+              Icons.remove_circle,
+              color: Color(0xffE74040),
+              size: 15,
+            )
           ],
         )),
   );

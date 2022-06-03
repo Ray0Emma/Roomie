@@ -33,7 +33,7 @@ class _MyAppBarState extends State<MyAppBar> {
                             color: Color.fromARGB(255, 224, 224, 224),
                             width: 4),
                         image: DecorationImage(
-                            image: AssetImage("assets/images/users/user1.jpeg"),
+                            image: AssetImage("images/users/user1.jpg"),
                             fit: BoxFit.cover)),
                   ),
                 ],

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:roomie/views/widgets/navigation.dart';
 import 'package:roomie/views/widgets/appbar.dart';
-// import 'package:roomie/views/widgets/request_card.dart';
+import 'package:roomie/views/widgets/request_card.dart';
 import 'package:roomie/views/widgets/filter.dart';
 
 import 'widgets/filterNumber.dart';
@@ -18,12 +18,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: MyNavigationBar(),
-      body: SingleChildScrollView(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xff30816F),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-            color: Color(0xff4943F0),
+            color: Color(0xff30816F),
           ),
           child: Column(
             children: [
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               // ****AppBar End****
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                // height: MediaQuery.of(context).size.height,
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -60,6 +61,39 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    ListView(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      children: [
+                        requestCard("Farah", 21, 1000, "images/users/user1.jpg",
+                            3, "images/users/user2.jpg"),
+                        requestCard(
+                            "Rachid",
+                            21,
+                            2000,
+                            "images/users/ranpo.jpg",
+                            2,
+                            "images/users/ranpo.jpg"),
+                        requestCard(
+                            "Ahmadi",
+                            25,
+                            2300,
+                            "images/users/user1.jpg",
+                            4,
+                            "images/users/user2.jpg"),
+                        requestCard(
+                            "Bourigue",
+                            30,
+                            5000,
+                            "images/users/ranpo.jpg",
+                            4,
+                            "images/users/ranpo.jpg"),
+                      ],
+                    )
                   ],
                 ),
 
