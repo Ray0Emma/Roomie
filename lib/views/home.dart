@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   color: Colors.white,
                 ),
+                // ***filters***
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
