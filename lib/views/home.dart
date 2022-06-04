@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ListView(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       children: [
                         requestCard("Farah", 21, 1000, "images/users/user1.jpg",

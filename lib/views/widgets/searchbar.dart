@@ -16,7 +16,7 @@ class SearchBar extends StatelessWidget {
           children: [
             Expanded(
               child: TextField(
-                cursorColor: Color(0xff4943F0),
+                cursorColor: Color(0xff30816F),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Search by city",
