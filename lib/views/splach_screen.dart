@@ -17,7 +17,8 @@ class SplashScreen extends StatelessWidget {
             splash: SizedBox(
               height: 700,
               width: 180,
-              child: SvgPicture.asset('images/splash.svg', fit: BoxFit.cover),
+              child: SvgPicture.asset('assets/images/splash.svg',
+                  fit: BoxFit.cover),
             ),
             nextScreen: HomePage(),
             splashTransition: SplashTransition.scaleTransition,
