@@ -24,9 +24,9 @@ Widget requestCard(String name, int age, double budget, String localisation,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  scrollImage("images/rooms/room1.webp"),
-                  scrollImage("images/rooms/room2.jpg"),
-                  scrollImage("images/rooms/room3.webp"),
+                  scrollImage("assets/images/rooms/room1.webp"),
+                  scrollImage("assets/images/rooms/room2.jpg"),
+                  scrollImage("assets/images/rooms/room3.webp"),
                 ],
               ),
             ),
