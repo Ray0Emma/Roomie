@@ -44,7 +44,7 @@ class _MyNavigationBarState extends State<MyNavigationBar>
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: "New Request", icon: Icon(Icons.add)),
+          BottomNavigationBarItem(label: "New Request", icon: Icon(Icons.add_circle)),
           BottomNavigationBarItem(
               label: "Near Me", icon: Icon(Icons.location_on)),
           BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
