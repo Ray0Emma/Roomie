@@ -20,7 +20,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: MyNavigationBar(),
         body: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(

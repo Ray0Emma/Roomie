@@ -1,10 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, depend_on_referenced_packages
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import './home.dart';
+import '../views/widgets/navigation.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -20,7 +19,7 @@ class SplashScreen extends StatelessWidget {
               child: SvgPicture.asset('assets/images/splash.svg',
                   fit: BoxFit.cover),
             ),
-            nextScreen: HomePage(),
+            nextScreen: MyNavigationBar(),
             splashTransition: SplashTransition.scaleTransition,
             // pageTransitionType: PageTransitionType.scale,
             backgroundColor: Color.fromARGB(206, 255, 255, 255)));
