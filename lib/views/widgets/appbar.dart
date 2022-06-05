@@ -14,33 +14,27 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        // color: Colors.blueAccent,
-                        border: Border.all(
-                            color: Color.fromARGB(255, 224, 224, 224),
-                            width: 4),
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/users/user1.jpg"),
-                            fit: BoxFit.cover)),
-                  ),
-                ],
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          child: Stack(
+            //  Stack places the objects in the upper left corner
+            children: <Widget>[
+              Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    // color: Colors.blueAccent,
+                    border: Border.all(
+                        color: Color.fromARGB(255, 224, 224, 224), width: 4),
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/users/user1.jpg"),
+                        fit: BoxFit.cover)),
               ),
-              Expanded(
+              Align(
+                alignment: Alignment.center,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: const [
                     Text(
                       "Roomie",
@@ -59,7 +53,7 @@ class _MyAppBarState extends State<MyAppBar> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
