@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../home.dart';
+import '../resources/app_colors.dart';
 
 class MyNavigationBar extends StatefulWidget {
   const MyNavigationBar({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     Text(
-      'New Offer',
+      'Offer',
       style: optionStyle,
     ),
     Text(
@@ -35,13 +36,13 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff30816F),
+      backgroundColor: AppColors.PRIMARY_COLOR,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.PRIMARY_COLOR_LIGHT,
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
@@ -60,8 +61,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Color(0xff30816F),
-              color: Color(0xff3a3a3b),
+              tabBackgroundColor: AppColors.PRIMARY_COLOR,
+              color: AppColors.PRIMARY_COLOR_DARK,
               tabs: [
                 GButton(
                   icon: Icons.home,
@@ -69,7 +70,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                 ),
                 GButton(
                   icon: Icons.add_circle,
-                  text: 'New Offer',
+                  text: 'Offer',
                 ),
                 GButton(
                   icon: Icons.location_on,

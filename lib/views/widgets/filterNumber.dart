@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../resources/app_colors.dart';
+
 Widget FiltreNumber(String name) {
   return InkWell(
     onTap: () {
@@ -12,8 +14,9 @@ Widget FiltreNumber(String name) {
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.white,
-            border: Border.all(color: Colors.black12)),
+            color: AppColors.PRIMARY_COLOR_LIGHT,
+            border: Border.all(
+                color: AppColors.PRIMARY_COLOR_DARK.withOpacity(0.1))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -26,7 +29,7 @@ Widget FiltreNumber(String name) {
             ),
             Text(
               "0",
-              style: TextStyle(fontSize: 15, color: Color(0xffE74040)),
+              style: TextStyle(fontSize: 15, color: AppColors.RED_COLOR),
             )
           ],
         )),
