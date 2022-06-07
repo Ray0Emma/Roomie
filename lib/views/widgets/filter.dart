@@ -3,6 +3,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../resources/app_colors.dart';
+
 Widget FilterCard(String name) {
   return InkWell(
     onTap: () {
@@ -13,8 +15,9 @@ Widget FilterCard(String name) {
         padding: EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.white,
-            border: Border.all(color: Colors.black12)),
+            color: AppColors.PRIMARY_COLOR_LIGHT,
+            border: Border.all(
+                color: AppColors.PRIMARY_COLOR_DARK.withOpacity(0.1))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -24,7 +27,7 @@ Widget FilterCard(String name) {
             ),
             Icon(
               Icons.remove_circle,
-              color: Color(0xffE74040),
+              color: AppColors.RED_COLOR,
               size: 15,
             )
           ],

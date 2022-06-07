@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import '../resources/app_colors.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, double budget, String localisation,
@@ -15,7 +16,7 @@ Widget requestCard(String name, int age, double budget, String localisation,
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16)),
-          color: Color.fromRGBO(245, 247, 249, 0.953),
+          color: AppColors.GRAY_COLOR,
         ),
         child: Column(
           children: [
@@ -33,15 +34,15 @@ Widget requestCard(String name, int age, double budget, String localisation,
             Container(
               margin: EdgeInsets.only(top: 10),
               child: ListTile(
-                title: Text(
-                  name,
-                ),
-                tileColor: Color(0xff060935),
+                title: Text(name,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.BLACK_COLOR)),
                 subtitle: Text(
                   "$age years old",
                 ),
-                trailing:
-                    Icon(Icons.location_on_outlined, color: Color(0xffE74040)),
+                trailing: Icon(Icons.location_on_outlined,
+                    color: AppColors.RED_COLOR),
                 leading: Stack(children: [
                   CircleAvatar(
                     backgroundColor: Color(0xff00A3FF),
@@ -60,9 +61,13 @@ Widget requestCard(String name, int age, double budget, String localisation,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("$capacity personnes",
-                      style: TextStyle(fontWeight: FontWeight.w800)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.BLACK_COLOR)),
                   Text("$budget DH/ month",
-                      style: TextStyle(fontWeight: FontWeight.w800))
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.BLACK_COLOR))
                 ],
               ),
             )
