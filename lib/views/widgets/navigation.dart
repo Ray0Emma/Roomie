@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:roomie/views/login.dart';
 
 import '../home.dart';
 import '../resources/app_colors.dart';
@@ -27,10 +28,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
       'Near Me',
       style: optionStyle,
     ),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
+  Register(),
   ];
 
   @override
