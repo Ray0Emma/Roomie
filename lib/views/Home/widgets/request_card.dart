@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import '../resources/app_colors.dart';
+import 'package:roomie/resources/app_colors.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, double budget, String localisation,

@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roomie/views/resources/app_colors.dart';
-import '../views/widgets/navigation.dart';
+import 'package:roomie/resources/app_colors.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
 
 class SplashScreen extends StatelessWidget {
   @override

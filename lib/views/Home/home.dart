@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:roomie/views/widgets/appbar.dart';
-import 'package:roomie/views/widgets/request_card.dart';
-import 'package:roomie/views/widgets/filter.dart';
-import 'resources/app_colors.dart';
+import 'package:roomie/views/Home/widgets/appbar.dart';
+import 'package:roomie/views/Home/widgets/request_card.dart';
+import 'package:roomie/views/Home/widgets/filter.dart';
+import 'package:roomie/resources/app_colors.dart';
 
-import 'widgets/filterNumber.dart';
+import '../Home/widgets/filterNumber.dart';
 
 class HomePage extends StatelessWidget {
   @override

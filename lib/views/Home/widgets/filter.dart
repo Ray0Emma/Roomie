@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../resources/app_colors.dart';
+import 'package:roomie/resources/app_colors.dart';
 
 Widget FilterCard(String name) {
   return InkWell(
