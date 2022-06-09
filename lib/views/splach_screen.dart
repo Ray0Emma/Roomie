@@ -16,11 +16,12 @@ class SplashScreen extends StatelessWidget {
         title: 'Roomie',
         home: AnimatedSplashScreen(
             duration: 3000,
-            splash: SizedBox(
-              height: 700,
-              width: 180,
-              child: SvgPicture.asset('assets/images/splash.svg',
-                  fit: BoxFit.cover),
+            splash: Container(
+              width: 200,
+              height: 200,
+              child: Image.asset(
+                'assets/images/roomie.png',
+              ),
             ),
             nextScreen: MyNavigationBar(),
             splashTransition: SplashTransition.scaleTransition,

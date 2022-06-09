@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:roomie/resources/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roomie/resources/firebase_auth_constants.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -80,11 +83,11 @@ class _RegisterState extends State<Register> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
+                            width: 200,
+                            height: 200,
                             child: SvgPicture.asset(
                               "assets/images/login.svg",
                             ),
-                            width: 200,
-                            height: 200,
                           ),
                           _inputField(context),
 
@@ -116,7 +119,7 @@ class _RegisterState extends State<Register> {
               borderRadius: BorderRadius.all(Radius.circular(50))),
           child: TextField(
             focusNode: _focusNodes[0],
-            // controller: emailController,
+            controller: _emailController,
             decoration: InputDecoration(
                 hintText: "Your Email",
                 border: OutlineInputBorder(
@@ -138,9 +141,9 @@ class _RegisterState extends State<Register> {
               border: Border.all(color: AppColors.PRIMARY_COLOR, width: 2),
               borderRadius: BorderRadius.all(Radius.circular(50))),
           child: TextField(
+            controller: _passwordController,
+            obscureText: true,
             focusNode: _focusNodes2[0],
-
-            //  controller: passwordController,
             decoration: InputDecoration(
               hintText: "Your Password",
               border: OutlineInputBorder(
@@ -153,8 +156,6 @@ class _RegisterState extends State<Register> {
                     : Colors.grey,
               ),
             ),
-
-            obscureText: true,
           ),
         ),
         SizedBox(
@@ -165,19 +166,18 @@ class _RegisterState extends State<Register> {
           height: 30,
         ),
         ElevatedButton(
-          onPressed: () {
-            //  print(emailController.text);
-            //  print(passwordController.text);
-            // signin();
+          onPressed: () async {
+            authController.login(
+                _emailController.text.trim(), _passwordController.text.trim());
           },
-          child: Text(
-            "Login",
-            style: TextStyle(fontSize: 20),
-          ),
           style: ElevatedButton.styleFrom(
             primary: AppColors.PRIMARY_COLOR,
             shape: StadiumBorder(),
             padding: EdgeInsets.symmetric(vertical: 16),
+          ),
+          child: Text(
+            "Login",
+            style: TextStyle(fontSize: 20),
           ),
         ),
         SizedBox(
@@ -201,57 +201,3 @@ class _RegisterState extends State<Register> {
     );
   }
 }
-
-  /*
-Widget Email(){
-  return  Container(
-    decoration: BoxDecoration(
-        border: Border.all(color: AppColors.PRIMARY_COLOR,width: 2),
-        borderRadius: BorderRadius.all(Radius.circular(50))
-
-    ),
-    child:TextField(
-      focusNode: _focusNodes[0],
-      // controller: emailController,
-      decoration: InputDecoration(
-          hintText: "Username",
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50),
-              borderSide: BorderSide.none),
-              prefixIcon: Icon(
-                Icons.alternate_email,
-                color: _focusNodes[0].hasFocus ? Colors.green : Colors.grey,
-              )
-
-
-      ),
-    ),) ;
-}
-
-Widget Password(context){
-  return Container(
-    decoration: BoxDecoration(
-        border: Border.all(color: AppColors.PRIMARY_COLOR,width: 2),
-        borderRadius: BorderRadius.all(Radius.circular(50))
-
-    ),
-    child: TextField(
-      focusNode: _focusNodes[0],
-
-      //  controller: passwordController,
-      decoration: InputDecoration(
-
-        hoverColor: Colors.red,
-        hintText: "Password",
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50),
-            borderSide: BorderSide.none),
-
-        filled: true,
-        prefixIcon: Icon(Icons.key),
-      ),
-
-      obscureText: true,
-    ),);
-}
-*/
