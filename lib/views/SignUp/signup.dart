@@ -490,9 +490,9 @@ class _SignUp3State extends State<SignUp3> {
                                       borderRadius:BorderRadius.all(Radius.circular(200))
                                   ),
 
-                                  child:CircleAvatar(radius:50,child: Container(
+                                  child:CircleAvatar(radius:34,child: Container(
 
-                                      child: Icon(Icons.school,color:AppColors.PRIMARY_COLOR,size:80,)),
+                                      child: Icon(Icons.school,color:AppColors.PRIMARY_COLOR,size:50,)),
                                     backgroundColor:AppColors.PRIMARY_COLOR.withOpacity(0.3)
                                   ),
                                     ),
@@ -508,9 +508,9 @@ class _SignUp3State extends State<SignUp3> {
                                    borderRadius:BorderRadius.all(Radius.circular(200))
                                ),
 
-                               child:CircleAvatar(radius:50,child: Container(
+                               child:CircleAvatar(radius:34,child: Container(
 
-                                   child: Icon(Icons.card_travel,color:AppColors.GRAY_Forced,size:80,)),
+                                   child: Icon(Icons.card_travel,color:AppColors.GRAY_Forced,size:50,)),
                                    backgroundColor:Colors.white
                                ),
                              ),
@@ -527,8 +527,8 @@ class _SignUp3State extends State<SignUp3> {
                                    borderRadius:BorderRadius.all(Radius.circular(200))
                                ),
 
-                               child:CircleAvatar(radius:50,child: Container(
-                                   child: Icon(Icons.computer,color:AppColors.GRAY_Forced,size:80,)),
+                               child:CircleAvatar(radius:34,child: Container(
+                                   child: Icon(Icons.computer,color:AppColors.GRAY_Forced,size:50,)),
                                    backgroundColor:Colors.white
                                ),
                              ),
@@ -550,6 +550,7 @@ class _SignUp3State extends State<SignUp3> {
                                   SizedBox(height: 40,),
                                   SizedBox(height: 20,),
                                   Container(
+                                    padding: EdgeInsets.all(6),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color:AppColors.PRIMARY_COLOR,
@@ -579,6 +580,7 @@ class _SignUp3State extends State<SignUp3> {
                                   ),
                                   SizedBox(height: 20,),
                                   Container(
+                                    padding: EdgeInsets.all(6),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color:AppColors.PRIMARY_COLOR,
@@ -608,6 +610,7 @@ class _SignUp3State extends State<SignUp3> {
                                   ),
                                   SizedBox(height: 20,),
                                   Container(
+                                    padding: EdgeInsets.all(6),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color:AppColors.PRIMARY_COLOR,
@@ -637,6 +640,7 @@ class _SignUp3State extends State<SignUp3> {
                                   ),
                                   SizedBox(height: 20,),
                                   Container(
+                                    padding: EdgeInsets.all(6),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color:AppColors.PRIMARY_COLOR,
