@@ -477,11 +477,8 @@ class _SignUp3State extends State<SignUp3> {
                     child: SingleChildScrollView(
 
                       child: Column(
-
-
-
-                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [      SizedBox(height: 40,),
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [SizedBox(height: 40,),
                          Row(
                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
@@ -489,7 +486,6 @@ class _SignUp3State extends State<SignUp3> {
                                 Container(
                                   padding: EdgeInsets.all(0),
                                   decoration:BoxDecoration(
-
                                       border: Border.all(color: AppColors.PRIMARY_COLOR,width: 2),
                                       borderRadius:BorderRadius.all(Radius.circular(200))
                                   ),
@@ -514,7 +510,7 @@ class _SignUp3State extends State<SignUp3> {
 
                                child:CircleAvatar(radius:50,child: Container(
 
-                                   child: Icon(Icons.school,color:AppColors.GRAY_Forced,size:80,)),
+                                   child: Icon(Icons.card_travel,color:AppColors.GRAY_Forced,size:80,)),
                                    backgroundColor:Colors.white
                                ),
                              ),
@@ -563,7 +559,7 @@ class _SignUp3State extends State<SignUp3> {
                                     ),
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
-
+                                         hint: Text("      "+listGender[0]),
                                           isExpanded: true,
                                           iconSize: 40,
                                           iconEnabledColor:AppColors.PRIMARY_COLOR,
@@ -592,7 +588,7 @@ class _SignUp3State extends State<SignUp3> {
                                     ),
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
-
+                                          hint: Text("      "+listGender[0]),
                                           isExpanded: true,
                                           iconSize: 40,
                                           iconEnabledColor:AppColors.PRIMARY_COLOR,
@@ -621,7 +617,7 @@ class _SignUp3State extends State<SignUp3> {
                                     ),
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
-
+                                          hint: Text("      "+listGender[0]),
                                           isExpanded: true,
                                           iconSize: 40,
                                           iconEnabledColor:AppColors.PRIMARY_COLOR,
@@ -650,7 +646,7 @@ class _SignUp3State extends State<SignUp3> {
                                     ),
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
-
+                                          hint: Text("      "+listGender[0]),
                                           isExpanded: true,
                                           iconSize: 40,
                                           iconEnabledColor:AppColors.PRIMARY_COLOR,
@@ -678,7 +674,7 @@ class _SignUp3State extends State<SignUp3> {
                                       // signin();
                                     },
                                     child: Text(
-                                      "Continue",
+                                      "Save",
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     style: ElevatedButton.styleFrom(
