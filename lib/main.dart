@@ -1,15 +1,21 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:roomie/controllers/auth_controller.dart';
 import 'package:roomie/resources/app_colors.dart';
+
+import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/SignUp/signup.dart';
+
 import 'package:roomie/views/splach_screen.dart';
 import 'package:get/get.dart';
-import 'package:roomie/views/Login/login.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  theme:
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await firebaseInitialization.then((value) {
+    Get.put(AuthController());
+  });
   ThemeData(
       iconTheme: const IconThemeData(color: Colors.white),
       inputDecorationTheme: InputDecorationTheme(focusColor: Colors.white),
