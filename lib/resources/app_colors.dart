@@ -10,4 +10,6 @@ class AppColors {
   static const Color BLACK_COLOR = Color(0xff060935);
   static const Color RED_COLOR = Color(0xFFe74040);
   static const Color GRAY_COLOR = Color(0xFFF5F7F9);
+  static const Color GRAY_Forced = Color(0xFFB1B3B3);
+
 }
