@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:roomie/controllers/auth_controller.dart';
 import 'package:roomie/resources/app_colors.dart';
+
 import 'package:roomie/resources/firebase_auth_constants.dart';
+import 'package:roomie/views/SignUp/signup.dart';
+
 import 'package:roomie/views/splach_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
@@ -34,8 +37,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home:SignUp(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
+
