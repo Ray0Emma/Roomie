@@ -20,7 +20,7 @@ void main() async {
       iconTheme: const IconThemeData(color: Colors.white),
       inputDecorationTheme: InputDecorationTheme(focusColor: Colors.white),
       colorScheme: ThemeData().colorScheme.copyWith(secondary: Colors.red));
-  SystemChrome.setSystemUIOverlayStyle(
+      SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: AppColors.PRIMARY_COLOR));
   runApp(const MyApp());
 }
