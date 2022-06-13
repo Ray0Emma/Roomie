@@ -6,6 +6,7 @@ import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/Login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:roomie/views/SignUp/signUp2.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -31,7 +32,7 @@ class AuthController extends GetxController {
       // we store our user informations in firestore
       addUser(user);
       // if the user exists and logged in the the user is navigated to the Home Screen
-      Get.offAll(() => MyNavigationBar());
+      Get.offAll(() => SignUp2());
     }
   }
 
@@ -64,6 +65,26 @@ class AuthController extends GetxController {
   }
 
   void addUser(User? user) async {
+    await firebaseFirestore.collection('users').doc(user!.uid).set({
+      'id': user.uid,
+      'name': user.displayName,
+      'email': user.email,
+      'createdon': Timestamp.now(),
+    });
+  }
+
+  void fillProfile(profile, birthday, phone, gender, about) async {
+    User? user = auth.currentUser;
+    await firebaseFirestore.collection('users').doc(user!.uid).update({
+      'profile': profile,
+      'birthday': birthday,
+      'phone': phone,
+      'gender': gender,
+      'about': about,
+    });
+  }
+
+  void addInfo(User? user) async {
     await firebaseFirestore.collection('users').doc(user!.uid).set({
       'id': user.uid,
       'name': user.displayName,
