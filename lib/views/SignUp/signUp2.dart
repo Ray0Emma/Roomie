@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +19,8 @@ class SignUp2 extends StatefulWidget {
 }
 
 class _SignUp2State extends State<SignUp2> {
+  late File _image;
+  final picker = ImagePicker();
   String? selectedcnieliv;
   List listGender = ["Gender", "male", "female"];
   TextEditingController image = TextEditingController();
@@ -25,6 +30,7 @@ class _SignUp2State extends State<SignUp2> {
   TextEditingController textAbout = TextEditingController();
   @override
   void initState() {
+    _image = File('assets/images/users/ranpo.jpg');
     dateinput.text = ""; //set the initial value of text field
     super.initState();
   }
@@ -42,6 +48,14 @@ class _SignUp2State extends State<SignUp2> {
       } else {
         print("error");
       }
+    }
+
+    Future getImage() async {
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+      setState(() {
+        _image = File(pickedFile!.path);
+      });
     }
 
     return SafeArea(
@@ -85,13 +99,23 @@ class _SignUp2State extends State<SignUp2> {
                           Container(
                             width: 150,
                             height: 150,
-                            child: CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                child: Icon(
-                                  Icons.person,
-                                  color: Colors.white,
-                                  size: 100,
-                                )),
+                            child: InkWell(
+                              onTap: getImage,
+                              child: CircleAvatar(
+                                  backgroundColor: Colors.grey,
+                                  // backgroundImage: (_image != null)
+                                  //     ? Image.file(
+                                  //         _image,
+                                  //         fit: BoxFit.cover,
+                                  //       ).image
+                                  //     : AssetImage(
+                                  //         'assets/images/users/ranpo.jpg'),
+                                  child: Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                    size: 100,
+                                  )),
+                            ),
                           ),
                           Form(
                               key: formState,

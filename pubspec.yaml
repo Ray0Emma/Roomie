@@ -45,6 +45,8 @@ dependencies:
   motion_tab_bar_v2: ^0.2.3 #don't need it
   curved_navigation_bar: ^1.0.3 #latest version
   get:
+  image_picker: ^0.8.5+3
+  multiselect_formfield: ^0.1.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
