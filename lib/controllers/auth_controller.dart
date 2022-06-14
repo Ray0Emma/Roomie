@@ -20,7 +20,7 @@ class AuthController extends GetxController {
     firebaseUser = Rx<User?>(auth.currentUser);
     // googleSignInAccount = Rx<GoogleSignInAccount?>(googleSign.currentUser);
 
-    firebaseUser.bindStream(auth.userChanges());
+        firebaseUser.bindStream(auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
 
     // googleSignInAccount.bindStream(googleSign.onCurrentUserChanged);

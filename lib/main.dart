@@ -5,6 +5,7 @@ import 'package:roomie/controllers/auth_controller.dart';
 import 'package:roomie/resources/app_colors.dart';
 
 import 'package:roomie/resources/firebase_auth_constants.dart';
+import 'package:roomie/views/Command/Command.dart';
 import 'package:roomie/views/SignUp/signup.dart';
 
 import 'package:roomie/views/splach_screen.dart';
@@ -14,7 +15,7 @@ import 'package:flutter/services.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebaseInitialization.then((value) {
-    Get.put(AuthController());
+   // Get.put(AuthController());
   });
   ThemeData(
       iconTheme: const IconThemeData(color: Colors.white),
@@ -28,7 +29,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:SignUp(),
+      home:command(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,21 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../../resources/app_colors.dart';
 
-class SignUp2 extends StatefulWidget {
-  const SignUp2({Key? key}) : super(key: key);
+class command extends StatefulWidget {
+  const command({Key? key}) : super(key: key);
   @override
-  State<SignUp2> createState() => _SignUp2State();
+  State<command> createState() => _commandState();
 }
-class _SignUp2State extends State<SignUp2> {
+class _commandState extends State<command> {
   String? selectedcnieliv;
   List listGender=["Gender","farah","rachid","bourigue","hamadi"];
   TextEditingController dateinput = TextEditingController();
+  TextEditingController capacity = TextEditingController();
+
+
   @override
   void initState() {
-    dateinput.text = ""; //set the initial value of text field
+    dateinput.text = "";
+    capacity.text="1";
+    //set the initial value of text field
     super.initState();
   }
   final TextEditingController _emailController = TextEditingController();
@@ -61,6 +67,8 @@ class _SignUp2State extends State<SignUp2> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          
+                          
                           Container(
                             child: CircleAvatar(child: Icon(Icons.person_outline_rounded,color: Colors.white,size:100,),backgroundColor:Colors.grey),
                             width: 150,
@@ -72,54 +80,151 @@ class _SignUp2State extends State<SignUp2> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  SizedBox(height: 20,),
+
+
+                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+
+
+
+                        Expanded(
+                          flex:2,
+                          child: TextFormField(
+                                inputFormatters: [ FilteringTextInputFormatter.digitsOnly],
+                            validator:(value) {
+                            if ( value!.isEmpty ||value.length<10){
+                            return "the phone must be > 10 caracter";}
+                            else return null;},
+                              //   focusNode: _focusNodes[0],
+                              // controller: emailController,
+                              decoration: InputDecoration(
+                                  enabledBorder:OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                    borderSide:BorderSide(
+                                        color: AppColors.PRIMARY_COLOR,
+                                        width: 2),
+                                  ),
+                                  hintText: "Budjet",
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                    borderSide:BorderSide(
+                                        color: AppColors.PRIMARY_COLOR,
+                                        width: 2),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.money,
+                                    //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
+                                  )),),
+                        ),
+                       Expanded(
+                           flex: 3,
+                           child:  Container(
+                         padding: EdgeInsets.symmetric(horizontal: 30),
+                         decoration: BoxDecoration(
+                           border: Border.all(
+                             color:AppColors.PRIMARY_COLOR,
+                             width: 2,
+                           ),
+                           borderRadius: BorderRadius.all(Radius.circular(50)),
+                         ),
+
+
+
+                         child: Row(
+
+                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                           children: [
+                             Expanded(
+                               flex:1,
+                               child: Center(child:IconButton(icon:Icon(Icons.remove,size: 30,) , onPressed: () {  },))),
+                             Expanded(
+                                 flex: 2,
+                               child: TextFormField(
+                                 controller: capacity,
+                                 validator:(value) {
+                                   if ( value!.isEmpty ||value.length<10){
+                                     return "the phone must be > 10 caracter";}
+                                   else return null;},
+                                 //   focusNode: _focusNodes[0],
+                                 // controller: emailController,
+                                 decoration: InputDecoration(
+                                     enabledBorder:OutlineInputBorder(
+                                       borderSide:BorderSide(
+                                           color: AppColors.PRIMARY_COLOR,
+                                           width: 2),
+                                     ),
+
+                                     focusedBorder: OutlineInputBorder(
+                                       borderSide:BorderSide(
+                                           color: AppColors.PRIMARY_COLOR,
+                                           width: 2),
+                                     ),
+                                   ),),
+
+                             ),Expanded(
+                                 flex:1,
+                                 child: Center(child: Text("+")))
+                           ],
+                         ),
+                       ))
+                        ,
+                                    ],),
+                                  SizedBox(height: 15,),
                                   Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color:AppColors.PRIMARY_COLOR,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String>(
 
-                                      child:Center(
-                                          child:TextFormField(
-                                            controller: dateinput,
-                                            decoration: InputDecoration(
-                                                enabledBorder:OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(50),
-                                                  borderSide:BorderSide(
-                                                      color: AppColors.PRIMARY_COLOR,
-                                                      width: 2),
-                                                ),
-                                                hintText: "Enter Date",
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(50),
-                                                  borderSide:BorderSide(
-                                                      color: AppColors.PRIMARY_COLOR,
-                                                      width: 2),
-                                                ),
-                                                prefixIcon: Icon(
-                                                  Icons.calendar_today,
-                                                  //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
-                                                )),
-                                            readOnly: true,  //set it true, so that user will not able to edit text
-                                            onTap: () async {
-                                              DateTime? pickedDate = await showDatePicker(
+                                          isExpanded: true,
+                                          iconSize: 40,
+                                          iconEnabledColor:AppColors.PRIMARY_COLOR,
+                                          iconDisabledColor:AppColors.PRIMARY_COLOR,
+                                          value: selectedcnieliv,
+                                          items: listGender.map((list) {
+                                            return DropdownMenuItem<String>(
+                                                value: list[0],
+                                                child: Text("      "+list,
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                    )));
+                                          }).toList(),
+                                          onChanged: (value) =>
+                                              setState(() => selectedcnieliv = value!)),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15,),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color:AppColors.PRIMARY_COLOR,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String>(
 
-                                                  context: context, initialDate: DateTime.now(),
-                                                  firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                                                  lastDate: DateTime(2101)
-                                              );
-
-                                              if(pickedDate != null ){
-                                                print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-                                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                                                print(formattedDate); //formatted date output using intl package =>  2021-03-16
-                                                //you can implement different kind of Date Format here according to your requirement
-
-                                                setState(() {
-                                                  dateinput.text = formattedDate; //set output date to TextField value.
-                                                });
-                                              }else{
-                                                print("Date is not selected");
-                                              }
-                                            },
-                                          )
-                                      )
+                                          isExpanded: true,
+                                          iconSize: 40,
+                                          iconEnabledColor:AppColors.PRIMARY_COLOR,
+                                          iconDisabledColor:AppColors.PRIMARY_COLOR,
+                                          value: selectedcnieliv,
+                                          items: listGender.map((list) {
+                                            return DropdownMenuItem<String>(
+                                                value: list[0],
+                                                child: Text("      "+list,
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                    )));
+                                          }).toList(),
+                                          onChanged: (value) =>
+                                              setState(() => selectedcnieliv = value!)),
+                                    ),
                                   ),
                                   SizedBox(height: 15,),
                                   Container(
@@ -174,36 +279,6 @@ class _SignUp2State extends State<SignUp2> {
                                         ),
                                         prefixIcon: Icon(
                                           Icons.phone,
-                                          //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
-                                        )),),
-                                  SizedBox(height: 15,),
-                                  TextFormField(
-                                    maxLines: 3,
-                                    validator:(value) {
-                                      if ( value!.isEmpty ||value.length<8){
-                                        return "entrer un Password  begin then 8 caracter";}
-                                      else return null;},
-                                    //   focusNode: _focusNodes[0],
-                                    // controller: emailController,
-                                    decoration: InputDecoration(
-                                        enabledBorder:OutlineInputBorder(
-
-                                          borderRadius: BorderRadius.circular(20),
-                                          borderSide:BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
-                                        ),
-                                        hintText: "A little About You",
-
-                                        focusedBorder: OutlineInputBorder(
-
-                                          borderRadius: BorderRadius.circular(20),
-                                          borderSide:BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.text_fields,
                                           //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),),
                                   SizedBox(height: 20,),
