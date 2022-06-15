@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 class Storage {
   File? _image;
   final picker = ImagePicker();
-
+   String imageUri="";
   Future getImage(BuildContext context) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -60,12 +60,15 @@ class Storage {
     });
 
     await uploadTask.whenComplete(() {
+     // print("*************************************************"+ref.getDownloadURL().toString());
       Navigator.pop(context);
+
       print('finished upload');
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Image uploaded successfully")));
      // progress.value = 0;
     });
+
     return await ref.getDownloadURL();
   }
 }

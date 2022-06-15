@@ -10,10 +10,12 @@ import 'package:roomie/views/Command/Command.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 
+import 'controllers/auth_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebaseInitialization.then((value) {
-   // Get.put(AuthController());
+   Get.put(AuthController());
   });
   ThemeData(
       iconTheme: const IconThemeData(color: Colors.white),

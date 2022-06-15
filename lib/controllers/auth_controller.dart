@@ -5,6 +5,8 @@ import 'package:roomie/views/Home/home.dart';
 import 'package:roomie/views/Login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../views/Command/Command.dart';
+
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
@@ -38,7 +40,7 @@ class AuthController extends GetxController {
         'createdon': Timestamp.now(),
       });
       // if the user exists and logged in the the user is navigated to the Home Screen
-      Get.offAll(() => HomePage());
+      Get.offAll(() => uplodeimg());
     }
   }
 

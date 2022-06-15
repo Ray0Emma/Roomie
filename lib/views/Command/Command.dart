@@ -369,8 +369,11 @@ class _uplodeimgState extends State<uplodeimg> {
                 }),
             TextButton(
                 onPressed: () {
-                 if (image != null)
+                 if (image != null){
                     _storage.uploadFile(image!, context);
+
+               //  print(_storage.uploadFile(image!, context).toString());
+               }
                   else
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("No Image was selected")));
