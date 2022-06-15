@@ -41,10 +41,10 @@ class AuthController extends GetxController {
   _setInitialScreen(User? user) {
     if (user == null) {
       // if the user is not found then the user is navigated to the Register Screen
-      Get.offAll(() => const Register());
+      // Get.offAll(() => const Register());
     } else {
       // we store our user informations in firestore
-      addUser(user);
+      // addUser(user);
       // if the user exists and logged in the the user is navigated to the Home Screen
       // Get.offAll(() => MyNavigationBar());
     }
@@ -61,7 +61,8 @@ class AuthController extends GetxController {
       user = userCredential.user;
       await user!.updateDisplayName(name);
       await user.reload();
-      user = auth.currentUser;
+      user = await auth.currentUser;
+      addUser(user);
       // print(user!.displayName);
     } catch (e) {
       print(e);
@@ -78,8 +79,8 @@ class AuthController extends GetxController {
     await auth.signOut();
   }
 
-  void addUser(User? user) async {
-    await firebaseFirestore.collection('users').doc(user!.uid).set({
+  void addUser(user) async {
+    await firebaseFirestore.collection('users').doc(user?.uid).set({
       'id': user.uid,
       'name': user.displayName,
       'email': user.email,
@@ -130,7 +131,7 @@ class AuthController extends GetxController {
 
     firebase_storage.UploadTask uploadTask;
     // Random rand = new Random();
-    User? user = auth.currentUser;
+    User? user = await auth.currentUser;
 
     _image = File(file.path);
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
@@ -154,8 +155,8 @@ class AuthController extends GetxController {
       Navigator.pop(context);
 
       print('finished upload');
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(await ref.getDownloadURL())));
+      // ScaffoldMessenger.of(context)
+      //     .showSnackBar(SnackBar(content: Text(await ref.getDownloadURL())));
     });
 
     return await ref.getDownloadURL();

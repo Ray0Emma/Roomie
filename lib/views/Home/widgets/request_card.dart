@@ -1,14 +1,28 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:roomie/resources/app_colors.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
+import 'package:roomie/views/Login/login.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, double budget, String localisation,
     int capacity, String profile) {
   return InkWell(
-      onTap: () {
-        null;
+      onTap: () async {
+        User? user;
+        if (await FirebaseAuth.instance.currentUser == null) {
+          // if the user is not found then the user is navigated to the Register Screen
+          Get.offAll(() => const Register());
+        } else {
+          // if the user exists and logged in the the user is navigated to the Home Screen
+          Get.to(() => MyNavigationBar()); //it should be room_details view
+          print('from card');
+        }
+        print('request card');
+        print(await FirebaseAuth.instance.currentUser?.email);
       },
       child: Container(
         height: 300,
