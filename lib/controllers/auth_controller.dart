@@ -84,12 +84,14 @@ class AuthController extends GetxController {
     });
   }
 
-  void addInfo(User? user) async {
-    await firebaseFirestore.collection('users').doc(user!.uid).set({
-      'id': user.uid,
-      'name': user.displayName,
-      'email': user.email,
-      'createdon': Timestamp.now(),
+  void addInfo(status, languages, personality, lifestyle, hobbis) async {
+    User? user = auth.currentUser;
+    await firebaseFirestore.collection('users').doc(user!.uid).update({
+      'status': status,
+      'languages': languages,
+      'personality': personality,
+      'lifestyle': lifestyle,
+      'hobbis': hobbis,
     });
   }
 }
