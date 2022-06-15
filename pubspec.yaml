@@ -46,6 +46,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   motion_tab_bar_v2: ^0.2.3 #don't need it
   curved_navigation_bar: ^1.0.3 #latest version
+  path: ^1.8.1
   get:
 dev_dependencies:
   flutter_test:

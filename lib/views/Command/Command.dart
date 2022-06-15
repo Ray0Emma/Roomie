@@ -1,10 +1,19 @@
+
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-
+import 'package:image_picker/image_picker.dart';
 import '../../resources/app_colors.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io' as io;
+
+import 'upload/storage.dart';
 class command extends StatefulWidget {
   const command({Key? key}) : super(key: key);
   @override
@@ -15,7 +24,6 @@ class _commandState extends State<command> {
   List listGender=["Gender","farah","rachid","bourigue","hamadi"];
   TextEditingController dateinput = TextEditingController();
   TextEditingController capacity = TextEditingController();
-
 
   @override
   void initState() {
@@ -38,30 +46,18 @@ class _commandState extends State<command> {
       }
     }
     return SafeArea(
+
       child: Scaffold(
-        backgroundColor: AppColors.PRIMARY_COLOR,
+        backgroundColor:Colors.white,
         body: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 9, horizontal: 30),
-                child: Row(children: [
-                  Icon(Icons.arrow_back_ios, size: 40, color: Colors.white,),
-                  Text("Fill Profile", style: TextStyle(color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 40),)
-                ],),),
+
               Expanded(
 
                 child: Container(
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            topLeft: Radius.circular(30))
-                    ),
+                  
                     child: SingleChildScrollView(
 
                       child: Column(
@@ -81,93 +77,100 @@ class _commandState extends State<command> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
 
+                                   Row(children: [
 
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                     Expanded(
+
+                                       flex:2,
+                                       child:TextFormField(
+                                       inputFormatters: [ FilteringTextInputFormatter.digitsOnly],
+                                       validator:(value) {
+                                         if ( value!.isEmpty ||value.length<10){
+                                           return "the phone must be > 10 caracter";}
+                                         else return null;},
+                                       //   focusNode: _focusNodes[0],
+                                       // controller: emailController,
+                                       decoration: InputDecoration(
+                                           enabledBorder:OutlineInputBorder(
+                                             borderRadius: BorderRadius.circular(50),
+                                             borderSide:BorderSide(
+                                                 color: AppColors.PRIMARY_COLOR,
+                                                 width: 2),
+                                           ),
+                                           hintText: "Budjet",
+                                           focusedBorder: OutlineInputBorder(
+                                             borderRadius: BorderRadius.circular(50),
+                                             borderSide:BorderSide(
+                                                 color: AppColors.PRIMARY_COLOR,
+                                                 width: 2),
+                                           ),
+                                           prefixIcon: Icon(
+                                             Icons.money,
+                                             //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
+                                           )),), ),
+
+                                     SizedBox(width: 30,),
+                                     Expanded(
+                                       flex: 3,
+                                       child:Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                         Expanded(
+                                           flex: 3,
+                                           child:  Container(
+                                             padding: EdgeInsets.symmetric(horizontal: 30),
+                                             decoration: BoxDecoration(
+                                               border: Border.all(
+                                                 color:AppColors.PRIMARY_COLOR,
+                                                 width: 2,
+                                               ),
+                                               borderRadius: BorderRadius.all(Radius.circular(50)),
+                                             ),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                               children: [
+                                                 Expanded(
+                                                     flex:1,
+                                                     child: Center(
+                                                         child:InkWell(child: Text("+",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w400),),))),
+                                                 SizedBox(width: 10),
+
+                                                 Expanded(
+                                                   flex: 3,
+                                                   child: TextFormField(
+                                                     controller: capacity,
+                                                     validator:(value) {
+                                                       if ( value!.isEmpty ||value.length<10){
+                                                         return "the phone must be > 10 caracter";}
+                                                       else return null;},
+                                                     //   focusNode: _focusNodes[0],
+                                                     // controller: emailController,
+                                                     decoration: InputDecoration(
+
+                                                   contentPadding: EdgeInsets.all((23)),
+                                                       enabledBorder:OutlineInputBorder(
+                                                         borderSide:BorderSide(
+                                                             color: AppColors.PRIMARY_COLOR,
+                                                             width: 2),
+                                                       ),
+
+                                                       focusedBorder: OutlineInputBorder(
+                                                         borderSide:BorderSide(
+                                                             color: AppColors.PRIMARY_COLOR,
+                                                             width: 2),
+                                                       ),
+                                                     ),),
+
+                                                 ),   SizedBox(width: 10)
+                                                 ,Expanded(
+                                                     flex:1,
+                                                     child: InkWell(child: Center(child: Text("-",style: TextStyle(fontSize: 50,fontWeight: FontWeight.w400),))))
+                                               ],
+                                             ),
+                                           )),
+                                     ],)
+                                       ,)
+                                   ],),
 
 
-
-                        Expanded(
-                          flex:2,
-                          child: TextFormField(
-                                inputFormatters: [ FilteringTextInputFormatter.digitsOnly],
-                            validator:(value) {
-                            if ( value!.isEmpty ||value.length<10){
-                            return "the phone must be > 10 caracter";}
-                            else return null;},
-                              //   focusNode: _focusNodes[0],
-                              // controller: emailController,
-                              decoration: InputDecoration(
-                                  enabledBorder:OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    borderSide:BorderSide(
-                                        color: AppColors.PRIMARY_COLOR,
-                                        width: 2),
-                                  ),
-                                  hintText: "Budjet",
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    borderSide:BorderSide(
-                                        color: AppColors.PRIMARY_COLOR,
-                                        width: 2),
-                                  ),
-                                  prefixIcon: Icon(
-                                    Icons.money,
-                                    //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
-                                  )),),
-                        ),
-                       Expanded(
-                           flex: 3,
-                           child:  Container(
-                         padding: EdgeInsets.symmetric(horizontal: 30),
-                         decoration: BoxDecoration(
-                           border: Border.all(
-                             color:AppColors.PRIMARY_COLOR,
-                             width: 2,
-                           ),
-                           borderRadius: BorderRadius.all(Radius.circular(50)),
-                         ),
-
-
-
-                         child: Row(
-
-                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                           children: [
-                             Expanded(
-                               flex:1,
-                               child: Center(child:IconButton(icon:Icon(Icons.remove,size: 30,) , onPressed: () {  },))),
-                             Expanded(
-                                 flex: 2,
-                               child: TextFormField(
-                                 controller: capacity,
-                                 validator:(value) {
-                                   if ( value!.isEmpty ||value.length<10){
-                                     return "the phone must be > 10 caracter";}
-                                   else return null;},
-                                 //   focusNode: _focusNodes[0],
-                                 // controller: emailController,
-                                 decoration: InputDecoration(
-                                     enabledBorder:OutlineInputBorder(
-                                       borderSide:BorderSide(
-                                           color: AppColors.PRIMARY_COLOR,
-                                           width: 2),
-                                     ),
-
-                                     focusedBorder: OutlineInputBorder(
-                                       borderSide:BorderSide(
-                                           color: AppColors.PRIMARY_COLOR,
-                                           width: 2),
-                                     ),
-                                   ),),
-
-                             ),Expanded(
-                                 flex:1,
-                                 child: Center(child: Text("+")))
-                           ],
-                         ),
-                       ))
-                        ,
-                                    ],),
                                   SizedBox(height: 15,),
                                   Container(
                                     decoration: BoxDecoration(
@@ -270,7 +273,7 @@ class _commandState extends State<command> {
                                               color: AppColors.PRIMARY_COLOR,
                                               width: 2),
                                         ),
-                                        hintText: "Your Phone",
+                                        hintText: "Your Adresse",
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(50),
                                           borderSide:BorderSide(
@@ -278,7 +281,7 @@ class _commandState extends State<command> {
                                               width: 2),
                                         ),
                                         prefixIcon: Icon(
-                                          Icons.phone,
+                                          Icons.location_city,
                                           //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),),
                                   SizedBox(height: 20,),
@@ -291,7 +294,7 @@ class _commandState extends State<command> {
                                       // signin();
                                     },
                                     child: Text(
-                                      "Continue",
+                                      "Post",
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     style: ElevatedButton.styleFrom(
@@ -312,6 +315,68 @@ class _commandState extends State<command> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+class uplodeimg extends StatefulWidget {
+  @override
+  _uplodeimgState createState() => _uplodeimgState();
+}
+
+class _uplodeimgState extends State<uplodeimg> {
+
+  io.File?image;
+  Storage _storage = new Storage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('upload one image'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+                height: 140,
+                width: 180,
+                color: Colors.black12,
+                child: image == null
+                    ? Icon(
+                  Icons.image,
+                  size: 50,
+                )
+                    : Image.file(
+                  image!,
+                  fit: BoxFit.fill,
+                )),
+            ElevatedButton(
+                child: Text('pick image'),
+                onPressed: () {
+                  _storage.getImage(context).then((file) {
+                    setState(() {
+                      image = io.File(file.path);
+                      print("file path ----------------"+file.path+"----------------");
+                      print(image);
+
+
+
+                    });
+                  });
+                }),
+            TextButton(
+                onPressed: () {
+                 if (image != null)
+                    _storage.uploadFile(image!, context);
+                  else
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("No Image was selected")));
+                },
+                child: Text('Upload Image'))
+          ],
         ),
       ),
     );
