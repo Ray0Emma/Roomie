@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' as io;
 import 'dart:io';
 import 'dart:math';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
@@ -34,7 +35,6 @@ class Storage {
 
   //  showDialog(context: context, builder: (context) => ProgressBar());
 
-    firebase_storage.UploadTask uploadTask;
     Random rand = new Random();
 
     _image = File(file.path);
@@ -43,32 +43,21 @@ class Storage {
         .child('photos')
         .child('/${DateTime.now().toIso8601String()}');
 
-    final metadata = firebase_storage.SettableMetadata(
-        contentType: 'image/jpeg',
-        customMetadata: {'picked-file-path': file.path});
 
-    if (kIsWeb) {
-      uploadTask = ref.putData(await file.readAsBytes(), metadata);
-    } else {
-      uploadTask = ref.putFile(io.File(file.path), metadata);
-    }
-    uploadTask.snapshotEvents.listen((event) {
-      /*
-      progress.value =
-          (100 * (event.bytesTransferred / event.totalBytes)).round();
-      print('${(100 * (event.bytesTransferred / event.totalBytes)).round()}');*/
+
+
+    UploadTask uploadTask = ref.putFile(_image!);
+    await uploadTask.whenComplete(() async {
+      var url = await ref.getDownloadURL();
+      imageUri = url.toString();
+    }).catchError((onError) {
+      print(onError);
     });
 
-    await uploadTask.whenComplete(() {
-     // print("*************************************************"+ref.getDownloadURL().toString());
-      Navigator.pop(context);
-
-      print('finished upload');
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Image uploaded successfully")));
-     // progress.value = 0;
-    });
+   print(imageUri);
 
     return await ref.getDownloadURL();
   }
+
+
 }
