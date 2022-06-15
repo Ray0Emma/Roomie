@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
+import 'package:roomie/views/SignUp/signUp2.dart';
 
 import '../../resources/app_colors.dart';
 
@@ -27,9 +28,38 @@ class _SignUpState extends State<SignUp> {
       if (formdata!.validate()) {
         authController.register(_emailController.text.trim(),
             _passwordController.text.trim(), _nameController.text);
-        print("valide");
+        var snackBar = SnackBar(
+          /// need to set following properties for best effect of awesome_snackbar_content
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'We need to know you better!',
+            message: 'Please fill in your profile informations!',
+
+            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+            contentType: ContentType.success,
+          ),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Get.to(SignUp2());
       } else {
-        print("errors snackbar");
+        var snackBar = SnackBar(
+          /// need to set following properties for best effect of awesome_snackbar_content
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'Error!',
+            message: 'Please fill all the fields!',
+
+            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+            contentType: ContentType.failure,
+          ),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
 
@@ -193,10 +223,6 @@ class _SignUpState extends State<SignUp> {
                                   ElevatedButton(
                                     onPressed: () {
                                       send();
-
-                                      //  print(emailController.text);
-                                      print("${_nameController.text}hi");
-                                      // signin();
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: AppColors.PRIMARY_COLOR,
