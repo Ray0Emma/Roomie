@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
 import 'dart:io';
+import 'dart:io' as io;
 
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +20,8 @@ class SignUp2 extends StatefulWidget {
 }
 
 class _SignUp2State extends State<SignUp2> {
-  late File _image;
+  // late File _image;
+  io.File? _image;
   final picker = ImagePicker();
   String? selectedcnieliv;
   List listGender = ["Gender", "male", "female"];
@@ -30,7 +32,7 @@ class _SignUp2State extends State<SignUp2> {
   TextEditingController textAbout = TextEditingController();
   @override
   void initState() {
-    _image = File('assets/images/users/ranpo.jpg');
+    _image = io.File('assets/images/users/ranpo.jpg');
     dateinput.text = ""; //set the initial value of text field
     super.initState();
   }
@@ -38,12 +40,18 @@ class _SignUp2State extends State<SignUp2> {
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
-    send() {
+    send() async {
       var formdata = formState.currentState;
       if (formdata!.validate()) {
-        authController.fillProfile(image.text, dateinput.text, phone.text,
-            selectedcnieliv, textAbout.text);
+        var imageurl;
 
+        await authController
+            .uploadFile(_image, context)
+            .then((value) => imageurl = value);
+        authController.fillProfile(imageurl, dateinput.text, phone.text,
+            selectedcnieliv, textAbout.text);
+        print("hiii imgae");
+        print(imageurl);
         Get.to(SignUp3());
       } else {
         print("error");
@@ -54,7 +62,7 @@ class _SignUp2State extends State<SignUp2> {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
       setState(() {
-        _image = File(pickedFile!.path);
+        _image = io.File(pickedFile!.path);
       });
     }
 
@@ -102,19 +110,20 @@ class _SignUp2State extends State<SignUp2> {
                             child: InkWell(
                               onTap: getImage,
                               child: CircleAvatar(
-                                  backgroundColor: Colors.grey,
-                                  // backgroundImage: (_image != null)
-                                  //     ? Image.file(
-                                  //         _image,
-                                  //         fit: BoxFit.cover,
-                                  //       ).image
-                                  //     : AssetImage(
-                                  //         'assets/images/users/ranpo.jpg'),
-                                  child: Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 100,
-                                  )),
+                                // backgroundColor: Colors.grey,
+                                backgroundImage: (_image == null)
+                                    ? Image.file(
+                                        _image!,
+                                        fit: BoxFit.cover,
+                                      ).image
+                                    : AssetImage(
+                                        'assets/images/users/ranpo.jpg'),
+                                // child: Icon(
+                                //   Icons.person,
+                                //   color: Colors.white,
+                                //   size: 100,
+                                // )
+                              ),
                             ),
                           ),
                           Form(

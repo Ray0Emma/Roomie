@@ -34,7 +34,7 @@ class _SignUpState extends State<SignUp> {
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.transparent,
           content: AwesomeSnackbarContent(
-            title: 'We need to know you better!',
+            title: 'Fill Profile!',
             message: 'Please fill in your profile informations!',
 
             /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
