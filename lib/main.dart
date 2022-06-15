@@ -1,26 +1,27 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:roomie/controllers/auth_controller.dart';
+import 'package:intl/intl_standalone.dart';
 import 'package:roomie/resources/app_colors.dart';
 
 import 'package:roomie/resources/firebase_auth_constants.dart';
-import 'package:roomie/views/SignUp/signup.dart';
+import 'package:roomie/views/Command/Command.dart';
 
-import 'package:roomie/views/splach_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+
+import 'controllers/auth_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebaseInitialization.then((value) {
-    Get.put(AuthController());
+   Get.put(AuthController());
   });
   ThemeData(
       iconTheme: const IconThemeData(color: Colors.white),
       inputDecorationTheme: InputDecorationTheme(focusColor: Colors.white),
       colorScheme: ThemeData().colorScheme.copyWith(secondary: Colors.red));
-  SystemChrome.setSystemUIOverlayStyle(
+      SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: AppColors.PRIMARY_COLOR));
   runApp(const MyApp());
 }
@@ -28,7 +29,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:SignUp(),
+      home:uplodeimg(),
       debugShowCheckedModeBanner: false,
     );
   }

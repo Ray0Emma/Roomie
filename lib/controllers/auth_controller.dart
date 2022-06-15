@@ -7,6 +7,8 @@ import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/Login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../views/Command/Command.dart';
+
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
@@ -19,7 +21,7 @@ class AuthController extends GetxController {
 
     firebaseUser = Rx<User?>(auth.currentUser);
 
-    firebaseUser.bindStream(auth.userChanges());
+        firebaseUser.bindStream(auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
   }
 
