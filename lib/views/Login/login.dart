@@ -2,9 +2,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:roomie/resources/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
+import 'package:roomie/views/SignUp/signup.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -188,12 +190,17 @@ class _RegisterState extends State<Register> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Dont have an Acount ?"),
-            Text(
-              "Sign up",
-              style: TextStyle(
-                  color: AppColors.PRIMARY_COLOR,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: () {
+                Get.to(SignUp());
+              },
+              child: Text(
+                "Sign up",
+                style: TextStyle(
+                    color: AppColors.PRIMARY_COLOR,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500),
+              ),
             )
           ],
         )),
