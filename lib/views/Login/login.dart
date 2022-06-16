@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roomie/resources/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/SignUp/signup.dart';
 
 class Register extends StatefulWidget {
@@ -171,6 +173,11 @@ class _RegisterState extends State<Register> {
           onPressed: () async {
             authController.login(
                 _emailController.text.trim(), _passwordController.text.trim());
+
+            if (await FirebaseAuth.instance.currentUser?.uid != null) {
+              Get.to(MyNavigationBar());
+// not logged
+            }
           },
           style: ElevatedButton.styleFrom(
             primary: AppColors.PRIMARY_COLOR,

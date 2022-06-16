@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,11 +24,14 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
-    send() {
+    send() async {
       var formdata = formState.currentState;
       if (formdata!.validate()) {
         authController.register(_emailController.text.trim(),
             _passwordController.text.trim(), _nameController.text);
+
+        // var user = await FirebaseAuth.instance.currentUser;
+        // authController.addUser(user);
         var snackBar = SnackBar(
           /// need to set following properties for best effect of awesome_snackbar_content
           elevation: 0,

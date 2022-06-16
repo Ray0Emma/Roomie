@@ -32,7 +32,7 @@ class _SignUp2State extends State<SignUp2> {
   TextEditingController textAbout = TextEditingController();
   @override
   void initState() {
-    _image = io.File('assets/images/users/ranpo.jpg');
+    // _image = io.File('assets/images/users/ranpo.jpg');
     dateinput.text = ""; //set the initial value of text field
     super.initState();
   }
@@ -110,19 +110,38 @@ class _SignUp2State extends State<SignUp2> {
                             child: InkWell(
                               onTap: getImage,
                               child: CircleAvatar(
-                                // backgroundColor: Colors.grey,
-                                backgroundImage: (_image == null)
-                                    ? Image.file(
-                                        _image!,
-                                        fit: BoxFit.cover,
-                                      ).image
-                                    : AssetImage(
-                                        'assets/images/users/ranpo.jpg'),
-                                // child: Icon(
-                                //   Icons.person,
-                                //   color: Colors.white,
-                                //   size: 100,
-                                // )
+                                backgroundColor:
+                                    AppColors.GRAY_Forced.withOpacity(0.3),
+                                child: ClipOval(
+                                  child: SizedBox(
+                                    width: 150.0,
+                                    height: 150.0,
+                                    child: (_image != null)
+                                        ? Image.file(
+                                            _image!,
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Image.asset(
+                                            "assets/images/users/ranpo.jpg",
+                                            fit: BoxFit.fill,
+                                          ),
+                                  ),
+                                ),
+                                // backgroundImage:
+                                // // (_image == null)
+                                // //     ?
+                                //     Image.file(
+                                //         _image!,
+                                //         fit: BoxFit.cover,
+                                //       ).image,
+                                //     // : AssetImage(
+                                //     //     'assets/images/users/ranpo.jpg'),
+                                // child:Icon(
+                                //         Icons.person,
+                                //         color: Colors.white,
+                                //         size: 100,
+                                //       )
+                                //     ,
                               ),
                             ),
                           ),
