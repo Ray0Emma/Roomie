@@ -50,7 +50,7 @@ class _SignUp2State extends State<SignUp2> {
             .then((value) => imageurl = value);
         authController.fillProfile(imageurl, dateinput.text, phone.text,
             selectedcnieliv, textAbout.text);
-        print("hiii imgae");
+        // print("hiii imgae");
         print(imageurl);
         Get.to(SignUp3());
       } else {
@@ -121,9 +121,10 @@ class _SignUp2State extends State<SignUp2> {
                                             _image!,
                                             fit: BoxFit.fill,
                                           )
-                                        : Image.asset(
-                                            "assets/images/users/ranpo.jpg",
-                                            fit: BoxFit.fill,
+                                        : Icon(
+                                            Icons.person,
+                                            color: Colors.white,
+                                            size: 100,
                                           ),
                                   ),
                                 ),
@@ -177,7 +178,7 @@ class _SignUp2State extends State<SignUp2> {
                                               width: 2),
                                         ),
                                         suffixIcon: Icon(
-                                          Icons.calendar_today,
+                                          Icons.calendar_month_rounded,
                                           //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),
                                     readOnly:
@@ -213,103 +214,115 @@ class _SignUp2State extends State<SignUp2> {
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: AppColors.PRIMARY_COLOR,
-                                        width: 2,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.PRIMARY_COLOR,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50)),
                                       ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(50)),
-                                    ),
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton<String>(
-                                          isExpanded: true,
-                                          iconSize: 40,
-                                          iconEnabledColor:
-                                              AppColors.PRIMARY_COLOR,
-                                          iconDisabledColor:
-                                              AppColors.PRIMARY_COLOR,
-                                          value: selectedcnieliv,
-                                          items: listGender.map((list) {
-                                            return DropdownMenuItem<String>(
-                                                value: list[0],
-                                                child: Text("      " + list,
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                    )));
-                                          }).toList(),
-                                          onChanged: (value) => setState(
-                                              () => selectedcnieliv = value!)),
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButton<String>(
+                                            isExpanded: true,
+                                            iconSize: 40,
+                                            iconEnabledColor:
+                                                AppColors.PRIMARY_COLOR,
+                                            iconDisabledColor:
+                                                AppColors.GRAY_Forced,
+                                            hint: Text('Gender'),
+                                            value: selectedcnieliv,
+                                            items: listGender.map((list) {
+                                              return DropdownMenuItem<String>(
+                                                  value: list[0],
+                                                  child: Text("      " + list,
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                      )));
+                                            }).toList(),
+                                            onChanged: (value) => setState(() =>
+                                                selectedcnieliv = value!)),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  TextFormField(
-                                    controller: phone,
-                                    validator: (value) {
-                                      if (value!.isEmpty || value.length < 10) {
-                                        return "phone number must be > 10 caracters";
-                                      } else
-                                        return null;
-                                    },
-                                    //   focusNode: _focusNodes[0],
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: phone,
+                                      validator: (value) {
+                                        if (value!.isEmpty ||
+                                            value.length < 10) {
+                                          return "phone number must be 10 digits";
+                                        } else
+                                          return null;
+                                      },
+                                      //   focusNode: _focusNodes[0],
 
-                                    decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
-                                        ),
-                                        hintText: "Your Phone",
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.phone,
-                                          //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
-                                        )),
+                                      decoration: InputDecoration(
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            borderSide: BorderSide(
+                                                color: AppColors.PRIMARY_COLOR,
+                                                width: 2),
+                                          ),
+                                          hintText: "Your Phone",
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            borderSide: BorderSide(
+                                                color: AppColors.PRIMARY_COLOR,
+                                                width: 2),
+                                          ),
+                                          suffixIcon: Icon(
+                                            Icons.phone,
+                                            //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
+                                          )),
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  TextFormField(
-                                    maxLines: 3,
-                                    validator: (value) {
-                                      if (value!.isEmpty || value.length < 8) {
-                                        return "tell us about you";
-                                      } else
-                                        return null;
-                                    },
-                                    //   focusNode: _focusNodes[0],
-                                    controller: textAbout,
-                                    decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
-                                        ),
-                                        hintText: "A little About You",
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.text_fields,
-                                          //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
-                                        )),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      maxLines: 3,
+                                      validator: (value) {
+                                        if (value!.isEmpty ||
+                                            value.length < 8) {
+                                          return "tell us about you";
+                                        } else
+                                          return null;
+                                      },
+                                      //   focusNode: _focusNodes[0],
+                                      controller: textAbout,
+                                      decoration: InputDecoration(
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            borderSide: BorderSide(
+                                                color: AppColors.PRIMARY_COLOR,
+                                                width: 2),
+                                          ),
+                                          hintText: "A little About You",
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            borderSide: BorderSide(
+                                                color: AppColors.PRIMARY_COLOR,
+                                                width: 2),
+                                          ),
+                                          suffixIcon: Icon(
+                                            Icons.text_fields,
+                                            //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
+                                          )),
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 20,
