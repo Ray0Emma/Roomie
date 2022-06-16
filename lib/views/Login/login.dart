@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roomie/resources/app_colors.dart';
@@ -22,11 +22,11 @@ class _RegisterState extends State<Register> {
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
-  List<FocusNode> _focusNodes = [
+  final List<FocusNode> _focusNodes = [
     FocusNode(),
     FocusNode(),
   ];
-  List<FocusNode> _focusNodes2 = [
+  final List<FocusNode> _focusNodes2 = [
     FocusNode(),
     FocusNode(),
   ];
@@ -56,20 +56,23 @@ class _RegisterState extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(vertical: 9, horizontal: 30),
+                padding: EdgeInsets.symmetric(vertical: 11, horizontal: 30),
                 child: Row(
                   children: [
                     Icon(
                       Icons.arrow_back_ios,
-                      size: 40,
+                      size: 20,
                       color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 5,
                     ),
                     Text(
                       "Sign In",
                       style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 40),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 28),
                     )
                   ],
                 ),
@@ -119,22 +122,26 @@ class _RegisterState extends State<Register> {
         ),
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: AppColors.PRIMARY_COLOR, width: 2),
+              border: Border.all(color: AppColors.PRIMARY_COLOR, width: 1.5),
               borderRadius: BorderRadius.all(Radius.circular(50))),
-          child: TextField(
-            focusNode: _focusNodes[0],
-            controller: _emailController,
-            decoration: InputDecoration(
-                hintText: "Your Email",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide.none),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: _focusNodes[0].hasFocus
-                      ? AppColors.PRIMARY_COLOR
-                      : Colors.grey,
-                )),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: TextField(
+              cursorColor: AppColors.PRIMARY_COLOR,
+              focusNode: _focusNodes[0],
+              controller: _emailController,
+              decoration: InputDecoration(
+                  hintText: "Your Email",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: BorderSide.none),
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: _focusNodes[0].hasFocus
+                        ? AppColors.PRIMARY_COLOR
+                        : Colors.grey,
+                  )),
+            ),
           ),
         ),
         SizedBox(
@@ -142,22 +149,26 @@ class _RegisterState extends State<Register> {
         ),
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: AppColors.PRIMARY_COLOR, width: 2),
+              border: Border.all(color: AppColors.PRIMARY_COLOR, width: 1.5),
               borderRadius: BorderRadius.all(Radius.circular(50))),
-          child: TextField(
-            controller: _passwordController,
-            obscureText: true,
-            focusNode: _focusNodes2[0],
-            decoration: InputDecoration(
-              hintText: "Your Password",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: BorderSide.none),
-              prefixIcon: Icon(
-                Icons.key,
-                color: _focusNodes2[0].hasFocus
-                    ? AppColors.PRIMARY_COLOR
-                    : Colors.grey,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: TextField(
+              cursorColor: AppColors.PRIMARY_COLOR,
+              controller: _passwordController,
+              obscureText: true,
+              focusNode: _focusNodes2[0],
+              decoration: InputDecoration(
+                hintText: "Your Password",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none),
+                prefixIcon: Icon(
+                  Icons.key,
+                  color: _focusNodes2[0].hasFocus
+                      ? AppColors.PRIMARY_COLOR
+                      : Colors.grey,
+                ),
               ),
             ),
           ),
@@ -165,18 +176,41 @@ class _RegisterState extends State<Register> {
         SizedBox(
           height: 10,
         ),
-        Center(child: Text("Forget password ?")),
+        Center(
+            child: Text(
+          "Forget password ?",
+          style: TextStyle(color: AppColors.PRIMARY_COLOR),
+        )),
         SizedBox(
           height: 30,
         ),
         ElevatedButton(
           onPressed: () async {
-            authController.login(
-                _emailController.text.trim(), _passwordController.text.trim());
+            // ignore: unnecessary_null_comparison
+            if (_emailController.text == '' && _passwordController.text == '') {
+              var snackBar = SnackBar(
+                /// need to set following properties for best effect of awesome_snackbar_content
+                elevation: 0,
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                content: AwesomeSnackbarContent(
+                  title: 'Oops Error!',
+                  message: 'please fill in all required fields correctly!',
 
-            if (await FirebaseAuth.instance.currentUser?.uid != null) {
-              Get.to(MyNavigationBar());
+                  /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                  contentType: ContentType.failure,
+                ),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            } else {
+              authController.login(_emailController.text.trim(),
+                  _passwordController.text.trim());
+
+              if (await FirebaseAuth.instance.currentUser?.uid != null) {
+                Get.to(MyNavigationBar());
 // not logged
+              }
             }
           },
           style: ElevatedButton.styleFrom(
@@ -196,7 +230,7 @@ class _RegisterState extends State<Register> {
             child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Dont have an Acount ?"),
+            Text("Don't have an account ? "),
             GestureDetector(
               onTap: () {
                 Get.to(SignUp());
@@ -205,7 +239,6 @@ class _RegisterState extends State<Register> {
                 "Sign up",
                 style: TextStyle(
                     color: AppColors.PRIMARY_COLOR,
-                    fontSize: 20,
                     fontWeight: FontWeight.w500),
               ),
             )

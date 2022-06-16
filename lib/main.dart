@@ -37,6 +37,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Roomie',
       color: AppColors.PRIMARY_COLOR,
+      theme: ThemeData().copyWith(
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: AppColors.PRIMARY_COLOR,
+            ),
+      ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
