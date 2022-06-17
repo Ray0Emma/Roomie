@@ -3,13 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:roomie/views/Command/Command.dart';
-import 'package:roomie/views/Login/login.dart';
 
 import 'package:roomie/views/Home/home.dart';
 import 'package:roomie/resources/app_colors.dart';
 import 'package:roomie/views/Profile/profile.dart';
-
-import '../../../Command/Command.dart';
 
 class MyNavigationBar extends StatefulWidget {
   const MyNavigationBar({Key? key}) : super(key: key);
@@ -24,7 +21,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-   command(),
+    command(),
     Text(
       'Near Me',
       style: optionStyle,
