@@ -145,6 +145,13 @@ class _SignUpState extends State<SignUp> {
                                               width: 1.5),
                                         ),
                                         hintText: "Your Full Name",
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          borderSide: BorderSide(
+                                              color: AppColors.PRIMARY_COLOR,
+                                              width: 1.5),
+                                        ),
                                         errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
@@ -154,7 +161,6 @@ class _SignUpState extends State<SignUp> {
                                         ),
                                         prefixIcon: Icon(
                                           Icons.person,
-                                          //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),
                                   ),
                                 ),
@@ -175,7 +181,6 @@ class _SignUpState extends State<SignUp> {
                                         return null;
                                       }
                                     },
-                                    //   focusNode: _focusNodes[0],
                                     controller: _emailController,
                                     decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
@@ -186,6 +191,13 @@ class _SignUpState extends State<SignUp> {
                                               width: 1.5),
                                         ),
                                         hintText: "Your Email",
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          borderSide: BorderSide(
+                                              color: AppColors.PRIMARY_COLOR,
+                                              width: 1.5),
+                                        ),
                                         errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
@@ -195,7 +207,6 @@ class _SignUpState extends State<SignUp> {
                                         ),
                                         prefixIcon: Icon(
                                           Icons.email,
-                                          //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),
                                   ),
                                 ),
@@ -214,7 +225,6 @@ class _SignUpState extends State<SignUp> {
                                         return null;
                                       }
                                     },
-                                    //   focusNode: _focusNodes[0],
                                     controller: _passwordController,
                                     decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
@@ -225,6 +235,13 @@ class _SignUpState extends State<SignUp> {
                                               width: 1.5),
                                         ),
                                         hintText: "Your Password",
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          borderSide: BorderSide(
+                                              color: AppColors.PRIMARY_COLOR,
+                                              width: 1.5),
+                                        ),
                                         errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
@@ -234,7 +251,6 @@ class _SignUpState extends State<SignUp> {
                                         ),
                                         prefixIcon: Icon(
                                           Icons.key,
-                                          //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),
                                   ),
                                 ),
@@ -252,7 +268,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                   child: GestureDetector(
                                     onTap: () {
-                                      Get.to(SignUp());
+                                      Get.to(() => SignUp());
                                     },
                                     child: Text(
                                       "Sign Up",
