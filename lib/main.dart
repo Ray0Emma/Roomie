@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:roomie/controllers/userController.dart';
 import 'package:roomie/resources/app_colors.dart';
 
 import 'package:roomie/resources/firebase_auth_constants.dart';
@@ -15,6 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await firebaseInitialization.then((value) {
     Get.put(AuthController());
+    Get.put(UserController());
   });
   ThemeData(
     iconTheme: const IconThemeData(color: Colors.white),
