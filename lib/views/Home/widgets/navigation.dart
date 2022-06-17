@@ -6,6 +6,7 @@ import 'package:roomie/views/Login/login.dart';
 
 import 'package:roomie/views/Home/home.dart';
 import 'package:roomie/resources/app_colors.dart';
+import 'package:roomie/views/Profile/profile.dart';
 
 class MyNavigationBar extends StatefulWidget {
   const MyNavigationBar({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
       'Near Me',
       style: optionStyle,
     ),
-    Register(),
+    Profile(),
   ];
 
   @override
