@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:roomie/views/splach_screen.dart';
 
+import 'controllers/Binging.dart';
 import 'controllers/auth_controller.dart';
 
 void main() async {
@@ -35,6 +36,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: Binding(),
+
       title: 'Roomie',
       color: AppColors.PRIMARY_COLOR,
       theme: ThemeData().copyWith(
