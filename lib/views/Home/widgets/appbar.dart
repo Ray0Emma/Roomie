@@ -16,18 +16,22 @@ class MyAppBar extends StatefulWidget {
 class _MyAppBarState extends State<MyAppBar> {
   var imageUrl = '';
   Future loadImage() async {
-    //current user id
-    final _userID = FirebaseAuth.instance.currentUser!.uid;
+    if (FirebaseAuth.instance.currentUser != null) {
+      //current user id
+      final _userID = FirebaseAuth.instance.currentUser!.uid;
 
-    //collect the image name
-    var variable =
-        await FirebaseFirestore.instance.collection('users').doc(_userID).get();
+      //collect the image name
+      var variable = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_userID)
+          .get();
 
-    //a list of images names (i need only one)
-    // var _file_name = variable['profile'];
+      //a list of images names (i need only one)
+      // var _file_name = variable['profile'];
 
-    // return await _file_name.toString();
-    return variable;
+      // return await _file_name.toString();
+      return variable;
+    }
   }
 
   // var _bar;
