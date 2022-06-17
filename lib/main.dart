@@ -19,9 +19,11 @@ void main() async {
     Get.put(AuthController());
   });
   ThemeData(
-      iconTheme: const IconThemeData(color: Colors.white),
-      inputDecorationTheme: InputDecorationTheme(focusColor: Colors.white),
-      colorScheme: ThemeData().colorScheme.copyWith(secondary: Colors.red));
+    iconTheme: const IconThemeData(color: Colors.white),
+    inputDecorationTheme: InputDecorationTheme(focusColor: Colors.white),
+    colorScheme: ColorScheme.light(primary: AppColors.PRIMARY_COLOR),
+    buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+  );
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: AppColors.PRIMARY_COLOR));
   runApp(const MyApp());
@@ -35,8 +37,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Roomie',
       color: AppColors.PRIMARY_COLOR,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData().copyWith(
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: AppColors.PRIMARY_COLOR,
+            ),
       ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,

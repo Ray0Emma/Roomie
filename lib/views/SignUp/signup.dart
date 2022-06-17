@@ -1,7 +1,5 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -9,7 +7,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/SignUp/signUp2.dart';
 
-import '../../resources/app_colors.dart';
+import 'package:roomie/resources/app_colors.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -70,65 +68,71 @@ class _SignUpState extends State<SignUp> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.PRIMARY_COLOR,
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 9, horizontal: 30),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.arrow_back_ios,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Sign In",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 40),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 11, horizontal: 30),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back_ios,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    "Sign Up",
+                    style: TextStyle(
                         color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            topLeft: Radius.circular(30))),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: SvgPicture.asset(
-                              "assets/images/login.svg",
-                            ),
-                            width: 200,
-                            height: 200,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 28),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                  padding: EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30))),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          height: 200,
+                          child: SvgPicture.asset(
+                            "assets/images/login.svg",
                           ),
-                          Form(
-                              key: formState,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  TextFormField(
+                        ),
+                        Form(
+                            key: formState,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
+                                  child: TextFormField(
+                                    cursorColor: AppColors.PRIMARY_COLOR,
                                     validator: (value) {
                                       if (value!.isEmpty) {
-                                        return "entrer your Full name  ";
-                                      } else
+                                        return "enter your Full Name  ";
+                                      } else {
                                         return null;
+                                      }
                                     },
                                     //   focusNode: _focusNodes[0],
                                     controller: _nameController,
@@ -138,32 +142,38 @@ class _SignUpState extends State<SignUp> {
                                               BorderRadius.circular(50),
                                           borderSide: BorderSide(
                                               color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
+                                              width: 1.5),
                                         ),
                                         hintText: "Your Full Name",
-                                        focusedBorder: OutlineInputBorder(
+                                        errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
                                           borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
+                                              color: AppColors.RED_COLOR,
+                                              width: 1.5),
                                         ),
                                         prefixIcon: Icon(
                                           Icons.person,
                                           //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextFormField(
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
+                                  child: TextFormField(
+                                    cursorColor: AppColors.PRIMARY_COLOR,
                                     validator: (value) {
                                       if (value!.isEmpty ||
                                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                               .hasMatch(value)) {
-                                        return "entrer un email  ";
-                                      } else
+                                        return "enter your email  ";
+                                      } else {
                                         return null;
+                                      }
                                     },
                                     //   focusNode: _focusNodes[0],
                                     controller: _emailController,
@@ -173,30 +183,36 @@ class _SignUpState extends State<SignUp> {
                                               BorderRadius.circular(50),
                                           borderSide: BorderSide(
                                               color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
+                                              width: 1.5),
                                         ),
                                         hintText: "Your Email",
-                                        focusedBorder: OutlineInputBorder(
+                                        errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
                                           borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
+                                              color: AppColors.RED_COLOR,
+                                              width: 1.5),
                                         ),
                                         prefixIcon: Icon(
                                           Icons.email,
                                           //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextFormField(
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
+                                  child: TextFormField(
+                                    cursorColor: AppColors.PRIMARY_COLOR,
                                     validator: (value) {
                                       if (value!.isEmpty || value.length < 8) {
-                                        return "entrer un Password  begin then 8 caracter";
-                                      } else
+                                        return "the password must be at least 8 characters";
+                                      } else {
                                         return null;
+                                      }
                                     },
                                     //   focusNode: _focusNodes[0],
                                     controller: _passwordController,
@@ -206,54 +222,53 @@ class _SignUpState extends State<SignUp> {
                                               BorderRadius.circular(50),
                                           borderSide: BorderSide(
                                               color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
+                                              width: 1.5),
                                         ),
                                         hintText: "Your Password",
-                                        focusedBorder: OutlineInputBorder(
+                                        errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
                                           borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 2),
+                                              color: AppColors.RED_COLOR,
+                                              width: 1.5),
                                         ),
                                         prefixIcon: Icon(
                                           Icons.key,
                                           //  color: _focusNodes[0].hasFocus ? AppColors.PRIMARY_COLOR: Colors.grey,
                                         )),
                                   ),
-                                  SizedBox(
-                                    height: 30,
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    send();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: AppColors.PRIMARY_COLOR,
+                                    shape: StadiumBorder(),
+                                    padding: EdgeInsets.symmetric(vertical: 16),
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      send();
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Get.to(SignUp());
                                     },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: AppColors.PRIMARY_COLOR,
-                                      shape: StadiumBorder(),
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 16),
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Get.to(SignUp());
-                                      },
-                                      child: Text(
-                                        "SinUp",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
+                                    child: Text(
+                                      "Sign Up",
+                                      style: TextStyle(fontSize: 20),
                                     ),
                                   ),
-                                ],
-                              )),
-                          // _forgotPassword(context),
-                          // _signup(context),
-                        ],
-                      ),
-                    )),
-              ),
-            ],
-          ),
+                                ),
+                              ],
+                            )),
+                        // _forgotPassword(context),
+                        // _signup(context),
+                      ],
+                    ),
+                  )),
+            ),
+          ],
         ),
       ),
     );
