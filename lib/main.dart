@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl_standalone.dart';
 import 'package:roomie/resources/app_colors.dart';
 
 import 'package:roomie/resources/firebase_auth_constants.dart';
-import 'package:roomie/views/Command/Command.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';

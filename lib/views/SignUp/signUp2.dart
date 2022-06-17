@@ -213,15 +213,22 @@ class _SignUp2State extends State<SignUp2> {
                                             AppColors.PRIMARY_COLOR,
                                         iconDisabledColor:
                                             AppColors.GRAY_Forced,
-                                        hint: Text('Gender'),
+                                        hint: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('Gender'),
+                                        ),
                                         value: selectedcnieliv,
                                         items: listGender.map((list) {
                                           return DropdownMenuItem<String>(
                                               value: list[0],
-                                              child: Text("      " + list,
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                  )));
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(9.0),
+                                                child: Text(list,
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                    )),
+                                              ));
                                         }).toList(),
                                         onChanged: (value) => setState(
                                             () => selectedcnieliv = value!)),
