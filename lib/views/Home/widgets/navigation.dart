@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:roomie/views/Command/Command.dart';
+import 'package:roomie/Command/Command.dart';
 
 import 'package:roomie/views/Home/home.dart';
 import 'package:roomie/resources/app_colors.dart';
