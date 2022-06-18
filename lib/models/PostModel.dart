@@ -1,24 +1,3 @@
-class command {
-
-String id;
-double? budjet;
-int? capacity;
-String? city;
-List<String>? Equipment;
-List<String>? Regulation;
-String? adresse;
-
-
-
-
-command({
-  required this.id,
-  required this.adresse,
-  required this.Regulation,
-  required this.Equipment,
-  required this.city,
-  required this.capacity,
-  required this.budjet});
 
 
 List citys=[
@@ -37,9 +16,23 @@ List citys=[
   "Marrakesh",
   "Fez",
   "Casablanca",
+  "Sidi Slimane",
+  "Errachidia",
+  "Guercif",
+  "Oulad Teima",
+  "Ben Guerir",
+  "Tifelt",
+  "Lqliaa",
+  "Taroudant",
+  "Fnideq",
+  "Sidi Kacem",
+  "Tiznit",
+  "Tan-Tan",
+  "Ouarzazate",
+  "Youssoufia",
 ];
 
-List? listLanguages = [
+List? equipment = [
   {
     "display": "Garden",
     "value": "Garden",
@@ -53,21 +46,70 @@ List? listLanguages = [
     "value": "French",
   },
   {
-    "display": "German",
-    "value": "German",
+    "display": "Wireless",
+    "value": "Wireless",
   },
   {
-    "display": "Chinese",
-    "value": "Chinese",
+    "display": "Fridge",
+    "value": "Fridge",
   },
   {
-    "display": "Spanish",
-    "value": "Spanish",
+    "display": "TV",
+    "value": "Tv",
   },
   {
-    "display": "Japanese",
-    "value": "Japanese",
+    "display": "Private bathroom",
+    "value": "Private bathroom",
   },
+   {
+    "display": "Car park",
+    "value": "Car park",
+  },
+  {
+    "display": "Air conditioner",
+    "value": "Air conditioner",
+  },
+  {
+    "display": "Cooking tools",
+    "value": "Cooking tools",
+  },
+    {
+    "display": "Dishwasher",
+    "value": "Dishwasher",
+  },
+   {
+    "display": "Terrace",
+    "value": "Terrace",
+  },
+  {
+    "display": "Washing machine",
+    "value": "Washing machine",
+  },
+  {
+
+    "display": "Microwave",
+    "value": "Microwave",
+  },
+
 ];
 
-}
+
+List? regulation = [
+  {
+    "display": "No animals",
+    "value": "No animals",
+  },
+  {
+    "display": "No visitors",
+    "value": "No visitors",
+  },
+  {
+    "display": "No Smoking",
+    "value": "No Smoking",
+  },
+  {
+    "display": "no parties",
+    "value": "no parties",
+  },
+  
+];
