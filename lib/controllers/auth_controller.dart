@@ -15,8 +15,6 @@ import 'package:roomie/views/Login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:roomie/views/SignUp/signUp2.dart';
 
-import '../views/Command/Command.dart';
-
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
