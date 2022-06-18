@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:roomie/controllers/userController.dart';
 
 import 'package:roomie/resources/app_colors.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -171,6 +173,7 @@ class _ProfileState extends State<Profile> {
                         GestureDetector(
                             onTap: () {
                               authController.signOut();
+                              Get.offAll(MyNavigationBar());
                             },
                             child: Row(
                               children: [

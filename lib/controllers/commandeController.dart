@@ -1,25 +1,15 @@
 import 'dart:async';
-import 'dart:io' as io;
 import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
-import 'package:roomie/Command/Command.dart';
-import 'package:roomie/views/Login/login.dart';
 
 import '../resources/firebase_auth_constants.dart';
-import 'auth_controller.dart';
 
 class comandeContrller extends GetxController {
   static comandeContrller instance = Get.find();
@@ -47,26 +37,6 @@ class comandeContrller extends GetxController {
   late String EquipmentResult;
   late String RegulationResult;
   final formKey = new GlobalKey<FormState>();
-
-  @override
-  void onReady() {
-    super.onReady();
-    // auth is comning from the constants.dart file but it is basically FirebaseAuth.instance.
-    // Since we have to use that many times I just made a constant file and declared there
-
-    firebaseUser = Rx<User?>(auth.currentUser);
-
-    firebaseUser.bindStream(auth.userChanges());
-  }
-
-  setInitialScreen() {
-    if (FirebaseAuth.instance.currentUser == null) {
-      // if the user is not found then the user is navigated to the Register Screen
-      return const Register();
-    } else {
-      return command();
-    }
-  }
 
   @override
   void onInit() {

@@ -4,9 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:roomie/Command/Command.dart';
-import 'package:roomie/controllers/commandeController.dart';
-import 'package:roomie/controllers/userController.dart';
-import 'package:roomie/resources/firebase_auth_constants.dart';
 
 import 'package:roomie/views/Home/home.dart';
 import 'package:roomie/resources/app_colors.dart';
@@ -26,12 +23,12 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    comandeContrller.instance.setInitialScreen(),
+    command(),
     Text(
       'Near Me',
       style: optionStyle,
     ),
-    UserController.instance.setInitialScreen(),
+    Profile(),
   ];
 
   @override
@@ -52,44 +49,50 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
           ],
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-            child: GNav(
-              rippleColor: Colors.grey[300]!,
-              hoverColor: Colors.grey[100]!,
-              gap: 8,
-              activeColor: Colors.white,
-              iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: Duration(milliseconds: 400),
-              tabBackgroundColor: AppColors.PRIMARY_COLOR,
-              color: AppColors.PRIMARY_COLOR_DARK,
-              tabs: [
-                GButton(
-                  icon: Icons.home,
-                  text: 'Home',
-                ),
-                GButton(
-                  icon: Icons.add_circle,
-                  text: 'Offer',
-                ),
-                GButton(
-                  icon: Icons.location_on,
-                  text: 'Near Me',
-                ),
-                GButton(
-                  icon: Icons.person,
-                  text: 'Profile',
-                ),
-              ],
-              selectedIndex: _selectedIndex,
-              onTabChange: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-            ),
-          ),
+          child: (FirebaseAuth.instance.currentUser != null)
+              ? Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                  child: GNav(
+                    rippleColor: Colors.grey[300]!,
+                    hoverColor: Colors.grey[100]!,
+                    gap: 8,
+                    activeColor: Colors.white,
+                    iconSize: 24,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    duration: Duration(milliseconds: 400),
+                    tabBackgroundColor: AppColors.PRIMARY_COLOR,
+                    color: AppColors.PRIMARY_COLOR_DARK,
+                    tabs: [
+                      GButton(
+                        icon: Icons.home,
+                        text: 'Home',
+                      ),
+                      GButton(
+                        icon: Icons.add_circle,
+                        text: 'Offer',
+                      ),
+                      GButton(
+                        icon: Icons.location_on,
+                        text: 'Near Me',
+                      ),
+                      GButton(
+                        active: false,
+                        icon: Icons.person,
+                        text: 'Profile',
+                      ),
+                    ],
+                    selectedIndex: _selectedIndex,
+                    onTabChange: (index) {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
+                    },
+                  ),
+                )
+              : Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 0)),
         ),
       ),
     );

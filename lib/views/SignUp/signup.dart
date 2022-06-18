@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/SignUp/signUp2.dart';
 
@@ -137,28 +138,11 @@ class _SignUpState extends State<SignUp> {
                                     //   focusNode: _focusNodes[0],
                                     controller: _nameController,
                                     decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 1.5),
-                                        ),
                                         hintText: "Your Full Name",
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 1.5),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.RED_COLOR,
-                                              width: 1.5),
-                                        ),
+                                        enabledBorder: enabledBorder,
+                                        focusedBorder: focusedBorder,
+                                        focusedErrorBorder: errorBorder,
+                                        errorBorder: errorBorder,
                                         prefixIcon: Icon(
                                           Icons.person,
                                         )),
@@ -183,28 +167,11 @@ class _SignUpState extends State<SignUp> {
                                     },
                                     controller: _emailController,
                                     decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 1.5),
-                                        ),
                                         hintText: "Your Email",
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 1.5),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.RED_COLOR,
-                                              width: 1.5),
-                                        ),
+                                        enabledBorder: enabledBorder,
+                                        focusedBorder: focusedBorder,
+                                        focusedErrorBorder: errorBorder,
+                                        errorBorder: errorBorder,
                                         prefixIcon: Icon(
                                           Icons.email,
                                         )),
@@ -227,28 +194,11 @@ class _SignUpState extends State<SignUp> {
                                     },
                                     controller: _passwordController,
                                     decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 1.5),
-                                        ),
                                         hintText: "Your Password",
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              width: 1.5),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          borderSide: BorderSide(
-                                              color: AppColors.RED_COLOR,
-                                              width: 1.5),
-                                        ),
+                                        enabledBorder: enabledBorder,
+                                        focusedBorder: focusedBorder,
+                                        focusedErrorBorder: errorBorder,
+                                        errorBorder: errorBorder,
                                         prefixIcon: Icon(
                                           Icons.key,
                                         )),

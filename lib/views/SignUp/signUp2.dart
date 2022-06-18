@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/SignUp/signUp3.dart';
 
@@ -142,25 +143,11 @@ class _SignUp2State extends State<SignUp2> {
                                     child: TextFormField(
                                   controller: dateinput,
                                   decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                        borderSide: BorderSide(
-                                            color: AppColors.PRIMARY_COLOR,
-                                            width: 1.5),
-                                      ),
                                       hintText: "Enter Date",
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                        borderSide: BorderSide(
-                                            color: AppColors.PRIMARY_COLOR,
-                                            width: 1.5),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                        borderSide: BorderSide(
-                                            color: AppColors.RED_COLOR,
-                                            width: 1.5),
-                                      ),
+                                      enabledBorder: enabledBorder,
+                                      focusedBorder: focusedBorder,
+                                      focusedErrorBorder: errorBorder,
+                                      errorBorder: errorBorder,
                                       suffixIcon: Icon(
                                         Icons.calendar_month_rounded,
                                       )),
@@ -249,25 +236,11 @@ class _SignUp2State extends State<SignUp2> {
                                   //   focusNode: _focusNodes[0],
 
                                   decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                        borderSide: BorderSide(
-                                            color: AppColors.PRIMARY_COLOR,
-                                            width: 1.5),
-                                      ),
                                       hintText: "Your Phone",
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                        borderSide: BorderSide(
-                                            color: AppColors.PRIMARY_COLOR,
-                                            width: 1.5),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                        borderSide: BorderSide(
-                                            color: AppColors.RED_COLOR,
-                                            width: 1.5),
-                                      ),
+                                      enabledBorder: enabledBorder,
+                                      focusedBorder: focusedBorder,
+                                      focusedErrorBorder: errorBorder,
+                                      errorBorder: errorBorder,
                                       suffixIcon: Icon(
                                         Icons.phone,
                                       )),
@@ -287,25 +260,11 @@ class _SignUp2State extends State<SignUp2> {
                                   //   focusNode: _focusNodes[0],
                                   controller: textAbout,
                                   decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
-                                            color: AppColors.PRIMARY_COLOR,
-                                            width: 1.5),
-                                      ),
                                       hintText: "A little About You",
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
-                                            color: AppColors.PRIMARY_COLOR,
-                                            width: 1.5),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
-                                            color: AppColors.RED_COLOR,
-                                            width: 1.5),
-                                      ),
+                                      enabledBorder: enabledBorder,
+                                      focusedBorder: focusedBorder,
+                                      focusedErrorBorder: errorBorder,
+                                      errorBorder: errorBorder,
                                       suffixIcon: Icon(
                                         Icons.text_fields,
                                       )),

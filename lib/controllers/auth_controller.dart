@@ -15,8 +15,6 @@ import 'package:roomie/views/Login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:roomie/views/SignUp/signUp2.dart';
 
-import '../views/Command/Command.dart';
-
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> firebaseUser;
@@ -47,7 +45,7 @@ class AuthController extends GetxController {
       // we store our user informations in firestore
       // addUser(user);
       // if the user exists and logged in the the user is navigated to the Home Screen
-      // Get.offAll(() => MyNavigationBar());
+      Get.offAll(() => MyNavigationBar());
     }
   }
 
