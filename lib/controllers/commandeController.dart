@@ -16,6 +16,7 @@ import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:roomie/Command/Command.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/Login/login.dart';
 
 import '../resources/firebase_auth_constants.dart';
@@ -59,12 +60,12 @@ class comandeContrller extends GetxController {
     firebaseUser.bindStream(auth.userChanges());
   }
 
-  setInitialScreen() {
-    if (FirebaseAuth.instance.currentUser == null) {
+  setInitialScreen() async {
+    if (await FirebaseAuth.instance.currentUser == null) {
       // if the user is not found then the user is navigated to the Register Screen
-      return const Register();
+      Get.to(const Register());
     } else {
-      return command();
+      return const MyNavigationBar();
     }
   }
 

@@ -14,6 +14,13 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    UserController.instance.setInitialScreen();
+  }
+
+  @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
 

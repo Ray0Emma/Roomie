@@ -47,7 +47,7 @@ class AuthController extends GetxController {
       // we store our user informations in firestore
       // addUser(user);
       // if the user exists and logged in the the user is navigated to the Home Screen
-      // Get.offAll(() => MyNavigationBar());
+      Get.offAll(() => MyNavigationBar());
     }
   }
 

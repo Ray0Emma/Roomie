@@ -23,12 +23,12 @@ class UserController extends GetxController {
     // ever(firebaseUser, _setInitialScreen);
   }
 
-  setInitialScreen() {
-    if (FirebaseAuth.instance.currentUser == null) {
+  setInitialScreen() async {
+    if (await FirebaseAuth.instance.currentUser == null) {
       // if the user is not found then the user is navigated to the Register Screen
-      return const Register();
+      Get.to(const Register());
     } else {
-      return const Profile();
+      return const MyNavigationBar();
     }
   }
 

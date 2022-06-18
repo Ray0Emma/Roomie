@@ -26,12 +26,12 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    comandeContrller.instance.setInitialScreen(),
+    command(),
     Text(
       'Near Me',
       style: optionStyle,
     ),
-    UserController.instance.setInitialScreen(),
+    Profile(),
   ];
 
   @override
