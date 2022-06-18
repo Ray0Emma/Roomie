@@ -16,7 +16,6 @@ void main() async {
   await firebaseInitialization.then((value) {
     Get.put(AuthController());
     Get.put(UserController());
-    Get.put(comandeContrller());
   });
   ThemeData(
     iconTheme: const IconThemeData(color: Colors.white),
@@ -35,8 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // initialBinding: Binding(),
-
+      initialBinding: Binding(),
       title: 'Roomie',
       color: AppColors.PRIMARY_COLOR,
       theme: ThemeData().copyWith(
