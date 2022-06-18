@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:roomie/controllers/commandeController.dart';
 import 'package:roomie/controllers/userController.dart';
 import 'package:roomie/resources/app_colors.dart';
 
@@ -18,6 +19,7 @@ void main() async {
   await firebaseInitialization.then((value) {
     Get.put(AuthController());
     Get.put(UserController());
+    Get.put(comandeContrller());
   });
   ThemeData(
     iconTheme: const IconThemeData(color: Colors.white),
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialBinding: Binding(),
+      // initialBinding: Binding(),
 
       title: 'Roomie',
       color: AppColors.PRIMARY_COLOR,
