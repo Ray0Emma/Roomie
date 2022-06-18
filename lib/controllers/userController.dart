@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/Login/login.dart';
+import 'package:roomie/views/Profile/profile.dart';
 
 class UserController extends GetxController {
   static UserController instance = Get.find();
@@ -18,14 +19,16 @@ class UserController extends GetxController {
 
     firebaseUser = Rx<User?>(auth.currentUser);
 
-    firebaseUser.bindStream(auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
+    // firebaseUser.bindStream(auth.userChanges());
+    // ever(firebaseUser, _setInitialScreen);
   }
 
-  _setInitialScreen(User? user) {
-    if (user == null) {
+  setInitialScreen() {
+    if (FirebaseAuth.instance.currentUser == null) {
       // if the user is not found then the user is navigated to the Register Screen
-      Get.offAll(() => const Register());
+      return const Register();
+    } else {
+      return const Profile();
     }
   }
 
