@@ -3,13 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:roomie/controllers/userController.dart';
 import 'package:roomie/resources/app_colors.dart';
-
 import 'package:roomie/resources/firebase_auth_constants.dart';
-
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:roomie/views/splach_screen.dart';
-
 import 'controllers/Binging.dart';
 import 'controllers/auth_controller.dart';
 
