@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, import_of_legacy_library_into_null_safe, prefer_final_fields, library_private_types_in_public_api
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:roomie/Command/Command.dart';
+import 'package:roomie/controllers/commandeController.dart';
+import 'package:roomie/controllers/userController.dart';
+import 'package:roomie/resources/firebase_auth_constants.dart';
 
 import 'package:roomie/views/Home/home.dart';
 import 'package:roomie/resources/app_colors.dart';
@@ -17,16 +21,17 @@ class MyNavigationBar extends StatefulWidget {
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
   int _selectedIndex = 0;
+  User? user = FirebaseAuth.instance.currentUser;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    command(),
+    comandeContrller.instance.setInitialScreen(),
     Text(
       'Near Me',
       style: optionStyle,
     ),
-    Profile(),
+    UserController.instance.setInitialScreen(),
   ];
 
   @override
