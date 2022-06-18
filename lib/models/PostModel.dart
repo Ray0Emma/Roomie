@@ -1,27 +1,4 @@
-class command {
-
-String id;
-double? budjet;
-int? capacity;
-String? city;
-List<String>? Equipment;
-List<String>? Regulation;
-String? adresse;
-
-
-
-
-command({
-  required this.id,
-  required this.adresse,
-  required this.Regulation,
-  required this.Equipment,
-  required this.city,
-  required this.capacity,
-  required this.budjet});
-
-
-List citys=[
+List? citys=[
   "El Jadida",
   "Khouribga",
   "Mohammedia",
@@ -69,5 +46,3 @@ List? listLanguages = [
     "value": "Japanese",
   },
 ];
-
-}

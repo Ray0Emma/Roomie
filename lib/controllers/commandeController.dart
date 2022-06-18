@@ -10,7 +10,6 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/state_manager.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,7 +25,8 @@ class comandeContrller extends GetxController{
   late Rx<User?> firebaseUser;
 
   String? selectedcnieliv;
-  List listGender=["Gender","farah","rachid","bourigue","hamadi"];
+  List listgen=["El Jadida","Khouribga","Mohammedia","Safi"
+];
   //all textEditing controller of all input the commande
   TextEditingController budget=new TextEditingController();
   int capacitycounter=0;
