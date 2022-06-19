@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                           2000,
                           "images/users/ranpo.jpg",
                           2,
-                          "assets/images/users/ranpo.jpg");
+                          "assets/images/users/ranpo.jpg",comandecontroller.posts[i]["imageUri"]);
                     })
               ],
             ),

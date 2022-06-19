@@ -9,7 +9,7 @@ import 'package:roomie/views/Login/login.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, double budget, String localisation,
-    int capacity, String profile) {
+    int capacity, String profile,String imagecomande) {
   return InkWell(
       onTap: () async {
         User? user;
@@ -36,14 +36,7 @@ Widget requestCard(String name, int age, double budget, String localisation,
           children: [
             SizedBox(
               height: 150,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  scrollImage("assets/images/rooms/room1.webp"),
-                  scrollImage("assets/images/rooms/room2.jpg"),
-                  scrollImage("assets/images/rooms/room3.webp"),
-                ],
-              ),
+              child: scrollImage(imagecomande),
             ),
             Container(
               margin: EdgeInsets.only(top: 10),

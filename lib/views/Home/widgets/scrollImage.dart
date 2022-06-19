@@ -9,6 +9,6 @@ Widget scrollImage(String image) {
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Colors.blueAccent,
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover)),
+        image: DecorationImage(image:NetworkImage(image), fit: BoxFit.cover)),
   );
 }
