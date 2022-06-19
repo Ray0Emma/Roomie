@@ -108,11 +108,13 @@ class comandeContrller extends GetxController {
       String imgurl = await uploadFile2(this.image, context);
       var msg=await firebaseFirestore.collection('posts').doc(userID).set({
         'budget': this.budget.text,
+        'capacity': this.capacity.text,
         'city': this.capacitycounter,
         'equipment': this.Equipment,
         'regulation': this.Regulation,
         'addresse': this.Addresse.text,
         'imageUri': imgurl,
+
         "id_user":userID,
         'createdon': Timestamp.now(),
       });
@@ -155,10 +157,10 @@ getData() async{
             .doc(element.id)
             .get();
         print(variable.get("name"));
+        infouser.add(variable);
         print("--------------------------------------------------------------");
         print( element.id);
         posts.add(element.data());
-
         print(getDataUer(element.id));
         print(element.data());});
       print("--------------------------------------------------------------");

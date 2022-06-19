@@ -8,8 +8,8 @@ import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/Login/login.dart';
 import 'scrollImage.dart';
 
-Widget requestCard(String name, int age, double budget, String localisation,
-    int capacity, String profile,String imgpost) {
+Widget requestCard(String name, int age, String budget, String localisation,
+    String capacity, String profile,String imgpost) {
   return InkWell(
       onTap: () async {
         User? user;

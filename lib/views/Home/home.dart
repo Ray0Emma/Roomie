@@ -73,11 +73,12 @@ class _HomePageState extends State<HomePage> {
                     itemCount:comandecontroller.posts.length ,
                     itemBuilder:(context,i){
                       return  requestCard(
-                          comandecontroller.posts[i]["addresse"],
+                          comandecontroller.infouser[i]["name"],
                           21,
-                          2000,
+                          comandecontroller.posts[i]["budget"],
                           "images",
-                          2,comandecontroller.posts[i]["imageUri"],
+                          comandecontroller.posts[i]["capacity"],
+                          comandecontroller.infouser[i]["profile"],
                           comandecontroller.posts[i]["imageUri"]);
                     })
               ],
