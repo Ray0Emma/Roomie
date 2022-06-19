@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -101,19 +104,47 @@ class comandeContrller extends GetxController {
 
 //add commande
   Future<void> addcommande(context) async {
+    final userID = FirebaseAuth.instance.currentUser!.uid;
     if (this.image != null) {
       String imgurl = await uploadFile2(this.image, context);
-      await firebaseFirestore.collection('posts').doc().set({
+      var msg=await firebaseFirestore.collection('posts').doc(userID).set({
         'budget': this.budget.text,
         'city': this.capacitycounter,
         'equipment': this.Equipment,
         'regulation': this.Regulation,
         'addresse': this.Addresse.text,
         'imageUri': imgurl,
+        "id_user":userID,
         'createdon': Timestamp.now(),
       });
+      var snackBar = SnackBar(
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          title: 'On Snap!',
+          message:
+          'your commande is created',
+          contentType: ContentType.success,
+        ),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
     } else {
-      print("error");
+      var snackBar = SnackBar(
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          title: 'On Snap!',
+          message:
+          'you must be uplode the image ',
+          contentType: ContentType.failure,
+        ),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 }
