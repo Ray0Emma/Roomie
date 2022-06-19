@@ -7,8 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -17,7 +15,6 @@ import '../resources/firebase_auth_constants.dart';
 class comandeContrller extends GetxController {
   static comandeContrller instance = Get.find();
   late Rx<User?> firebaseUser;
-
   String? selectedcnieliv;
   List listGender = ["Gender", "farah", "rachid", "bourigue", "hamadi"];
   //all textEditing controller of all input the commande
@@ -29,6 +26,7 @@ class comandeContrller extends GetxController {
   TextEditingController regulations = new TextEditingController();
   TextEditingController Addresse = new TextEditingController();
   List posts=[];
+  List infouser=[];
   String? imageUri;
   // the image who selected
   File? image;
@@ -150,15 +148,35 @@ class comandeContrller extends GetxController {
   }
 
 getData() async{
-
     FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
-
-      event.docs.forEach((element) {
+      event.docs.forEach((element) async {
+        var variable = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element.id)
+            .get();
+        print(variable.get("name"));
+        print("--------------------------------------------------------------");
+        print( element.id);
         posts.add(element.data());
+
+        print(getDataUer(element.id));
         print(element.data());});
-
+      print("--------------------------------------------------------------");
     });
+  }
 
+  Future getDataUer(userID) async {
+
+      //current user id
+      //collect the image name
+      var variable = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .get();
+      //a list of images names (i need only one)
+      // var _file_name = variable['profile'];
+      // return await _file_name.toString();
+      return variable;
 
   }
 }

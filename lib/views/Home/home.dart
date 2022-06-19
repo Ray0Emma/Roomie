@@ -76,9 +76,9 @@ class _HomePageState extends State<HomePage> {
                           comandecontroller.posts[i]["addresse"],
                           21,
                           2000,
-                          "images/users/ranpo.jpg",
-                          2,
-                          "assets/images/users/ranpo.jpg",comandecontroller.posts[i]["imageUri"]);
+                          "images",
+                          2,comandecontroller.posts[i]["imageUri"],
+                          comandecontroller.posts[i]["imageUri"]);
                     })
               ],
             ),
