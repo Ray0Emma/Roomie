@@ -150,9 +150,11 @@ class comandeContrller extends GetxController {
 
   getData() async{
 
+
     CollectionReference comandeRef=FirebaseFirestore.instance.collection("posta");
     QuerySnapshot querySnapshotpost=await comandeRef.get();
     List<QueryDocumentSnapshot> listpost=querySnapshotpost.docs;
+    listpost.forEach((element) {print(element.data());});
 
   }
 }
