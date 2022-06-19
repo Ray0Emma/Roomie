@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, prefer_interpolation_to_compose_strings
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,8 +17,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formState = GlobalKey<FormState>();
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.PRIMARY_COLOR,
@@ -82,33 +80,51 @@ class _ProfileState extends State<Profile> {
                               if (usnapshot.hasData &&
                                   usnapshot.connectionState ==
                                       ConnectionState.done) {
-                                return Text(
-                                  usnapshot.data["name"],
-                                  style: TextStyle(
-                                      color: AppColors.PRIMARY_COLOR_DARK,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w500),
+                                return Column(
+                                  children: [
+                                    Text(
+                                      usnapshot.data["name"],
+                                      style: TextStyle(
+                                          color: AppColors.PRIMARY_COLOR_DARK,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "+212 " + usnapshot.data["phone"],
+                                      style: TextStyle(
+                                        color: AppColors.GRAY_Forced,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
                                 );
                               } else {
-                                return Text(
-                                  "Your Name",
-                                  style: TextStyle(
-                                      color: AppColors.PRIMARY_COLOR_DARK,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w500),
+                                return Column(
+                                  children: [
+                                    Text(
+                                      "Your Name",
+                                      style: TextStyle(
+                                          color: AppColors.PRIMARY_COLOR_DARK,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "21 years old",
+                                      style: TextStyle(
+                                        color: AppColors.GRAY_Forced,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
                                 );
                               }
                             }),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "21 years old",
-                          style: TextStyle(
-                            color: AppColors.GRAY_Forced,
-                            fontSize: 14,
-                          ),
-                        ),
                         const Divider(
                           height: 47,
                           thickness: 1,
@@ -119,56 +135,68 @@ class _ProfileState extends State<Profile> {
                               null;
                             },
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Icon(
-                                  Icons.person,
-                                  color: AppColors.PRIMARY_COLOR_DARK,
-                                  size: 24,
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  'Edit Profile',
-                                  style: TextStyle(
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person,
                                       color: AppColors.PRIMARY_COLOR_DARK,
-                                      fontSize: 19),
+                                      size: 24,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      'Edit Profile',
+                                      style: TextStyle(
+                                          color: AppColors.PRIMARY_COLOR_DARK,
+                                          fontSize: 19),
+                                    ),
+                                  ],
                                 ),
-                                // ListTile(
-                                //   trailing: Icon(
-                                //     Icons.arrow_forward_ios_rounded,
-                                //     color: AppColors.PRIMARY_COLOR_DARK,
-                                //   ),
-                                // )
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: AppColors.PRIMARY_COLOR_DARK,
+                                ),
                               ],
                             )),
                         SizedBox(
-                          height: 20,
+                          height: 25,
                         ),
                         GestureDetector(
                             onTap: () {
                               null;
                             },
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Icon(
-                                  Icons.info,
-                                  color: AppColors.PRIMARY_COLOR_DARK,
-                                  size: 24,
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  'Edit informations',
-                                  style: TextStyle(
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.info,
                                       color: AppColors.PRIMARY_COLOR_DARK,
-                                      fontSize: 19),
-                                )
+                                      size: 24,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      'Edit informations',
+                                      style: TextStyle(
+                                          color: AppColors.PRIMARY_COLOR_DARK,
+                                          fontSize: 19),
+                                    )
+                                  ],
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: AppColors.PRIMARY_COLOR_DARK,
+                                ),
                               ],
                             )),
                         SizedBox(
-                          height: 20,
+                          height: 25,
                         ),
                         GestureDetector(
                             onTap: () {
@@ -192,11 +220,6 @@ class _ProfileState extends State<Profile> {
                                 )
                               ],
                             )),
-                        // trailing: Icon(
-                        //   Icons.arrow_forward_ios_rounded,
-                        //   color: AppColors.RED_COLOR,
-                        //   size: 25,
-                        // ),
                       ],
                     ),
                   )),

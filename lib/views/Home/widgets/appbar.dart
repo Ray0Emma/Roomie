@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:roomie/controllers/userController.dart';
 import 'package:roomie/resources/app_colors.dart';
 import '../widgets/searchBar.dart';
 
@@ -14,58 +13,8 @@ class MyAppBar extends StatefulWidget {
 }
 
 class _MyAppBarState extends State<MyAppBar> {
-  var imageUrl = '';
-  Future loadImage() async {
-    if (FirebaseAuth.instance.currentUser != null) {
-      //current user id
-      final _userID = FirebaseAuth.instance.currentUser!.uid;
-
-      //collect the image name
-      var variable = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(_userID)
-          .get();
-
-      //a list of images names (i need only one)
-      // var _file_name = variable['profile'];
-
-      // return await _file_name.toString();
-      return variable;
-    }
-  }
-
-  // var _bar;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _bar = asyncImage();
-  // }
-
-  // void _retry() {
-  //   setState(() {
-  //     _bar = asyncImage();
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   loadImage().then((value) => imageUrl = value);
-  // }
-
-  // @override
-  // Future<void> setState(VoidCallback fn) async {
-  //   // TODO: implement setState
-  //   super.setState(fn);
-
-  //   await loadImage().then((value) => imageUrl = value);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // _retry();
     return Column(
       children: <Widget>[
         Padding(
@@ -74,32 +23,21 @@ class _MyAppBarState extends State<MyAppBar> {
             //  Stack places the objects in the upper left corner
             children: <Widget>[
               FutureBuilder(
-                future: loadImage(),
+                future: UserController.instance.loadImage(),
                 builder: (BuildContext context, AsyncSnapshot usnapshot) {
                   if (usnapshot.hasData &&
-                      usnapshot.connectionState == ConnectionState.done &&
-                      usnapshot.data["profile"] != null) {
+                      usnapshot.connectionState == ConnectionState.done) {
                     return Container(
                       height: 50,
                       width: 50,
-                      decoration: (FirebaseAuth.instance.currentUser != null)
-                          ? BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              // color: Colors.blueAccent,
-                              border: Border.all(
-                                  color: AppColors.GRAY_COLOR, width: 4),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      usnapshot.data["profile"]), //user profile
-                                  fit: BoxFit.cover))
-                          : null,
-
-                      // (imageUrl != '')
-                      //     ?
-                      // DecorationImage(
-                      //         image: NetworkImage(imageUrl), //user profile
-                      //         fit: BoxFit.cover)
-                      //     : null,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border:
+                              Border.all(color: AppColors.GRAY_COLOR, width: 4),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  usnapshot.data["profile"]), //user profile
+                              fit: BoxFit.cover)),
                     );
                   } else {
                     return Container();
@@ -135,11 +73,4 @@ class _MyAppBarState extends State<MyAppBar> {
       ],
     );
   }
-
-  asyncImage() async {
-    await loadImage().then((value) => imageUrl = value);
-  }
 }
-// Widget MyAppBar() {
-
-// }
