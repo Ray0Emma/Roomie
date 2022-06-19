@@ -26,7 +26,8 @@ class _MyAppBarState extends State<MyAppBar> {
                 future: UserController.instance.loadImage(),
                 builder: (BuildContext context, AsyncSnapshot usnapshot) {
                   if (usnapshot.hasData &&
-                      usnapshot.connectionState == ConnectionState.done) {
+                      usnapshot.connectionState == ConnectionState.done &&
+                      usnapshot.data["profile"] != null) {
                     return Container(
                       height: 50,
                       width: 50,
