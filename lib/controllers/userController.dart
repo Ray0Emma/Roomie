@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class UserController extends GetxController {
   static UserController instance = Get.find();
+  var user = FirebaseAuth.instance.currentUser;
 
   var imageUrl = '';
   Future loadImage() async {
@@ -16,12 +17,21 @@ class UserController extends GetxController {
           .collection('users')
           .doc(userID)
           .get();
-
-      //a list of images names (i need only one)
-      // var _file_name = variable['profile'];
-
-      // return await _file_name.toString();
       return variable;
+    }
+  }
+
+  Future getData() async {
+    var collection = FirebaseFirestore.instance.collection('users');
+    var docSnapshot = await collection.doc(user?.uid).get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic>? data = docSnapshot.data();
+
+      print(data);
+      // name = data?['name']; // <-- The value you want to retrieve.
+      // Call setState if needed.
+
+      return data;
     }
   }
 }
