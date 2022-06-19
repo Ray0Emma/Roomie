@@ -73,38 +73,7 @@ class _MyAppBarState extends State<MyAppBar> {
           child: Stack(
             //  Stack places the objects in the upper left corner
             children: <Widget>[
-              FutureBuilder(
-                future: loadImage(),
-                builder: (BuildContext context, AsyncSnapshot usnapshot) {
-                  if (usnapshot.hasData &&
-                      usnapshot.connectionState == ConnectionState.done) {
-                    return Container(
-                      height: 50,
-                      width: 50,
-                      decoration: (FirebaseAuth.instance.currentUser != null)
-                          ? BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              // color: Colors.blueAccent,
-                              border: Border.all(
-                                  color: AppColors.GRAY_COLOR, width: 4),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      usnapshot.data["profile"]), //user profile
-                                  fit: BoxFit.cover))
-                          : null,
 
-                      // (imageUrl != '')
-                      //     ?
-                      // DecorationImage(
-                      //         image: NetworkImage(imageUrl), //user profile
-                      //         fit: BoxFit.cover)
-                      //     : null,
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
               Align(
                 alignment: Alignment.center,
                 child: Column(
