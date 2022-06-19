@@ -57,8 +57,8 @@ class _ProfileState extends State<Profile> {
                                       AppColors.GRAY_Forced.withOpacity(0.3),
                                   child: ClipOval(
                                     child: SizedBox(
-                                      width: 150.0,
-                                      height: 150.0,
+                                      width: 130,
+                                      height: 130,
                                       child: Image.network(
                                           usnapshot.data["profile"]),
                                     ),
