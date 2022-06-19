@@ -4,12 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import '../../controllers/commandeController.dart';
 import '../../resources/app_colors.dart';
 import 'dart:io' as io;
-import 'upload/storage.dart';
+
+import '../models/PostModel.dart';
 
 class command extends StatefulWidget {
   comandeContrller  c=Get.find();
@@ -209,7 +209,7 @@ comandeContrller c=Get.find();
                                           iconEnabledColor:AppColors.PRIMARY_COLOR,
                                           iconDisabledColor:AppColors.PRIMARY_COLOR,
                                           value: comandecontroller.selectedcnieliv,
-                                          items: comandecontroller.listGender.map((list) {
+                                          items: citys.map((list) {
                                             return DropdownMenuItem<String>(
                                                 value: list,
                                                 child: Text("       "+list,
@@ -253,36 +253,7 @@ comandeContrller c=Get.find();
                                         }
                                         return null;
                                       },
-                                      dataSource: [
-                                        {
-                                          "display": "Running",
-                                          "value": "Running",
-                                        },
-                                        {
-                                          "display": "Climbing",
-                                          "value": "Climbing",
-                                        },
-                                        {
-                                          "display": "Walking",
-                                          "value": "Walking",
-                                        },
-                                        {
-                                          "display": "Swimming",
-                                          "value": "Swimming",
-                                        },
-                                        {
-                                          "display": "Soccer Practice",
-                                          "value": "Soccer Practice",
-                                        },
-                                        {
-                                          "display": "Baseball Practice",
-                                          "value": "Baseball Practice",
-                                        },
-                                        {
-                                          "display": "Football Practice",
-                                          "value": "Football Practice",
-                                        },
-                                      ],
+                                      dataSource:equipment,
                                       textField: 'display',
                                       valueField: 'value',
                                       okButtonLabel: 'OK',
@@ -329,36 +300,7 @@ comandeContrller c=Get.find();
                                         }
                                         return null;
                                       },
-                                      dataSource: [
-                                        {
-                                          "display": "Running",
-                                          "value": "Running",
-                                        },
-                                        {
-                                          "display": "Climbing",
-                                          "value": "Climbing",
-                                        },
-                                        {
-                                          "display": "Walking",
-                                          "value": "Walking",
-                                        },
-                                        {
-                                          "display": "Swimming",
-                                          "value": "Swimming",
-                                        },
-                                        {
-                                          "display": "Soccer Practice",
-                                          "value": "Soccer Practice",
-                                        },
-                                        {
-                                          "display": "Baseball Practice",
-                                          "value": "Baseball Practice",
-                                        },
-                                        {
-                                          "display": "Football Practice",
-                                          "value": "Football Practice",
-                                        },
-                                      ],
+                                      dataSource:regulation,
                                       textField: 'display',
                                       valueField: 'value',
                                       okButtonLabel: 'OK',
