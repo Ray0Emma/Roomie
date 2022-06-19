@@ -28,7 +28,7 @@ class comandeContrller extends GetxController {
   TextEditingController equipment = new TextEditingController();
   TextEditingController regulations = new TextEditingController();
   TextEditingController Addresse = new TextEditingController();
-
+  List posts=[];
   String? imageUri;
   // the image who selected
   File? image;
@@ -43,6 +43,7 @@ class comandeContrller extends GetxController {
 
   @override
   void onInit() {
+    getData();
     Equipment = [];
     EquipmentResult = '';
     Regulation = [];
@@ -148,13 +149,16 @@ class comandeContrller extends GetxController {
     }
   }
 
-  getData() async{
+getData() async{
 
+    FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
 
-    CollectionReference comandeRef=FirebaseFirestore.instance.collection("posta");
-    QuerySnapshot querySnapshotpost=await comandeRef.get();
-    List<QueryDocumentSnapshot> listpost=querySnapshotpost.docs;
-    listpost.forEach((element) {print(element.data());});
+      event.docs.forEach((element) {
+        posts.add(element.data());
+        print(element.data());});
+
+    });
+
 
   }
 }
