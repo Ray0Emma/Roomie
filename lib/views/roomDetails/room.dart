@@ -73,11 +73,30 @@ class _rommDetailsState extends State<rommDetails> {
                             Divider(thickness:3,),
                             characher("Regulation",lang),
                             Divider(thickness:3,),
-                            profileUser("https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4","Farah hamada","nice girl helped rachid for learning ","13","profetionnele")
+                            profileUser("https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4","Farah hamada","nice girl helped rachid for learning ","13","profetionnele"),
+                            Divider(thickness:3,),
+                            characher("Languages",lang),
+                            Divider(thickness:3,),
+                            characher("Personality",lang),
+                            Divider(thickness:3,),
+                            characher("LifeStyle",lang),
+                            Divider(thickness:3,),
+                            characher("Hobbis",lang),
+                            SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("${100} DH/ month",style: TextStyle(fontWeight: FontWeight.w800,fontSize:20),),
+                                  ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.call), label: Text("call",style: TextStyle(fontSize: 20),),
+                                  style:ElevatedButton.styleFrom(
+                                      primary:AppColors.PRIMARY_COLOR,
+                                    padding: EdgeInsets.symmetric(horizontal: 25,vertical: 12)
+                                  ) ,
+                                  )
 
-
-
-
+                              ],
+                            ),
+                            SizedBox(height: 20,),
 
                           ],),)
                       ],
