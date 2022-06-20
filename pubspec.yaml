@@ -50,6 +50,7 @@ dependencies:
   get:
   image_picker: ^0.8.5+3
   multiselect_formfield: ^0.1.7
+  flutter_cupertino_date_picker: ^0.8.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

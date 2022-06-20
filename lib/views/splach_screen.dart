@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roomie/resources/app_colors.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
+import 'package:roomie/views/roomDetails/room.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class SplashScreen extends StatelessWidget {
                 'assets/images/roomie.png',
               ),
             ),
-            nextScreen: MyNavigationBar(),
+            nextScreen: rommDetails(),
             splashTransition: SplashTransition.scaleTransition,
             // pageTransitionType: PageTransitionType.scale,
             backgroundColor: AppColors.PRIMARY_COLOR));

@@ -7,8 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -17,7 +15,6 @@ import '../resources/firebase_auth_constants.dart';
 class comandeContrller extends GetxController {
   static comandeContrller instance = Get.find();
   late Rx<User?> firebaseUser;
-
   String? selectedcnieliv;
   List listGender = ["Gender", "farah", "rachid", "bourigue", "hamadi"];
   //all textEditing controller of all input the commande
@@ -28,7 +25,9 @@ class comandeContrller extends GetxController {
   TextEditingController equipment = new TextEditingController();
   TextEditingController regulations = new TextEditingController();
   TextEditingController Addresse = new TextEditingController();
-
+  List posts=[];
+  List infouser=[];
+  List infopost=[];
   String? imageUri;
   // the image who selected
   File? image;
@@ -43,6 +42,7 @@ class comandeContrller extends GetxController {
 
   @override
   void onInit() {
+    getData();
     Equipment = [];
     EquipmentResult = '';
     Regulation = [];
@@ -109,11 +109,13 @@ class comandeContrller extends GetxController {
       String imgurl = await uploadFile2(this.image, context);
       var msg=await firebaseFirestore.collection('posts').doc(userID).set({
         'budget': this.budget.text,
+        'capacity': this.capacity.text,
         'city': this.capacitycounter,
         'equipment': this.Equipment,
         'regulation': this.Regulation,
         'addresse': this.Addresse.text,
         'imageUri': imgurl,
+
         "id_user":userID,
         'createdon': Timestamp.now(),
       });
@@ -148,13 +150,56 @@ class comandeContrller extends GetxController {
     }
   }
 
-  getData() async{
+getData() async{
+    FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
+      event.docs.forEach((element) async {
+        var variable = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element.id)
+            .get();
+        print(variable.get("birthday"));
+        infouser.add(variable);
+        print("--------------------------------------------------------------");
+        print( element.id);
+        posts.add(element.data());
+        print(getDataUer(element.id));
+        print(element.data());});
+      print("--------------------------------------------------------------");
+    });
+  }
+
+  Future getDataUer(userID) async {
+
+      //current user id
+      //collect the image name
+      var variable = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .get();
+      //a list of images names (i need only one)
+      // var _file_name = variable['profile'];
+      // return await _file_name.toString();
+      return variable;
+
+  }
 
 
-    CollectionReference comandeRef=FirebaseFirestore.instance.collection("posta");
-    QuerySnapshot querySnapshotpost=await comandeRef.get();
-    List<QueryDocumentSnapshot> listpost=querySnapshotpost.docs;
-    listpost.forEach((element) {print(element.data());});
+  calculateAge(DateTime birthDate) {
 
+    DateTime currentDate = DateTime.now();
+    print(currentDate);
+    int age = currentDate.year - birthDate.year;
+    int month1 = currentDate.month;
+    int month2 = birthDate.month;
+    if (month2 > month1) {
+      age--;
+    } else if (month1 == month2) {
+      int day1 = currentDate.day;
+      int day2 = birthDate.day;
+      if (day2 > day1) {
+        age--;
+      }
+    }
+    return age;
   }
 }
