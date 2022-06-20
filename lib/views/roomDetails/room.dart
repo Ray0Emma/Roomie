@@ -8,6 +8,7 @@ import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 
 import 'package:roomie/resources/app_colors.dart';
+import 'package:roomie/views/roomDetails/widget/imagepost.dart';
 
 class rommDetails extends StatefulWidget {
   const rommDetails({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _rommDetailsState extends State<rommDetails> {
             ),
             Expanded(
               child: Container(
-                  padding: EdgeInsets.all(30),
+
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -58,13 +59,15 @@ class _rommDetailsState extends State<rommDetails> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: double.infinity,
-                          height: 200,
-                          child: SvgPicture.asset(
-                            "assets/images/login.svg",
-                          ),
-                        ),
+                        imagepost("https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4"),
+                        Container(child:Column(children: [
+
+
+
+
+
+                        ],),)
+
 
                       ],
                     ),
@@ -76,3 +79,7 @@ class _rommDetailsState extends State<rommDetails> {
     );
   }
 }
+
+
+
+
