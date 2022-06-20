@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 Widget imagepost(String image){
   return   Container(
+
     height: 300,
     width: double.infinity,
     decoration: BoxDecoration(

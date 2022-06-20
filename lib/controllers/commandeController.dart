@@ -27,6 +27,7 @@ class comandeContrller extends GetxController {
   TextEditingController Addresse = new TextEditingController();
   List posts=[];
   List infouser=[];
+  List infopost=[];
   String? imageUri;
   // the image who selected
   File? image;
