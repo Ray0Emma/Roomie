@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder:(context,i){
                       return  requestCard(
                           comandecontroller.infouser[i]["name"],
-                          comandecontroller.calculateAge(comandecontroller.infouser[i]["createdon"].toDate()),
+                          comandecontroller.calculateAge(comandecontroller.infouser[i]["birthday"].toDate),
                           comandecontroller.posts[i]["budget"],
                           "images",
                           comandecontroller.posts[i]["capacity"],
