@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget adressepost(String adresse,int age ,String ville){
-  return  Column(
+  return  Container(
+    margin: EdgeInsets.symmetric(vertical: 18),
+    child: Column(
 crossAxisAlignment: CrossAxisAlignment.start,
 children: [
 Text(adresse,style: TextStyle(fontSize:13,fontWeight: FontWeight.w800 ),),
@@ -13,4 +15,5 @@ children: [
 Text("${age} Personne"),Text(ville)
 ],)
 ],
-);}
+),
+  );}
