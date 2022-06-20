@@ -8,6 +8,7 @@ import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 
 import 'package:roomie/resources/app_colors.dart';
+import 'package:roomie/views/roomDetails/widget/adresse.dart';
 import 'package:roomie/views/roomDetails/widget/imagepost.dart';
 
 class rommDetails extends StatefulWidget {
@@ -60,8 +61,10 @@ class _rommDetailsState extends State<rommDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         imagepost("https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4"),
-                        Container(child:Column(children: [
-
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          child:Column(children: [
+                            adressepost("N 41 LOTS REDDAD, OUMDHAR, BENI MELLAL",3,"Beni Mellal"),
 
 
 
