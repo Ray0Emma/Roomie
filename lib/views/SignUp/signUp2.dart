@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, use_build_context_synchronously
 
 import 'dart:io' as io;
 
@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
+import 'package:roomie/views/Profile/widgets/profileImage.dart';
 import 'package:roomie/views/SignUp/signUp3.dart';
 
 import 'package:roomie/resources/app_colors.dart';
@@ -39,18 +40,17 @@ class _SignUp2State extends State<SignUp2> {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     send() async {
       var formdata = formState.currentState;
-      if (formdata!.validate()) {
+      if (formdata!.validate() && _image != null) {
         var imageurl;
 
         await authController
             .uploadFile(_image, context)
             .then((value) => imageurl = value);
         authController.fillProfile(imageurl, dateinput.text, phone.text,
-            selectedcnieliv, textAbout.text);
-        print(imageurl);
+            selectedcnieliv, textAbout.text, context);
         Get.to(() => SignUp3());
       } else {
-        print("error");
+        ScaffoldMessenger.of(context).showSnackBar(snackbarError());
       }
     }
 
@@ -58,7 +58,9 @@ class _SignUp2State extends State<SignUp2> {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
       setState(() {
-        _image = io.File(pickedFile!.path);
+        if (pickedFile != null) {
+          _image = io.File(pickedFile.path);
+        }
       });
     }
 

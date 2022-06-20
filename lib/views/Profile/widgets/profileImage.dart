@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roomie/controllers/userController.dart';
@@ -36,6 +37,54 @@ Widget arrowBack() {
       Icons.arrow_back_ios,
       size: 20,
       color: Colors.white,
+    ),
+  );
+}
+
+SnackBar snackbarError() {
+  return SnackBar(
+    /// need to set following properties for best effect of awesome_snackbar_content
+    elevation: 0,
+    behavior: SnackBarBehavior.floating,
+    backgroundColor: Colors.transparent,
+    content: AwesomeSnackbarContent(
+      title: 'Error!',
+      message: 'Please fill all the fields including Image!',
+
+      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+      contentType: ContentType.failure,
+    ),
+  );
+}
+
+snackbarError1(e) {
+  return SnackBar(
+    /// need to set following properties for best effect of awesome_snackbar_content
+    elevation: 0,
+    behavior: SnackBarBehavior.floating,
+    backgroundColor: Colors.transparent,
+    content: AwesomeSnackbarContent(
+      title: 'Error!',
+      message: e,
+
+      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+      contentType: ContentType.failure,
+    ),
+  );
+}
+
+SnackBar snackbarSuccess() {
+  return SnackBar(
+    /// need to set following properties for best effect of awesome_snackbar_content
+    elevation: 0,
+    behavior: SnackBarBehavior.floating,
+    backgroundColor: Colors.transparent,
+    content: AwesomeSnackbarContent(
+      title: 'Success!',
+      message: 'You have filled all the informations!',
+
+      /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+      contentType: ContentType.success,
     ),
   );
 }

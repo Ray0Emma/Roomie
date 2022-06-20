@@ -9,6 +9,7 @@ import 'package:roomie/views/Home/widgets/navigation.dart';
 
 import 'package:roomie/resources/app_colors.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:roomie/views/Profile/widgets/profileImage.dart';
 
 class SignUp3 extends StatefulWidget {
   const SignUp3({Key? key}) : super(key: key);
@@ -39,27 +40,13 @@ class _SignUp3State extends State<SignUp3> {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     send() {
       var formdata = formState.currentState;
-      if (formdata!.validate()) {
-        authController.addInfo(
-            status, _myLanguages, _myLifeStyle, _myPersonality, _myHobbis);
-        var snackBar = SnackBar(
-          /// need to set following properties for best effect of awesome_snackbar_content
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Welcome!',
-            message: 'You have filled you profile informations successfully!',
-
-            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-            contentType: ContentType.success,
-          ),
-        );
-
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      if (formdata!.validate() && status != null) {
+        authController.addInfo(status, _myLanguages, _myLifeStyle,
+            _myPersonality, _myHobbis, context);
+        ScaffoldMessenger.of(context).showSnackBar(snackbarSuccess());
         Get.to(MyNavigationBar());
       } else {
-        print("error");
+        ScaffoldMessenger.of(context).showSnackBar(snackbarError());
       }
     }
 

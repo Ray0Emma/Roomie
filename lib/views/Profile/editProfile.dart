@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, unrelated_type_equality_checks
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, unrelated_type_equality_checks, use_build_context_synchronously
 
 import 'dart:io' as io;
 
@@ -60,10 +60,10 @@ class _EditProfileState extends State<EditProfile> {
               .uploadFile(_image, context)
               .then((value) => imageurl = value);
           authController.fillProfile(imageurl, dateinput.text, phone.text,
-              selectedcnieliv, textAbout.text);
+              selectedcnieliv, textAbout.text, context);
         } else {
           authController.fillProfile(imageurl, dateinput.text, phone.text,
-              selectedcnieliv, textAbout.text);
+              selectedcnieliv, textAbout.text, context);
         }
 
         print(imageurl);
