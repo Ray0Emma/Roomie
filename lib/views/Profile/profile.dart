@@ -7,6 +7,8 @@ import 'package:roomie/controllers/userController.dart';
 import 'package:roomie/resources/app_colors.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
+import 'package:roomie/views/Profile/editInformations.dart';
+import 'package:roomie/views/Profile/editProfile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -48,7 +50,8 @@ class _ProfileState extends State<Profile> {
                               (BuildContext context, AsyncSnapshot usnapshot) {
                             if (usnapshot.hasData &&
                                 usnapshot.connectionState ==
-                                    ConnectionState.done) {
+                                    ConnectionState.done &&
+                                usnapshot.data["profile"] != null) {
                               return SizedBox(
                                 width: 130,
                                 height: 130,
@@ -57,8 +60,8 @@ class _ProfileState extends State<Profile> {
                                       AppColors.GRAY_Forced.withOpacity(0.3),
                                   child: ClipOval(
                                     child: SizedBox(
-                                      width: 150.0,
-                                      height: 150.0,
+                                      width: 130,
+                                      height: 130,
                                       child: Image.network(
                                           usnapshot.data["profile"]),
                                     ),
@@ -132,7 +135,7 @@ class _ProfileState extends State<Profile> {
                         ),
                         GestureDetector(
                             onTap: () {
-                              null;
+                              Get.to(EditProfile());
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -166,7 +169,7 @@ class _ProfileState extends State<Profile> {
                         ),
                         GestureDetector(
                             onTap: () {
-                              null;
+                              Get.to(EditInformations());
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

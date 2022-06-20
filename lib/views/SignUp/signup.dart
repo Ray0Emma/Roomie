@@ -27,26 +27,7 @@ class _SignUpState extends State<SignUp> {
       var formdata = formState.currentState;
       if (formdata!.validate()) {
         authController.register(_emailController.text.trim(),
-            _passwordController.text.trim(), _nameController.text);
-
-        // var user = await FirebaseAuth.instance.currentUser;
-        // authController.addUser(user);
-        var snackBar = SnackBar(
-          /// need to set following properties for best effect of awesome_snackbar_content
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Fill Profile!',
-            message: 'Please fill in your profile informations!',
-
-            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-            contentType: ContentType.success,
-          ),
-        );
-
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Get.to(SignUp2());
+            _passwordController.text.trim(), _nameController.text, context);
       } else {
         var snackBar = SnackBar(
           /// need to set following properties for best effect of awesome_snackbar_content

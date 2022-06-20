@@ -2,18 +2,22 @@
 
 import 'dart:io' as io;
 import 'dart:io';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:roomie/resources/app_colors.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:roomie/views/Login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:roomie/views/Profile/widgets/profileImage.dart';
 import 'package:roomie/views/SignUp/signUp2.dart';
+import 'package:roomie/views/SignUp/signUp3.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -49,7 +53,7 @@ class AuthController extends GetxController {
     }
   }
 
-  void register(String email, password, name) async {
+  void register(String email, password, name, context) async {
     User? user;
 
     try {
@@ -62,16 +66,44 @@ class AuthController extends GetxController {
       await user.reload();
       user = await auth.currentUser;
       addUser(user);
+      var snackBar = SnackBar(
+        /// need to set following properties for best effect of awesome_snackbar_content
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          title: 'Fill Profile!',
+          message: 'Please fill in your profile informations!',
+
+          /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+          contentType: ContentType.success,
+        ),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Get.to(SignUp2());
       // print(user!.displayName);
-    } catch (e) {
-      print(e);
+    } on FirebaseAuthException catch (e) {
+      // snackbarError1(e.message);
+      Get.snackbar(
+        "Error!",
+        e.message.toString(),
+        backgroundColor: AppColors.RED_COLOR.withOpacity(.7),
+      );
     }
   }
 
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-    } catch (firebaseAuthException) {}
+    } on FirebaseAuthException catch (e) {
+      // var snackbarError1 = snackbarError1(e.message);
+      Get.snackbar(
+        "Error!",
+        e.message.toString(),
+        backgroundColor: AppColors.RED_COLOR.withOpacity(.7),
+      );
+    }
   }
 
   void signOut() async {
@@ -87,7 +119,7 @@ class AuthController extends GetxController {
     });
   }
 
-  void fillProfile(profile, birthday, phone, gender, about) async {
+  void fillProfile(profile, birthday, phone, gender, about, context) async {
     User? user = auth.currentUser;
     await firebaseFirestore.collection('users').doc(user!.uid).update({
       'profile': profile,
@@ -98,7 +130,8 @@ class AuthController extends GetxController {
     });
   }
 
-  void addInfo(status, languages, personality, lifestyle, hobbis) async {
+  void addInfo(
+      status, languages, personality, lifestyle, hobbis, context) async {
     User? user = auth.currentUser;
     await firebaseFirestore.collection('users').doc(user!.uid).update({
       'status': status,
@@ -107,6 +140,21 @@ class AuthController extends GetxController {
       'lifestyle': lifestyle,
       'hobbis': hobbis,
     });
+    var snackBar = SnackBar(
+      /// need to set following properties for best effect of awesome_snackbar_content
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: 'Welcome!',
+        message: 'You have filled you profile informations successfully!',
+
+        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+        contentType: ContentType.success,
+      ),
+    );
+
+    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   //method for adding the image using picker

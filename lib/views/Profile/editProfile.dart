@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, unrelated_type_equality_checks, use_build_context_synchronously
 
 import 'dart:io' as io;
 
@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:roomie/controllers/userController.dart';
 import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/Profile/widgets/profileImage.dart';
@@ -13,15 +14,16 @@ import 'package:roomie/views/SignUp/signUp3.dart';
 
 import 'package:roomie/resources/app_colors.dart';
 
-class SignUp2 extends StatefulWidget {
-  const SignUp2({Key? key}) : super(key: key);
+class EditProfile extends StatefulWidget {
+  const EditProfile({Key? key}) : super(key: key);
   @override
-  State<SignUp2> createState() => _SignUp2State();
+  State<EditProfile> createState() => _EditProfileState();
 }
 
-class _SignUp2State extends State<SignUp2> {
+class _EditProfileState extends State<EditProfile> {
   io.File? _image;
   final picker = ImagePicker();
+  var imageurl;
   String? selectedcnieliv;
   List listGender = ["male", "female"];
   TextEditingController image = TextEditingController();
@@ -31,8 +33,20 @@ class _SignUp2State extends State<SignUp2> {
   TextEditingController textAbout = TextEditingController();
   @override
   void initState() {
-    dateinput.text = ""; //set the initial value of text field
     super.initState();
+    setState(() {
+      UserController.instance.getData().then((value) => {
+            (value['gender'] != null)
+                ? [
+                    dateinput.text = value['birthday'],
+                    phone.text = value['phone'],
+                    selectedcnieliv = value['gender'],
+                    textAbout.text = value['about'],
+                    imageurl = value['profile'],
+                  ]
+                : CircularProgressIndicator()
+          });
+    });
   }
 
   @override
@@ -40,17 +54,22 @@ class _SignUp2State extends State<SignUp2> {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     send() async {
       var formdata = formState.currentState;
-      if (formdata!.validate() && _image != null) {
-        var imageurl;
+      if (formdata!.validate()) {
+        if (_image != null) {
+          await authController
+              .uploadFile(_image, context)
+              .then((value) => imageurl = value);
+          authController.fillProfile(imageurl, dateinput.text, phone.text,
+              selectedcnieliv, textAbout.text, context);
+        } else {
+          authController.fillProfile(imageurl, dateinput.text, phone.text,
+              selectedcnieliv, textAbout.text, context);
+        }
 
-        await authController
-            .uploadFile(_image, context)
-            .then((value) => imageurl = value);
-        authController.fillProfile(imageurl, dateinput.text, phone.text,
-            selectedcnieliv, textAbout.text, context);
-        Get.to(() => SignUp3());
+        print(imageurl);
+        Get.back();
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(snackbarError());
+        print("error");
       }
     }
 
@@ -58,9 +77,8 @@ class _SignUp2State extends State<SignUp2> {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
       setState(() {
-        if (pickedFile != null) {
-          _image = io.File(pickedFile.path);
-        }
+        _image = io.File(pickedFile!.path);
+        imageurl == null;
       });
     }
 
@@ -74,16 +92,12 @@ class _SignUp2State extends State<SignUp2> {
               padding: EdgeInsets.symmetric(vertical: 11, horizontal: 30),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    size: 20,
-                    color: Colors.white,
-                  ),
+                  arrowBack(),
                   SizedBox(
                     width: 5,
                   ),
                   Text(
-                    "Fill Profile",
+                    "Edit Profile",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
@@ -121,11 +135,7 @@ class _SignUp2State extends State<SignUp2> {
                                           _image!,
                                           fit: BoxFit.fill,
                                         )
-                                      : Icon(
-                                          Icons.person,
-                                          color: Colors.white,
-                                          size: 100,
-                                        ),
+                                      : profileImage(),
                                 ),
                               ),
                             ),
@@ -284,7 +294,7 @@ class _SignUp2State extends State<SignUp2> {
                                     padding: EdgeInsets.symmetric(vertical: 16),
                                   ),
                                   child: Text(
-                                    "Continue",
+                                    "Update",
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 ),

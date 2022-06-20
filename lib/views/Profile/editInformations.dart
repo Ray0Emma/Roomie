@@ -3,32 +3,52 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roomie/controllers/userController.dart';
 import 'package:roomie/models/dataUser.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
-import 'package:roomie/views/Home/widgets/navigation.dart';
 
 import 'package:roomie/resources/app_colors.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:roomie/views/Profile/widgets/profileImage.dart';
 
-class SignUp3 extends StatefulWidget {
-  const SignUp3({Key? key}) : super(key: key);
+class EditInformations extends StatefulWidget {
+  const EditInformations({Key? key}) : super(key: key);
   @override
-  _SignUp3State createState() => _SignUp3State();
+  _EditInformationsState createState() => _EditInformationsState();
 }
 
-class _SignUp3State extends State<SignUp3> {
+class _EditInformationsState extends State<EditInformations> {
   List? _myLanguages, _myLifeStyle, _myPersonality, _myHobbis;
   Color selectedColor = AppColors.GRAY_Forced,
       selectedColor2 = AppColors.GRAY_Forced,
       selectedColor3 = AppColors.GRAY_Forced;
   String? status;
-
-  TextEditingController dateinput = TextEditingController();
   @override
   void initState() {
-    dateinput.text = ""; //set the initial value of text field
+    //set the initial value of text field
     super.initState();
+    // UserController.instance.getData().then((value) => {
+    //       (value != null)
+    //           ? [
+    //               _myLifeStyle = value['lifestyle'],
+    //               _myPersonality = value['personality'],
+    //               selectedColor = (value['status'] == 'Student')
+    //                   ? AppColors.PRIMARY_COLOR
+    //                   : AppColors.GRAY_Forced,
+    //               _myHobbis = value['hobbis'],
+    //               selectedColor2 = (value['status'] == 'Professional')
+    //                   ? AppColors.PRIMARY_COLOR
+    //                   : AppColors.GRAY_Forced,
+    //               _myHobbis = value['hobbis'],
+    //               selectedColor3 = (value['status'] == 'Freelancer')
+    //                   ? AppColors.PRIMARY_COLOR
+    //                   : AppColors.GRAY_Forced,
+    //               _myLanguages = value['languages'],
+    //               status = value['status'],
+    //             ]
+    //           : CircularProgressIndicator()
+    //     });
+
     _myLanguages = [];
     _myLifeStyle = [];
     _myPersonality = [];
@@ -40,13 +60,27 @@ class _SignUp3State extends State<SignUp3> {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     send() {
       var formdata = formState.currentState;
-      if (formdata!.validate() && status != null) {
+      if (formdata!.validate()) {
         authController.addInfo(status, _myLanguages, _myLifeStyle,
             _myPersonality, _myHobbis, context);
-        ScaffoldMessenger.of(context).showSnackBar(snackbarSuccess());
-        Get.to(MyNavigationBar());
+        var snackBar = SnackBar(
+          /// need to set following properties for best effect of awesome_snackbar_content
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'Welcome!',
+            message: 'You have filled you profile informations successfully!',
+
+            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+            contentType: ContentType.success,
+          ),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Get.back();
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(snackbarError());
+        print("error");
       }
     }
 
@@ -60,16 +94,12 @@ class _SignUp3State extends State<SignUp3> {
               padding: EdgeInsets.symmetric(vertical: 11, horizontal: 30),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    size: 20,
-                    color: Colors.white,
-                  ),
+                  arrowBack(),
                   SizedBox(
                     width: 5,
                   ),
                   Text(
-                    "Fill Profile",
+                    "Edit Informations",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
@@ -91,7 +121,6 @@ class _SignUp3State extends State<SignUp3> {
                           topLeft: Radius.circular(30))),
                   child: SingleChildScrollView(
                     child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
                           height: 40,
@@ -522,7 +551,7 @@ class _SignUp3State extends State<SignUp3> {
                                     padding: EdgeInsets.symmetric(vertical: 16),
                                   ),
                                   child: Text(
-                                    "Save",
+                                    "Update",
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 ),
