@@ -156,7 +156,7 @@ getData() async{
             .collection('users')
             .doc(element.id)
             .get();
-        print(variable.get("name"));
+        print(variable.get("birthday"));
         infouser.add(variable);
         print("--------------------------------------------------------------");
         print( element.id);
@@ -186,6 +186,7 @@ getData() async{
   calculateAge(DateTime birthDate) {
 
     DateTime currentDate = DateTime.now();
+    print(currentDate);
     int age = currentDate.year - birthDate.year;
     int month1 = currentDate.month;
     int month2 = birthDate.month;
