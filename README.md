@@ -1,6 +1,6 @@
-# roomie
+# Roomie
 
-A new Flutter project.
+![Untitled design](https://user-images.githubusercontent.com/70212296/174905378-5e56dcf2-df32-47ae-b69d-3a6aa8327ce0.jpg)
 
 ## Getting Started
 
