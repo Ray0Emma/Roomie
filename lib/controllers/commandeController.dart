@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
 
 import '../resources/firebase_auth_constants.dart';
 
@@ -110,8 +111,8 @@ class comandeContrller extends GetxController {
       String imgurl = await uploadFile2(this.image, context);
       var msg = await firebaseFirestore.collection('posts').doc(userID).set({
         'budget': this.budget.text,
-        'capacity': this.capacity.text,
-        'city': this.capacitycounter,
+        'capacity': this.capacitycounter,
+        'city': this.selectedcnieliv,
         'equipment': this.Equipment,
         'regulation': this.Regulation,
         'addresse': this.Addresse.text,
@@ -124,21 +125,22 @@ class comandeContrller extends GetxController {
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
-          title: 'On Snap!',
-          message: 'your commande is created',
+          title: 'Success!',
+          message: 'your commande was created',
           contentType: ContentType.success,
         ),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Get.offAll(const MyNavigationBar());
     } else {
       var snackBar = SnackBar(
         elevation: 0,
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
-          title: 'On Snap!',
-          message: 'you must be uplode the image ',
+          title: 'Ooh Error!',
+          message: 'please fill all fields including image',
           contentType: ContentType.failure,
         ),
       );
