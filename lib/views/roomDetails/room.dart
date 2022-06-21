@@ -13,6 +13,7 @@ import 'package:roomie/views/roomDetails/widget/adresse.dart';
 import 'package:roomie/views/roomDetails/widget/character.dart';
 import 'package:roomie/views/roomDetails/widget/imagepost.dart';
 import 'package:roomie/views/roomDetails/widget/profileUser.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/RoomeDetails.dart';
 
@@ -70,8 +71,8 @@ class _rommDetailsState extends State<rommDetails> {
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(30),
                             topLeft: Radius.circular(30))),
-                    child: SingleChildScrollView(
-                      child:   FutureBuilder(
+                    child:Stack(children: [
+                      FutureBuilder(
                         future: roomeidetails.getDataUser(idPost),
                         builder:
                             (BuildContext context, AsyncSnapshot usnapshotUser) {
@@ -79,94 +80,127 @@ class _rommDetailsState extends State<rommDetails> {
                             future: roomeidetails.getDataPost(idPost),
                             builder:
                                 (BuildContext context, AsyncSnapshot usnapshotpost) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  imagepost(usnapshotpost.data["imageUri"])
-                                  ,
-                                  Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 16),
-                                    child: Column(
-                                      children: [
-                                        adressepost(
-                                            usnapshotpost.data["addresse"],
-                                            usnapshotpost.data["capacity"],
-                                            citys[usnapshotpost.data["city"]]),
-                                        Divider(
-                                          thickness: 3,
-                                        ),
-                                        characher("Equipment", usnapshotpost.data["equipment"]),
-                                        Divider(
-                                          thickness: 3,
-                                        ),
-                                        characher("Regulation", usnapshotpost.data["regulation"]),
-                                        Divider(
-                                          thickness: 3,
-                                        ),
-                                        profileUser(
-                                            usnapshotUser.data["profile"],
-                                            usnapshotUser.data["name"],
-                                            usnapshotUser.data["about"],
-                                            "13",
-                                            "profetionnele"),
-                                        Divider(
-                                          thickness: 3,
-                                        ),
-                                        characher("Languages", lang),
-                                        Divider(
-                                          thickness: 3,
-                                        ),
-                                        characher("Personality", lang),
-                                        Divider(
-                                          thickness: 3,
-                                        ),
-                                        characher("LifeStyle", lang),
-                                        Divider(
-                                          thickness: 3,
-                                        ),
-                                        characher("Hobbis", lang),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "${100} DH/ month",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 20),
-                                            ),
-                                            ElevatedButton.icon(
-                                              onPressed: () {},
-                                              icon: Icon(Icons.call),
-                                              label: Text(
-                                                "call",
-                                                style: TextStyle(fontSize: 20),
-                                              ),
-                                              style: ElevatedButton.styleFrom(
-                                                  primary: AppColors.PRIMARY_COLOR,
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 25, vertical: 12)),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              );
+                              if (usnapshotpost.hasData && usnapshotUser.hasData &&
+                                  usnapshotpost.connectionState ==
+                                      ConnectionState.done) {
+                                return
+                                 Stack(
 
+                                   children: [
+
+                                   SingleChildScrollView(
+                                     child: Column(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       children: [
+                                         imagepost(usnapshotpost.data["imageUri"])
+                                         ,
+                                         Container(
+                                           padding: EdgeInsets.symmetric(horizontal: 16),
+                                           child: Column(
+                                             children: [
+                                               adressepost(
+                                                   usnapshotpost.data["addresse"],
+                                                   usnapshotpost.data["capacity"],
+                                                   citys[usnapshotpost.data["city"]]),
+                                               Divider(
+                                                 thickness: 3,
+                                               ),
+                                               characher("Equipment", usnapshotpost.data["equipment"]),
+                                               Divider(
+                                                 thickness: 3,
+                                               ),
+                                               characher("Regulation", usnapshotpost.data["regulation"]),
+                                               Divider(
+                                                 thickness: 3,
+                                               ),
+                                               profileUser(
+                                                   usnapshotUser.data["profile"],
+                                                   usnapshotUser.data["name"],
+                                                   usnapshotUser.data["about"],
+                                                   "13",
+                                                   usnapshotUser.data["status"]),
+                                               Divider(
+                                                 thickness: 3,
+                                               ),
+                                               characher("Languages", usnapshotUser.data["languages"]),
+                                               Divider(
+                                                 thickness: 3,
+                                               ),
+                                               characher("Personality", usnapshotUser.data["personality"]),
+                                               Divider(
+                                                 thickness: 3,
+                                               ),
+                                               characher("LifeStyle", usnapshotUser.data["lifestyle"]),
+                                               Divider(
+                                                 thickness: 3,
+                                               ),
+                                               characher("Hobbis",  usnapshotUser.data["hobbis"]),
+                                               SizedBox(
+                                                 height: 10,
+                                               ),
+
+
+                                             ],
+                                           ),
+                                         )
+                                       ],
+                                     ),
+                                   ),
+
+
+                                   Positioned(
+                                     bottom:0,
+                                     child: Container(
+                                        width:350 ,
+                                        height: 80,
+                                       decoration: BoxDecoration(color: Colors.white),
+                                       child: Row(
+                                         mainAxisAlignment:
+                                         MainAxisAlignment.spaceAround,
+                                         children: [
+                                           Text(
+                                             "${usnapshotpost.data["budget"]} DH/ month",
+                                             style: TextStyle(
+                                                 fontWeight: FontWeight.w800,
+                                                 fontSize: 20),
+                                           ),
+                                           ElevatedButton.icon(
+                                             onPressed: () {
+
+                                               launch("tel://21213123123");
+
+                                             },
+                                             icon: Icon(Icons.call),
+                                             label: Text(
+                                               "call",
+                                               style: TextStyle(fontSize: 20),
+                                             ),
+                                             style: ElevatedButton.styleFrom(
+                                                 primary: AppColors.PRIMARY_COLOR,
+                                                 padding: EdgeInsets.symmetric(
+                                                     horizontal: 25, vertical: 12)),
+                                           )
+                                         ],
+                                       ),
+                                     ),
+                                   )
+                                 ],);
+                              } else {
+                                return Container();
+                              }
                             },
                           );
 
                         },
-                      ),
-                    ))) ,
+                      )
+
+                     
+
+
+                    ],)
+
+
+                )) ,
             ),
           ],
         ),

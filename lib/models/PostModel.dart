@@ -2,7 +2,7 @@
 
 List citys=[
   "El Jadida",
-  "Khouribga",
+  "Khouribg",
   "Mohammedia",
   "Safi",
   "Temara",
