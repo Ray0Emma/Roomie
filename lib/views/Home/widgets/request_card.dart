@@ -6,10 +6,11 @@ import 'package:get/get.dart';
 import 'package:roomie/resources/app_colors.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/Login/login.dart';
+import 'package:roomie/views/roomDetails/room.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, String budget, String localisation,
-    String capacity, String profile,String imgpost) {
+    String capacity, String profile, String imgpost, String idpost) {
   return InkWell(
       onTap: () async {
         User? user;
@@ -18,7 +19,8 @@ Widget requestCard(String name, int age, String budget, String localisation,
           Get.offAll(() => const Register());
         } else {
           // if the user exists and logged in the the user is navigated to the Home Screen
-          Get.to(() => MyNavigationBar()); //it should be room_details view
+          Get.to(rommDetails(),
+              arguments: idpost); //it should be room_details view
           print('from card');
         }
         print('request card');

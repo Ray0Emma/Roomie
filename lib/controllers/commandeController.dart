@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 import '../resources/firebase_auth_constants.dart';
 
@@ -25,9 +26,9 @@ class comandeContrller extends GetxController {
   TextEditingController equipment = new TextEditingController();
   TextEditingController regulations = new TextEditingController();
   TextEditingController Addresse = new TextEditingController();
-  List posts=[];
-  List infouser=[];
-  List infopost=[];
+  List posts = [];
+  List infouser = [];
+  List infopost = [];
   String? imageUri;
   // the image who selected
   File? image;
@@ -107,7 +108,7 @@ class comandeContrller extends GetxController {
     final userID = FirebaseAuth.instance.currentUser!.uid;
     if (this.image != null) {
       String imgurl = await uploadFile2(this.image, context);
-      var msg=await firebaseFirestore.collection('posts').doc(userID).set({
+      var msg = await firebaseFirestore.collection('posts').doc(userID).set({
         'budget': this.budget.text,
         'capacity': this.capacity.text,
         'city': this.capacitycounter,
@@ -115,8 +116,7 @@ class comandeContrller extends GetxController {
         'regulation': this.Regulation,
         'addresse': this.Addresse.text,
         'imageUri': imgurl,
-
-        "id_user":userID,
+        "id_user": userID,
         'createdon': Timestamp.now(),
       });
       var snackBar = SnackBar(
@@ -125,14 +125,12 @@ class comandeContrller extends GetxController {
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
           title: 'On Snap!',
-          message:
-          'your commande is created',
+          message: 'your commande is created',
           contentType: ContentType.success,
         ),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
     } else {
       var snackBar = SnackBar(
         elevation: 0,
@@ -140,8 +138,7 @@ class comandeContrller extends GetxController {
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
           title: 'On Snap!',
-          message:
-          'you must be uplode the image ',
+          message: 'you must be uplode the image ',
           contentType: ContentType.failure,
         ),
       );
@@ -150,7 +147,7 @@ class comandeContrller extends GetxController {
     }
   }
 
-getData() async{
+  getData() async {
     FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
       event.docs.forEach((element) async {
         var variable = await FirebaseFirestore.instance
@@ -160,41 +157,39 @@ getData() async{
         print(variable.get("birthday"));
         infouser.add(variable);
         print("--------------------------------------------------------------");
-        print( element.id);
+        print(element.id);
         posts.add(element.data());
         print(getDataUer(element.id));
-        print(element.data());});
+        print(element.data());
+      });
       print("--------------------------------------------------------------");
     });
   }
 
   Future getDataUer(userID) async {
-
-      //current user id
-      //collect the image name
-      var variable = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userID)
-          .get();
-      //a list of images names (i need only one)
-      // var _file_name = variable['profile'];
-      // return await _file_name.toString();
-      return variable;
-
+    //current user id
+    //collect the image name
+    var variable =
+        await FirebaseFirestore.instance.collection('users').doc(userID).get();
+    //a list of images names (i need only one)
+    // var _file_name = variable['profile'];
+    // return await _file_name.toString();
+    return variable;
   }
 
+  calculateAge(String birthDateString) {
+    String datePattern = "yyyy-mm-dd";
 
-  calculateAge(DateTime birthDate) {
+    DateTime birthDate = DateFormat(datePattern).parse(birthDateString);
+    DateTime today = DateTime.now();
 
-    DateTime currentDate = DateTime.now();
-    print(currentDate);
-    int age = currentDate.year - birthDate.year;
-    int month1 = currentDate.month;
+    int age = today.year - birthDate.year;
+    int month1 = today.month;
     int month2 = birthDate.month;
     if (month2 > month1) {
       age--;
     } else if (month1 == month2) {
-      int day1 = currentDate.day;
+      int day1 = today.day;
       int day2 = birthDate.day;
       if (day2 > day1) {
         age--;
