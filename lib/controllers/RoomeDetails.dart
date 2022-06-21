@@ -44,4 +44,25 @@ class roomeiDetails extends GetxController {
 
   }
 
+  calculateAge(String birthDateString) {
+    String datePattern = "yyyy-mm-dd";
+
+    DateTime birthDate = DateFormat(datePattern).parse(birthDateString);
+    DateTime today = DateTime.now();
+
+    int age = today.year - birthDate.year;
+    int month1 = today.month;
+    int month2 = birthDate.month;
+    if (month2 > month1) {
+      age--;
+    } else if (month1 == month2) {
+      int day1 = today.day;
+      int day2 = birthDate.day;
+      if (day2 > day1) {
+        age--;
+      }
+    }
+    return age;
+  }
+
 }

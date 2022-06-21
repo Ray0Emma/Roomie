@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:roomie/models/PostModel.dart';
 import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
@@ -25,7 +26,15 @@ class rommDetails extends StatefulWidget {
 
 class _rommDetailsState extends State<rommDetails> {
   roomeiDetails c = Get.find();
-
+  static List<Color> _kDefaultRainbowColors = const [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.indigo,
+    Colors.purple,
+  ];
   var idPost = Get.arguments;
   List lang = ["france", "merican", "souse", "tamazurt"];
   @override
@@ -117,7 +126,7 @@ class _rommDetailsState extends State<rommDetails> {
                                                    usnapshotUser.data["profile"],
                                                    usnapshotUser.data["name"],
                                                    usnapshotUser.data["about"],
-                                                   "13",
+                                                   roomeidetails.calculateAge(usnapshotUser.data["birthday"]),
                                                    usnapshotUser.data["status"]),
                                                Divider(
                                                  thickness: 3,
@@ -167,7 +176,7 @@ class _rommDetailsState extends State<rommDetails> {
                                            ElevatedButton.icon(
                                              onPressed: () {
 
-                                               launch("tel://21213123123");
+                                               launch("tel://${ usnapshotUser.data["phone"]}");
 
                                              },
                                              icon: Icon(Icons.call),
@@ -193,13 +202,7 @@ class _rommDetailsState extends State<rommDetails> {
 
                         },
                       )
-
-                     
-
-
                     ],)
-
-
                 )) ,
             ),
           ],
