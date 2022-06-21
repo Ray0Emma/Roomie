@@ -18,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   comandeContrller c = Get.find();
+  String name = "";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
