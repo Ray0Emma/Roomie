@@ -27,32 +27,36 @@ class _EditInformationsState extends State<EditInformations> {
   void initState() {
     //set the initial value of text field
     super.initState();
-    UserController.instance.getData().then((value) => {
-          (value != null)
-              ? [
-                  _myLifeStyle = value['lifestyle'],
-                  _myPersonality = value['personality'],
-                  selectedColor = (value['status'] == 'Student')
-                      ? AppColors.PRIMARY_COLOR
-                      : AppColors.GRAY_Forced,
-                  _myHobbis = value['hobbis'],
-                  selectedColor2 = (value['status'] == 'Professional')
-                      ? AppColors.PRIMARY_COLOR
-                      : AppColors.GRAY_Forced,
-                  _myHobbis = value['hobbis'],
-                  selectedColor3 = (value['status'] == 'Freelancer')
-                      ? AppColors.PRIMARY_COLOR
-                      : AppColors.GRAY_Forced,
-                  _myLanguages = value['languages'],
-                  status = value['status'],
-                ]
-              : CircularProgressIndicator()
-        });
+    asyncTasks() async {
+      UserController.instance.getData().then((value) => {
+            setState(() {
+              (value != null)
+                  ? [
+                      status = value['status'].toString(),
+                      selectedColor = (value['status'].toString() == 'Student')
+                          ? AppColors.PRIMARY_COLOR
+                          : AppColors.GRAY_Forced,
+                      selectedColor2 =
+                          (value['status'].toString() == 'Professional')
+                              ? AppColors.PRIMARY_COLOR
+                              : AppColors.GRAY_Forced,
+                      selectedColor3 =
+                          (value['status'].toString() == 'Freelancer')
+                              ? AppColors.PRIMARY_COLOR
+                              : AppColors.GRAY_Forced,
+                      _myLanguages = value['languages'] as List,
+                      _myPersonality = value['lifestyle'] as List,
+                      _myLifeStyle = value['personality'] as List,
+                      _myHobbis = value['hobbis'] as List,
+                    ]
+                  : CircularProgressIndicator();
+            })
+          });
+    }
 
-    // _myLanguages = [];
-    // _myLifeStyle = [];
-    // _myPersonality = [];
-    // _myHobbis = [];
+    setState(() {
+      asyncTasks();
+    });
   }
 
   @override
