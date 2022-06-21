@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget profileUser(String image,String name,String aboutme,String age,String etat){
+Widget profileUser(String image,String name,String aboutme,int age,String etat){
   return  Container(
     margin: EdgeInsets.symmetric(vertical: 18),
     child: Column(
@@ -20,12 +20,12 @@ Widget profileUser(String image,String name,String aboutme,String age,String eta
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                   color: Colors.blueAccent,
                   image: DecorationImage(image:NetworkImage(image), fit: BoxFit.cover)),),
-             SizedBox(width: 4,),
+             SizedBox(width: 8,),
              Column(
                mainAxisAlignment: MainAxisAlignment.start,
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-               Text(name,style: TextStyle(fontWeight: FontWeight.w700),),SizedBox(height: 5),Text(aboutme,style: TextStyle(fontSize: 10),)
+               Text(name,style: TextStyle(fontWeight: FontWeight.w700),),SizedBox(height: 8),Text(aboutme,style: TextStyle(fontSize: 10),)
              ],),
             Text("${age} Years old",style: TextStyle(fontWeight:FontWeight.w500),)
           ],),
