@@ -17,77 +17,82 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  comandeContrller  c=Get.find();
+  comandeContrller c = Get.find();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child:GetBuilder<comandeContrller>(
-        builder: (comandecontroller) =>Container(
-      decoration: BoxDecoration(
-        color: AppColors.PRIMARY_COLOR,
-      ),
-      child: Column(
-        children: [
-          // ****AppBar start****
-          MyAppBar(),
-          SizedBox(
-            height: 36,
-          ),
-          // ****AppBar End****
-          Container(
-            width: MediaQuery.of(context).size.width,
-            // height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-              ),
-              color: Colors.white,
-            ),
-            // ***filters***
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 36,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      FiltreNumber("Filtre"),
-                      FilterCard("room "),
-                      FilterCard("man "),
-                      FilterCard("woman "),
-                      FilterCard("appartement "),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    itemCount:comandecontroller.posts.length ,
-                    itemBuilder:(context,i){
-                      return  requestCard(
-                          comandecontroller.infouser[i]["name"],
-                          comandecontroller.calculateAge(comandecontroller.infouser[i]["birthday"].toDate()),
-                          comandecontroller.posts[i]["budget"], "images",
-                          comandecontroller.posts[i]["capacity"],
-                          comandecontroller.infouser[i]["profile"],
-                          comandecontroller.posts[i]["imageUri"]);
-                    })
-              ],
-            ),
+          child: GetBuilder<comandeContrller>(
+              builder: (comandecontroller) => Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.PRIMARY_COLOR,
+                    ),
+                    child: Column(
+                      children: [
+                        // ****AppBar start****
+                        MyAppBar(),
+                        SizedBox(
+                          height: 36,
+                        ),
+                        // ****AppBar End****
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          // height: MediaQuery.of(context).size.height,
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(25),
+                              topRight: Radius.circular(25),
+                            ),
+                            color: Colors.white,
+                          ),
+                          // ***filters***
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 36,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    FiltreNumber("Filtre"),
+                                    FilterCard("room "),
+                                    FilterCard("man "),
+                                    FilterCard("woman "),
+                                    FilterCard("appartement "),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: BouncingScrollPhysics(),
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  itemCount: comandecontroller.posts.length,
+                                  itemBuilder: (context, i) {
+                                    return requestCard(
+                                        comandecontroller.infouser[i]["name"],
+                                        comandecontroller.calculateAge(
+                                            comandecontroller.infouser[i]
+                                                ["birthday"]),
+                                        comandecontroller.posts[i]["budget"],
+                                        "images",
+                                        comandecontroller.posts[i]["capacity"],
+                                        comandecontroller.infouser[i]
+                                            ["profile"],
+                                        comandecontroller.posts[i]["imageUri"],
+                                        comandecontroller.posts[i]["id_user"]);
+                                  })
+                            ],
+                          ),
 
-            // *** end filters
-          ),
-        ],
-      ),
-    )) ,
+                          // *** end filters
+                        ),
+                      ],
+                    ),
+                  )),
         ),
       ),
     );

@@ -24,7 +24,8 @@ class SplashScreen extends StatelessWidget {
                 'assets/images/roomie.png',
               ),
             ),
-            nextScreen: rommDetails(),
+            splashIconSize: double.infinity,
+            nextScreen: MyNavigationBar(),
             splashTransition: SplashTransition.scaleTransition,
             // pageTransitionType: PageTransitionType.scale,
             backgroundColor: AppColors.PRIMARY_COLOR));

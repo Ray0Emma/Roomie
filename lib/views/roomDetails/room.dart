@@ -20,7 +20,8 @@ class rommDetails extends StatefulWidget {
 }
 
 class _rommDetailsState extends State<rommDetails> {
-  List lang=["france","merican","souse","tamazurt"];
+  var idPost = Get.arguments;
+  List lang = ["france", "merican", "souse", "tamazurt"];
 
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,7 +54,6 @@ class _rommDetailsState extends State<rommDetails> {
             ),
             Expanded(
               child: Container(
-
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -63,42 +63,82 @@ class _rommDetailsState extends State<rommDetails> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        imagepost("https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4"),
+                        imagepost(
+                            "https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4"),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
-                          child:Column(children: [
-                            adressepost("N 41 LOTS REDDAD, OUMDHAR, BENI MELLAL",3,"Beni Mellal"),
-                            Divider(thickness:3,),
-                            characher("Equipment",lang),
-                            Divider(thickness:3,),
-                            characher("Regulation",lang),
-                            Divider(thickness:3,),
-                            profileUser("https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4","Farah hamada","nice girl helped rachid for learning ","13","profetionnele"),
-                            Divider(thickness:3,),
-                            characher("Languages",lang),
-                            Divider(thickness:3,),
-                            characher("Personality",lang),
-                            Divider(thickness:3,),
-                            characher("LifeStyle",lang),
-                            Divider(thickness:3,),
-                            characher("Hobbis",lang),
-                            SizedBox(height: 10,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("${100} DH/ month",style: TextStyle(fontWeight: FontWeight.w800,fontSize:20),),
-                                  ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.call), label: Text("call",style: TextStyle(fontSize: 20),),
-                                  style:ElevatedButton.styleFrom(
-                                      primary:AppColors.PRIMARY_COLOR,
-                                    padding: EdgeInsets.symmetric(horizontal: 25,vertical: 12)
-                                  ) ,
+                          child: Column(
+                            children: [
+                              adressepost(
+                                  "N 41 LOTS REDDAD, OUMDHAR, BENI MELLAL",
+                                  3,
+                                  "Beni Mellal"),
+                              Divider(
+                                thickness: 3,
+                              ),
+                              characher("Equipment", lang),
+                              Divider(
+                                thickness: 3,
+                              ),
+                              characher("Regulation", lang),
+                              Divider(
+                                thickness: 3,
+                              ),
+                              profileUser(
+                                  "https://firebasestorage.googleapis.com/v0/b/roomie-589a9.appspot.com/o/photos%2F6f92a1948e175f59385308b580ae153c.png?alt=media&token=83111565-9989-464f-a417-1e7ac0d0bab4",
+                                  "Farah hamada",
+                                  "nice girl helped rachid for learning ",
+                                  "13",
+                                  "profetionnele"),
+                              Divider(
+                                thickness: 3,
+                              ),
+                              characher("Languages", lang),
+                              Divider(
+                                thickness: 3,
+                              ),
+                              characher("Personality", lang),
+                              Divider(
+                                thickness: 3,
+                              ),
+                              characher("LifeStyle", lang),
+                              Divider(
+                                thickness: 3,
+                              ),
+                              characher("Hobbis", lang),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${100} DH/ month",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 20),
+                                  ),
+                                  ElevatedButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.call),
+                                    label: Text(
+                                      "call",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: AppColors.PRIMARY_COLOR,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 25, vertical: 12)),
                                   )
-
-                              ],
-                            ),
-                            SizedBox(height: 20,),
-
-                          ],),)
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   )),
@@ -109,7 +149,3 @@ class _rommDetailsState extends State<rommDetails> {
     );
   }
 }
-
-
-
-

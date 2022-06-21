@@ -34,19 +34,19 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      UserController.instance.getData().then((value) => {
-            (value['gender'] != null)
-                ? [
-                    dateinput.text = value['birthday'],
-                    phone.text = value['phone'],
-                    selectedcnieliv = value['gender'],
-                    textAbout.text = value['about'],
-                    imageurl = value['profile'],
-                  ]
-                : CircularProgressIndicator()
-          });
-    });
+    // setState(() {
+    UserController.instance.getData().then((value) => {
+          (value['gender'] != null)
+              ? [
+                  dateinput.text = value['birthday'],
+                  phone.text = value['phone'],
+                  selectedcnieliv = value['gender'],
+                  textAbout.text = value['about'],
+                  imageurl = value['profile'],
+                ]
+              : CircularProgressIndicator()
+          // });
+        });
   }
 
   @override
@@ -219,7 +219,7 @@ class _EditProfileState extends State<EditProfile> {
                                         value: selectedcnieliv,
                                         items: listGender.map((list) {
                                           return DropdownMenuItem<String>(
-                                              value: list[0],
+                                              value: list,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(9.0),

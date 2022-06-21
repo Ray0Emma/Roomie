@@ -27,32 +27,32 @@ class _EditInformationsState extends State<EditInformations> {
   void initState() {
     //set the initial value of text field
     super.initState();
-    // UserController.instance.getData().then((value) => {
-    //       (value != null)
-    //           ? [
-    //               _myLifeStyle = value['lifestyle'],
-    //               _myPersonality = value['personality'],
-    //               selectedColor = (value['status'] == 'Student')
-    //                   ? AppColors.PRIMARY_COLOR
-    //                   : AppColors.GRAY_Forced,
-    //               _myHobbis = value['hobbis'],
-    //               selectedColor2 = (value['status'] == 'Professional')
-    //                   ? AppColors.PRIMARY_COLOR
-    //                   : AppColors.GRAY_Forced,
-    //               _myHobbis = value['hobbis'],
-    //               selectedColor3 = (value['status'] == 'Freelancer')
-    //                   ? AppColors.PRIMARY_COLOR
-    //                   : AppColors.GRAY_Forced,
-    //               _myLanguages = value['languages'],
-    //               status = value['status'],
-    //             ]
-    //           : CircularProgressIndicator()
-    //     });
+    UserController.instance.getData().then((value) => {
+          (value != null)
+              ? [
+                  _myLifeStyle = value['lifestyle'],
+                  _myPersonality = value['personality'],
+                  selectedColor = (value['status'] == 'Student')
+                      ? AppColors.PRIMARY_COLOR
+                      : AppColors.GRAY_Forced,
+                  _myHobbis = value['hobbis'],
+                  selectedColor2 = (value['status'] == 'Professional')
+                      ? AppColors.PRIMARY_COLOR
+                      : AppColors.GRAY_Forced,
+                  _myHobbis = value['hobbis'],
+                  selectedColor3 = (value['status'] == 'Freelancer')
+                      ? AppColors.PRIMARY_COLOR
+                      : AppColors.GRAY_Forced,
+                  _myLanguages = value['languages'],
+                  status = value['status'],
+                ]
+              : CircularProgressIndicator()
+        });
 
-    _myLanguages = [];
-    _myLifeStyle = [];
-    _myPersonality = [];
-    _myHobbis = [];
+    // _myLanguages = [];
+    // _myLifeStyle = [];
+    // _myPersonality = [];
+    // _myHobbis = [];
   }
 
   @override
