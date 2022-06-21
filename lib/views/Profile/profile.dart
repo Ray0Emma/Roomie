@@ -63,7 +63,9 @@ class _ProfileState extends State<Profile> {
                                       width: 130,
                                       height: 130,
                                       child: Image.network(
-                                          usnapshot.data["profile"]),
+                                        usnapshot.data["profile"],
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),

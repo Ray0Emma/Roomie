@@ -34,19 +34,26 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
-    // setState(() {
-    UserController.instance.getData().then((value) => {
-          (value['gender'] != null)
-              ? [
-                  dateinput.text = value['birthday'],
-                  phone.text = value['phone'],
-                  selectedcnieliv = value['gender'],
-                  textAbout.text = value['about'],
-                  imageurl = value['profile'],
-                ]
-              : CircularProgressIndicator()
-          // });
-        });
+    asyncTasks() async {
+      await UserController.instance.getData().then((value) => {
+            setState(() {
+              (value != null)
+                  ? [
+                      dateinput.text = value['birthday'],
+                      phone.text = value['phone'],
+                      selectedcnieliv = value['gender'].toString(),
+                      textAbout.text = value['about'],
+                      imageurl = value['profile'],
+                    ]
+                  : CircularProgressIndicator();
+            })
+          });
+    }
+
+    setState(() {
+      asyncTasks();
+    });
+    asyncTasks();
   }
 
   @override
@@ -133,7 +140,7 @@ class _EditProfileState extends State<EditProfile> {
                                   child: (_image != null)
                                       ? Image.file(
                                           _image!,
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.cover,
                                         )
                                       : profileImage(),
                                 ),
@@ -273,10 +280,10 @@ class _EditProfileState extends State<EditProfile> {
                                   controller: textAbout,
                                   decoration: InputDecoration(
                                       hintText: "A little About You",
-                                      enabledBorder: enabledBorder,
-                                      focusedBorder: focusedBorder,
-                                      focusedErrorBorder: errorBorder,
-                                      errorBorder: errorBorder,
+                                      enabledBorder: enabledBorderAbout,
+                                      focusedBorder: focusedBorderAbout,
+                                      focusedErrorBorder: errorBorderAbout,
+                                      errorBorder: errorBorderAbout,
                                       suffixIcon: Icon(
                                         Icons.text_fields,
                                       )),
