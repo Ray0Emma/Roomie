@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ThemeData().colorScheme.copyWith(
               primary: AppColors.PRIMARY_COLOR,
             ),
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
       ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
