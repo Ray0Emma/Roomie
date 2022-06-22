@@ -28,6 +28,7 @@ class comandeContrller extends GetxController {
   TextEditingController regulations = new TextEditingController();
   TextEditingController Addresse = new TextEditingController();
   List posts = [];
+  List currentPosts = [];
   List infouser = [];
   List infopost = [];
   String? imageUri;
@@ -50,6 +51,20 @@ class comandeContrller extends GetxController {
     Regulation = [];
     RegulationResult = '';
     super.onInit();
+    // asyncTasks() async {
+    //   await getData().then((value) => {
+    //         setState(() {
+    //           (value != null)
+    //               ? [
+    //                   Equipment = value['birthday'],
+    //                   EquipmentResult = value['phone'],
+    //                   regu = value['gender'].toString(),
+    //                   textAbout.text = value['about'],
+    //                   imageurl = value['profile'],
+    //                 ]
+    //               : CircularProgressIndicator();
+    //         })
+    //       });
   }
 
   incrimenter() {
@@ -159,6 +174,12 @@ class comandeContrller extends GetxController {
         print(variable.get("birthday"));
         infouser.add(variable);
         print("--------------------------------------------------------------");
+        if (FirebaseAuth.instance.currentUser != null) {
+          if (element.id == FirebaseAuth.instance.currentUser!.uid) {
+            currentPosts.add(element.data());
+          }
+        }
+
         print(element.id);
         posts.add(element.data());
         print(getDataUer(element.id));

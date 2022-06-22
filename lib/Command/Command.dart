@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, must_be_immutable, prefer_interpolation_to_compose_strings
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:roomie/resources/app_styles.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
 import '../../controllers/commandeController.dart';
 import '../../resources/app_colors.dart';
 import 'dart:io' as io;
@@ -26,13 +29,15 @@ class _commandState extends State<command> {
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
-    // send() async {
-    //   var formdata = formState.currentState;
-    //   if (formdata!.validate()) {
-    //   } else {
-    //     print("error");
-    //   }
-    // }
+    send() async {
+      var formdata = formState.currentState;
+      if (formdata != null) {
+        if (formdata.validate()) {
+        } else {
+          print("error");
+        }
+      }
+    }
 
     return SafeArea(
       child: Scaffold(
@@ -319,8 +324,8 @@ class _commandState extends State<command> {
                                         child: MultiSelectFormField(
                                           fillColor: Colors.transparent,
                                           border: InputBorder.none,
-                                          autovalidate:
-                                              AutovalidateMode.disabled,
+                                          autovalidate: AutovalidateMode
+                                              .onUserInteraction,
                                           chipBackGroundColor:
                                               AppColors.PRIMARY_COLOR,
                                           chipLabelStyle: TextStyle(
@@ -384,8 +389,8 @@ class _commandState extends State<command> {
                                         child: MultiSelectFormField(
                                           fillColor: Colors.transparent,
                                           border: InputBorder.none,
-                                          autovalidate:
-                                              AutovalidateMode.disabled,
+                                          autovalidate: AutovalidateMode
+                                              .onUserInteraction,
                                           chipBackGroundColor:
                                               AppColors.PRIMARY_COLOR,
                                           chipLabelStyle: TextStyle(
@@ -439,6 +444,13 @@ class _commandState extends State<command> {
                                       ),
                                       TextFormField(
                                         controller: comandecontroller.Addresse,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "please fill the field";
+                                          } else {
+                                            return null;
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
@@ -466,7 +478,7 @@ class _commandState extends State<command> {
                                       ),
                                       ElevatedButton(
                                         onPressed: () async {
-                                          // send();
+                                          send();
                                           comandecontroller
                                               .addcommande(context);
                                         },
@@ -476,10 +488,77 @@ class _commandState extends State<command> {
                                           padding: EdgeInsets.symmetric(
                                               vertical: 16),
                                         ),
-                                        child: Text(
-                                          "Post",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
+                                        child: (comandecontroller
+                                                .currentPosts.isEmpty)
+                                            ? Text(
+                                                "Post",
+                                                style: TextStyle(fontSize: 20),
+                                              )
+                                            : Text(
+                                                "Update",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          (comandecontroller
+                                                  .currentPosts.isNotEmpty)
+                                              ? Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .stretch,
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: () async {
+                                                        setState(() {
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "posts")
+                                                              .doc(FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser!
+                                                                  .uid)
+                                                              .delete()
+                                                              .then(
+                                                                (doc) => [
+                                                                  Get.offAll(
+                                                                      MyNavigationBar()),
+                                                                  comandecontroller
+                                                                      .onInit()
+                                                                ],
+                                                                onError: (e) =>
+                                                                    print(
+                                                                        "Error updating document $e"),
+                                                              );
+                                                          print(comandecontroller
+                                                              .currentPosts);
+                                                        });
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        primary:
+                                                            AppColors.RED_COLOR,
+                                                        shape: StadiumBorder(),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 16),
+                                                      ),
+                                                      child: Text(
+                                                        "Delete",
+                                                        style: TextStyle(
+                                                            fontSize: 20),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Container(),
+                                        ],
                                       ),
                                     ],
                                   ),

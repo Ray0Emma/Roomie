@@ -71,10 +71,11 @@ Widget requestCard(
                         style: TextStyle(color: AppColors.PRIMARY_COLOR_DARK),
                       ),
                       style: ElevatedButton.styleFrom(
+                        // shadowColor: Colors.transparent,
                         primary: AppColors.GRAY_COLOR,
                         shape: StadiumBorder(),
-                        padding: EdgeInsets.all(16),
-                        textStyle: TextStyle(fontSize: 15),
+                        padding: EdgeInsets.all(8),
+                        textStyle: TextStyle(fontSize: 12),
                       ),
                     ),
                   ],
