@@ -26,17 +26,8 @@ class rommDetails extends StatefulWidget {
 
 class _rommDetailsState extends State<rommDetails> {
   roomeiDetails c = Get.find();
-  static List<Color> _kDefaultRainbowColors = const [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
-    Colors.blue,
-    Colors.indigo,
-    Colors.purple,
-  ];
+
   var idPost = Get.arguments;
-  List lang = ["france", "merican", "souse", "tamazurt"];
   @override
   void initState() {
     
@@ -195,7 +186,13 @@ class _rommDetailsState extends State<rommDetails> {
                                    )
                                  ],);
                               } else {
-                                return Container();
+                                return Container(
+                                  width: double.infinity,
+                                  child:Center(child: CircularProgressIndicator(
+
+                                    color: AppColors.PRIMARY_COLOR,
+
+                                  ),),);
                               }
                             },
                           );

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget adressepost(String adresse,String capacity ,String ville){
+Widget adressepost(String adresse,int capacity ,String ville){
   return  Container(
     margin: EdgeInsets.symmetric(vertical: 18),
     child: Column(

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -8,7 +9,9 @@ import 'package:roomie/views/Home/widgets/appbar.dart';
 import 'package:roomie/views/Home/widgets/request_card.dart';
 import 'package:roomie/views/Home/widgets/filter.dart';
 import 'package:roomie/resources/app_colors.dart';
+import 'package:roomie/views/Home/widgets/searchBar.dart';
 
+import '../../controllers/HomeController.dart';
 import '../Home/widgets/filterNumber.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,14 +20,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  comandeContrller c = Get.find();
+  homeController c = Get.find();
+  String name="";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: GetBuilder<comandeContrller>(
-              builder: (comandecontroller) => Container(
+          child: GetBuilder<homeController>(
+              builder: (homecontroller) => Container(
                     decoration: BoxDecoration(
                       color: AppColors.PRIMARY_COLOR,
                     ),
@@ -32,6 +37,43 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         // ****AppBar start****
                         MyAppBar(),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15), color: AppColors.GRAY_COLOR),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    cursorColor: AppColors.PRIMARY_COLOR,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: "Search by city",
+                                      contentPadding: EdgeInsets.all(20.0),
+                                    ),
+                                    keyboardType: TextInputType.text,
+                                    maxLines: 1,
+                                    onChanged: (value){
+                                        setState(() {
+                                          name=value;
+                                        });
+
+                                    },
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.search,
+                                    color: AppColors.PRIMARY_COLOR_DARK,
+                                  ),
+                                  onPressed: (){
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: 36,
                         ),
@@ -66,28 +108,90 @@ class _HomePageState extends State<HomePage> {
                               const SizedBox(
                                 height: 30,
                               ),
-                              ListView.builder(
+                             /* ListView.builder(
                                   shrinkWrap: true,
                                   physics: BouncingScrollPhysics(),
                                   padding: EdgeInsets.symmetric(horizontal: 15),
-                                  itemCount: comandecontroller.posts.length,
+                                  itemCount: homecontroller.posts.length,
                                   itemBuilder: (context, i) {
                                     return requestCard(
-                                        comandecontroller.infouser[i]["name"],
-                                        comandecontroller.calculateAge(
-                                            comandecontroller.infouser[i]
+                                        homecontroller.users[i]["name"],
+                                        homecontroller.calculateAge(
+                                            homecontroller.users[i]
                                                 ["birthday"]),
-                                        comandecontroller.posts[i]["budget"],
+                                        homecontroller.posts[i]["budget"],
                                         "images",
-                                        comandecontroller.posts[i]["capacity"]
-                                            .toString(),
-                                        comandecontroller.infouser[i]
+                                        homecontroller.posts[i]["capacity"],
+                                        homecontroller.users[i]
                                             ["profile"],
-                                        comandecontroller.posts[i]["imageUri"],
-                                        comandecontroller.posts[i]["id_user"],
-                                        comandecontroller.posts[i]["city"]
-                                            .toString());
-                                  })
+                                        homecontroller.posts[i]["imageUri"],
+                                        homecontroller.posts[i]["id_user"]);
+                                  })*/
+
+                             StreamBuilder<QuerySnapshot>(
+                                stream: (name != "" && name != null)
+                                    ? FirebaseFirestore.instance
+                                    .collection('posts')
+                                    .where("addresse", isEqualTo: name)
+                                    .snapshots()
+                                    : FirebaseFirestore.instance.collection("posts").snapshots(),
+                                builder: (context, snapshot) {
+                                  return (snapshot.connectionState == ConnectionState.waiting)
+                                      ? Center(child: CircularProgressIndicator())
+                                      : ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: BouncingScrollPhysics(),
+                                    padding: EdgeInsets.symmetric(horizontal: 15),
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) {
+
+                                      DocumentSnapshot data = snapshot.data!.docs[index];
+                                      return  requestCard(
+                                          homecontroller.users[index]["name"],
+                                          homecontroller.calculateAge(
+                                              homecontroller.users[index]
+                                              ["birthday"]),
+                                          data["budget"],
+                                          "images",
+                                          data["capacity"],
+                                          homecontroller.users[index]
+                                          ["profile"],
+                                          data["imageUri"],
+                                          data["id_user"]);
+
+                                    },
+                                  );
+                                },
+                              )
+                               /*
+                              FutureBuilder(
+                                future: homecontroller.getAllDataPost(),
+                                builder:
+                                    (BuildContext context, AsyncSnapshot usnapshot) {
+                                  if (usnapshot.hasData &&
+                                      usnapshot.connectionState ==
+                                          ConnectionState.done ) {
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: BouncingScrollPhysics(),
+                                      padding: EdgeInsets.symmetric(horizontal: 15),
+                                      itemCount: usnapshot.data.docs.length,
+                                      itemBuilder: (context, index) {
+                                        DocumentSnapshot data = usnapshot.data.docs[index];
+                                        return Text("${data["addresse"]}");
+                                      },
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                },
+                              )*/
+
+
+
+
+
+
                             ],
                           ),
 

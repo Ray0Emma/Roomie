@@ -70,7 +70,7 @@ class _MyAppBarState extends State<MyAppBar> {
             ],
           ),
         ),
-        SearchBar(),
+
       ],
     );
   }
