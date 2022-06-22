@@ -481,6 +481,7 @@ class _commandState extends State<command> {
                                           send();
                                           comandecontroller
                                               .addcommande(context);
+                                          comandecontroller.getData();
                                         },
                                         style: ElevatedButton.styleFrom(
                                           primary: AppColors.PRIMARY_COLOR,
@@ -530,7 +531,9 @@ class _commandState extends State<command> {
                                                                   Get.offAll(
                                                                       MyNavigationBar()),
                                                                   comandecontroller
-                                                                      .onInit()
+                                                                      .initialState(),
+                                                                  comandecontroller
+                                                                      .getData()
                                                                 ],
                                                                 onError: (e) =>
                                                                     print(

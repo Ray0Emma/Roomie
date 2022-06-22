@@ -72,6 +72,23 @@ class comandeContrller extends GetxController {
     update();
   }
 
+  initialState() {
+    currentPosts = [];
+    selectedcnieliv = null;
+    image = null;
+    budget.text = '';
+    capacitycounter = 0;
+    capacity.text = '0';
+    city.text = '';
+    equipment.text = '';
+    regulations.text = '';
+    Addresse.text = '';
+    Equipment = [];
+    EquipmentResult = '';
+    Regulation = [];
+    RegulationResult = '';
+  }
+
   dincrimenter() {
     if (capacitycounter > 0) capacitycounter--;
     update();
