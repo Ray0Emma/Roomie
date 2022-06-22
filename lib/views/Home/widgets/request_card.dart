@@ -58,8 +58,27 @@ Widget requestCard(
                 subtitle: Text(
                   "$age years old",
                 ),
-                trailing: Icon(Icons.location_on_outlined,
-                    color: AppColors.RED_COLOR, semanticLabel: city),
+                trailing: Column(
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.location_on,
+                        color: AppColors.RED_COLOR,
+                      ),
+                      label: Text(
+                        city,
+                        style: TextStyle(color: AppColors.PRIMARY_COLOR_DARK),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.GRAY_COLOR,
+                        shape: StadiumBorder(),
+                        padding: EdgeInsets.all(16),
+                        textStyle: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
                 leading: Stack(children: [
                   CircleAvatar(
                     backgroundColor: Color(0xff00A3FF),
