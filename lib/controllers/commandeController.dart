@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:roomie/views/Home/widgets/navigation.dart';
 
 import '../resources/firebase_auth_constants.dart';
 
@@ -27,6 +28,7 @@ class comandeContrller extends GetxController {
   TextEditingController regulations = new TextEditingController();
   TextEditingController Addresse = new TextEditingController();
   List posts = [];
+  List currentPosts = [];
   List infouser = [];
   List infopost = [];
   String? imageUri;
@@ -49,11 +51,42 @@ class comandeContrller extends GetxController {
     Regulation = [];
     RegulationResult = '';
     super.onInit();
+    // asyncTasks() async {
+    //   await getData().then((value) => {
+    //         setState(() {
+    //           (value != null)
+    //               ? [
+    //                   Equipment = value['birthday'],
+    //                   EquipmentResult = value['phone'],
+    //                   regu = value['gender'].toString(),
+    //                   textAbout.text = value['about'],
+    //                   imageurl = value['profile'],
+    //                 ]
+    //               : CircularProgressIndicator();
+    //         })
+    //       });
   }
 
   incrimenter() {
     capacitycounter++;
     update();
+  }
+
+  initialState() {
+    currentPosts = [];
+    selectedcnieliv = null;
+    image = null;
+    budget.text = '';
+    capacitycounter = 0;
+    capacity.text = '0';
+    city.text = '';
+    equipment.text = '';
+    regulations.text = '';
+    Addresse.text = '';
+    Equipment = [];
+    EquipmentResult = '';
+    Regulation = [];
+    RegulationResult = '';
   }
 
   dincrimenter() {
@@ -110,8 +143,8 @@ class comandeContrller extends GetxController {
       String imgurl = await uploadFile2(this.image, context);
       var msg = await firebaseFirestore.collection('posts').doc(userID).set({
         'budget': this.budget.text,
-        'capacity': this.capacity.text,
-        'city': this.capacitycounter,
+        'capacity': this.capacitycounter.toString(),
+        'city': this.selectedcnieliv,
         'equipment': this.Equipment,
         'regulation': this.Regulation,
         'addresse': this.Addresse.text,
@@ -124,21 +157,22 @@ class comandeContrller extends GetxController {
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
-          title: 'On Snap!',
-          message: 'your commande is created',
+          title: 'Success!',
+          message: 'your commande was created',
           contentType: ContentType.success,
         ),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Get.offAll(const MyNavigationBar());
     } else {
       var snackBar = SnackBar(
         elevation: 0,
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
-          title: 'On Snap!',
-          message: 'you must be uplode the image ',
+          title: 'Ooh Error!',
+          message: 'please fill all fields including image',
           contentType: ContentType.failure,
         ),
       );
@@ -157,6 +191,12 @@ class comandeContrller extends GetxController {
         print(variable.get("birthday"));
         infouser.add(variable);
         print("--------------------------------------------------------------");
+        if (FirebaseAuth.instance.currentUser != null) {
+          if (element.id == FirebaseAuth.instance.currentUser!.uid) {
+            currentPosts.add(element.data());
+          }
+        }
+
         print(element.id);
         posts.add(element.data());
         print(getDataUer(element.id));

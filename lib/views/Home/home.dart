@@ -171,7 +171,6 @@ class _HomePageState extends State<HomePage> {
                                   if (usnapshot.hasData &&
                                       usnapshot.connectionState ==
                                           ConnectionState.done ) {
-
                                     return ListView.builder(
                                       shrinkWrap: true,
                                       physics: BouncingScrollPhysics(),
