@@ -30,7 +30,6 @@ class _rommDetailsState extends State<rommDetails> {
   var idPost = Get.arguments;
   @override
   void initState() {
-    
     super.initState();
   }
 
@@ -65,142 +64,177 @@ class _rommDetailsState extends State<rommDetails> {
             ),
             Expanded(
               child: GetBuilder<roomeiDetails>(
-                builder: (roomeidetails) =>Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            topLeft: Radius.circular(30))),
-                    child:Stack(children: [
-                      FutureBuilder(
-                        future: roomeidetails.getDataUser(idPost),
-                        builder:
-                            (BuildContext context, AsyncSnapshot usnapshotUser) {
-                          return   FutureBuilder(
-                            future: roomeidetails.getDataPost(idPost),
-                            builder:
-                                (BuildContext context, AsyncSnapshot usnapshotpost) {
-                              if (usnapshotpost.hasData && usnapshotUser.hasData &&
-                                  usnapshotpost.connectionState ==
-                                      ConnectionState.done) {
-                                return
-                                 Stack(
-
-                                   children: [
-
-                                   SingleChildScrollView(
-                                     child: Column(
-                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                       children: [
-                                         imagepost(usnapshotpost.data["imageUri"])
-                                         ,
-                                         Container(
-                                           padding: EdgeInsets.symmetric(horizontal: 16),
-                                           child: Column(
-                                             children: [
-                                               adressepost(
-                                                   usnapshotpost.data["addresse"],
-                                                   usnapshotpost.data["capacity"],
-                                                   citys[usnapshotpost.data["city"]]),
-                                               Divider(
-                                                 thickness: 3,
-                                               ),
-                                               characher("Equipment", usnapshotpost.data["equipment"]),
-                                               Divider(
-                                                 thickness: 3,
-                                               ),
-                                               characher("Regulation", usnapshotpost.data["regulation"]),
-                                               Divider(
-                                                 thickness: 3,
-                                               ),
-                                               profileUser(
-                                                   usnapshotUser.data["profile"],
-                                                   usnapshotUser.data["name"],
-                                                   usnapshotUser.data["about"],
-                                                   roomeidetails.calculateAge(usnapshotUser.data["birthday"]),
-                                                   usnapshotUser.data["status"]),
-                                               Divider(
-                                                 thickness: 3,
-                                               ),
-                                               characher("Languages", usnapshotUser.data["languages"]),
-                                               Divider(
-                                                 thickness: 3,
-                                               ),
-                                               characher("Personality", usnapshotUser.data["personality"]),
-                                               Divider(
-                                                 thickness: 3,
-                                               ),
-                                               characher("LifeStyle", usnapshotUser.data["lifestyle"]),
-                                               Divider(
-                                                 thickness: 3,
-                                               ),
-                                               characher("Hobbis",  usnapshotUser.data["hobbis"]),
-                                               SizedBox(
-                                                 height: 10,
-                                               ),
-
-
-                                             ],
-                                           ),
-                                         )
-                                       ],
-                                     ),
-                                   ),
-
-
-                                   Positioned(
-                                     bottom:0,
-                                     child: Container(
-                                        width:350 ,
-                                        height: 80,
-                                       decoration: BoxDecoration(color: Colors.white),
-                                       child: Row(
-                                         mainAxisAlignment:
-                                         MainAxisAlignment.spaceAround,
-                                         children: [
-                                           Text(
-                                             "${usnapshotpost.data["budget"]} DH/ month",
-                                             style: TextStyle(
-                                                 fontWeight: FontWeight.w800,
-                                                 fontSize: 20),
-                                           ),
-                                           ElevatedButton.icon(
-                                             onPressed: () {
-
-                                               launch("tel://${ usnapshotUser.data["phone"]}");
-
-                                             },
-                                             icon: Icon(Icons.call),
-                                             label: Text(
-                                               "call",
-                                               style: TextStyle(fontSize: 20),
-                                             ),
-                                             style: ElevatedButton.styleFrom(
-                                                 primary: AppColors.PRIMARY_COLOR,
-                                                 padding: EdgeInsets.symmetric(
-                                                     horizontal: 25, vertical: 12)),
-                                           )
-                                         ],
-                                       ),
-                                     ),
-                                   )
-                                 ],);
-                              } else {
-                                return Container(
-                                  width: double.infinity,
-                                  child:Center(child: CircularProgressIndicator(
-
-                                    color: AppColors.PRIMARY_COLOR,
-
-                                  ),),);
-                              }
+                  builder: (roomeidetails) => Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(30),
+                              topLeft: Radius.circular(30))),
+                      child: Stack(
+                        children: [
+                          FutureBuilder(
+                            future: roomeidetails.getDataUser(idPost),
+                            builder: (BuildContext context,
+                                AsyncSnapshot usnapshotUser) {
+                              return FutureBuilder(
+                                future: roomeidetails.getDataPost(idPost),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot usnapshotpost) {
+                                  if (usnapshotpost.hasData &&
+                                      usnapshotUser.hasData &&
+                                      usnapshotpost.connectionState ==
+                                          ConnectionState.done) {
+                                    return Stack(
+                                      children: [
+                                        SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              imagepost(usnapshotpost
+                                                  .data["imageUri"]),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 16),
+                                                child: Column(
+                                                  children: [
+                                                    adressepost(
+                                                        usnapshotpost
+                                                            .data["addresse"],
+                                                        usnapshotpost
+                                                            .data["capacity"],
+                                                        usnapshotpost
+                                                            .data["city"]),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                    characher(
+                                                        "Equipment",
+                                                        usnapshotpost
+                                                            .data["equipment"]),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                    characher(
+                                                        "Regulation",
+                                                        usnapshotpost.data[
+                                                            "regulation"]),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                    profileUser(
+                                                        usnapshotUser
+                                                            .data["profile"],
+                                                        usnapshotUser
+                                                            .data["name"],
+                                                        usnapshotUser
+                                                            .data["about"],
+                                                        roomeidetails
+                                                            .calculateAge(
+                                                                usnapshotUser
+                                                                        .data[
+                                                                    "birthday"]),
+                                                        usnapshotUser
+                                                            .data["status"]),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                    characher(
+                                                        "Languages",
+                                                        usnapshotUser
+                                                            .data["languages"]),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                    characher(
+                                                        "Personality",
+                                                        usnapshotUser.data[
+                                                            "personality"]),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                    characher(
+                                                        "LifeStyle",
+                                                        usnapshotUser
+                                                            .data["lifestyle"]),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                    characher(
+                                                        "Hobbis",
+                                                        usnapshotUser
+                                                            .data["hobbis"]),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          child: Container(
+                                            width: 350,
+                                            height: 80,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Text(
+                                                  "${usnapshotpost.data["budget"]} DH/ month",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      fontSize: 20),
+                                                ),
+                                                ElevatedButton.icon(
+                                                  onPressed: () {
+                                                    launch(
+                                                        "tel://${usnapshotUser.data["phone"]}");
+                                                  },
+                                                  icon: Icon(Icons.call),
+                                                  label: Text(
+                                                    "call",
+                                                    style:
+                                                        TextStyle(fontSize: 20),
+                                                  ),
+                                                  style: ElevatedButton
+                                                      .styleFrom(
+                                                          primary: AppColors
+                                                              .PRIMARY_COLOR,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      25,
+                                                                  vertical:
+                                                                      12)),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  } else {
+                                    return Container(
+                                      width: double.infinity,
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          color: AppColors.PRIMARY_COLOR,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                              );
                             },
-                          );
-
-                        },
-                      )
-                    ],)
-                )) ,
+                          )
+                        ],
+                      ))),
             ),
           ],
         ),
