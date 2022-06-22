@@ -21,8 +21,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   homeController c = Get.find();
-  TextEditingController search=TextEditingController();
   String name="";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -127,7 +127,8 @@ class _HomePageState extends State<HomePage> {
                                         homecontroller.posts[i]["imageUri"],
                                         homecontroller.posts[i]["id_user"]);
                                   })*/
-                              StreamBuilder<QuerySnapshot>(
+
+                             StreamBuilder<QuerySnapshot>(
                                 stream: (name != "" && name != null)
                                     ? FirebaseFirestore.instance
                                     .collection('posts')
@@ -143,12 +144,55 @@ class _HomePageState extends State<HomePage> {
                                     padding: EdgeInsets.symmetric(horizontal: 15),
                                     itemCount: snapshot.data!.docs.length,
                                     itemBuilder: (context, index) {
+
                                       DocumentSnapshot data = snapshot.data!.docs[index];
-                                      return Text("${data["addresse"]}");
+                                      return  requestCard(
+                                          homecontroller.users[index]["name"],
+                                          homecontroller.calculateAge(
+                                              homecontroller.users[index]
+                                              ["birthday"]),
+                                          data["budget"],
+                                          "images",
+                                          data["capacity"],
+                                          homecontroller.users[index]
+                                          ["profile"],
+                                          data["imageUri"],
+                                          data["id_user"]);
+
                                     },
                                   );
                                 },
                               )
+                               /*
+                              FutureBuilder(
+                                future: homecontroller.getAllDataPost(),
+                                builder:
+                                    (BuildContext context, AsyncSnapshot usnapshot) {
+                                  if (usnapshot.hasData &&
+                                      usnapshot.connectionState ==
+                                          ConnectionState.done ) {
+
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: BouncingScrollPhysics(),
+                                      padding: EdgeInsets.symmetric(horizontal: 15),
+                                      itemCount: usnapshot.data.docs.length,
+                                      itemBuilder: (context, index) {
+                                        DocumentSnapshot data = usnapshot.data.docs[index];
+                                        return Text("${data["addresse"]}");
+                                      },
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                },
+                              )*/
+
+
+
+
+
+
                             ],
                           ),
 
