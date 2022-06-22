@@ -21,7 +21,7 @@ class _HomeState extends State<nearToMe> {
   String googleAPiKey = "AIzaSyCaM5mZeujKjAt43V-QHOHtdd-d2_0jkeM";
   Set<Marker> markers = Set(); //markers for google map
   Map<PolylineId, Polyline> polylines = {}; //polylines to show direction
-  LatLng startLocation = LatLng(27.6683619, 85.3101895);
+  LatLng startLocation = LatLng(32.3699229,-6.3150989);
   LatLng endLocation = LatLng(27.6875436, 85.2751138);
   double distance = 0.0;
   BitmapDescriptor? myIcon;
@@ -29,7 +29,7 @@ class _HomeState extends State<nearToMe> {
   List listromm=[{},{},{}];
   initState(){
     BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(), 'image/Home.png')
+        ImageConfiguration(), 'assets/Home.png')
         .then((onValue) {
       myIcon = onValue;
     });
@@ -105,7 +105,7 @@ class _HomeState extends State<nearToMe> {
                 zoomGesturesEnabled: true,
                 initialCameraPosition: CameraPosition(
                   target: startLocation,
-                  zoom: 14.0,
+                  zoom: 8.0,
                 ),
                 markers: markers,
                 //polylines: Set<Polyline>.of(polylines.values),
