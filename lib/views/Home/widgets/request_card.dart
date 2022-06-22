@@ -10,7 +10,7 @@ import 'package:roomie/views/roomDetails/room.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, String budget, String localisation,
-    String capacity, String profile, String imgpost, String idpost) {
+    int capacity, String profile, String imgpost, String idpost) {
   return InkWell(
       onTap: () async {
         User? user;

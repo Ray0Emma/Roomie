@@ -7,7 +7,7 @@ Widget profileUser(String image,String name,String aboutme,int age,String etat){
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Roommate",style: TextStyle(fontSize:13,fontWeight: FontWeight.w800 ),),
+        Text("Roommate",style: TextStyle(fontSize:16,fontWeight: FontWeight.w900),),
         SizedBox(height: 10,),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,

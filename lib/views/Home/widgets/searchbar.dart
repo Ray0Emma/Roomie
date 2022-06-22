@@ -29,7 +29,8 @@ Widget SearchBar() {
               Icons.search,
               color: AppColors.PRIMARY_COLOR_DARK,
             ),
-            onPressed: null,
+            onPressed: (){
+            },
           ),
         ],
       ),
