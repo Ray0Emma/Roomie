@@ -9,8 +9,16 @@ import 'package:roomie/views/Login/login.dart';
 import 'package:roomie/views/roomDetails/room.dart';
 import 'scrollImage.dart';
 
-Widget requestCard(String name, int age, String budget, String localisation,
-    String capacity, String profile, String imgpost, String idpost) {
+Widget requestCard(
+    String name,
+    int age,
+    String budget,
+    String localisation,
+    String capacity,
+    String profile,
+    String imgpost,
+    String idpost,
+    String city) {
   return InkWell(
       onTap: () async {
         User? user;
@@ -51,7 +59,7 @@ Widget requestCard(String name, int age, String budget, String localisation,
                   "$age years old",
                 ),
                 trailing: Icon(Icons.location_on_outlined,
-                    color: AppColors.RED_COLOR),
+                    color: AppColors.RED_COLOR, semanticLabel: city),
                 leading: Stack(children: [
                   CircleAvatar(
                     backgroundColor: Color(0xff00A3FF),

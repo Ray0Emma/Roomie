@@ -79,11 +79,14 @@ class _HomePageState extends State<HomePage> {
                                                 ["birthday"]),
                                         comandecontroller.posts[i]["budget"],
                                         "images",
-                                        comandecontroller.posts[i]["capacity"],
+                                        comandecontroller.posts[i]["capacity"]
+                                            .toString(),
                                         comandecontroller.infouser[i]
                                             ["profile"],
                                         comandecontroller.posts[i]["imageUri"],
-                                        comandecontroller.posts[i]["id_user"]);
+                                        comandecontroller.posts[i]["id_user"],
+                                        comandecontroller.posts[i]["city"]
+                                            .toString());
                                   })
                             ],
                           ),
