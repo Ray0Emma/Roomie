@@ -1,16 +1,71 @@
-# Roomie
+<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+<p align="center">
+  <a href="">
+    <img alt="Roomie" src="https://user-images.githubusercontent.com/70212296/175127761-602264de-6146-4aa3-8ee4-c36d11d72d3f.svg" width="400" />
+  </a>
+</p>
 
-![Untitled design](https://user-images.githubusercontent.com/70212296/174905378-5e56dcf2-df32-47ae-b69d-3a6aa8327ce0.jpg)
+<h1 align="center">
+  Roomie Application
+</h1>
 
-## Getting Started
+Roomie application makes finding roommates and rooms to share easy. It will manage offers and requests for co-rentals.
 
-This project is a starting point for a Flutter application.
+we are using a map (googlemap api) to display the locations of nearby rooms . Roomie ses Firebase( FireStore/Storage) to manage its data.
 
-A few resources to get you started if this is your first Flutter project:
+A co-location offer can be made by a user of the application by creating an account and completing a form,
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+that form will indicate the details of the offer:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ 1.  The address of the accommodation, the area, the price and the capacity (the number of personnes),etc
+ 2.  WiFi, Lave-linge, etc
+ 3.  Pictures of the accommodation,etc
+
+The application is built using [Flutter](https://flutter.dev/)
+
+
+## 🚀 Quick start
+
+
+1.  **Fork and clone the project**
+
+    Change the current working directory to the location where you want the cloned directory.
+    
+    ```sh
+    git clone https://github.com/your-username/Roomie.git
+    ```
+
+1.  **Start developing.**
+
+    Navigate into your new site’s directory and start it up.
+
+    ```sh
+    cd Roomie/
+    flutter pub get
+    ```
+
+## 📸 Roomie 
+
+![Roomie Design](https://user-images.githubusercontent.com/70212296/175122869-51f7bfe6-a24d-4070-9d6a-7876d9b4d463.jpg)
+
+## Licensing
+
+The code in this project is licensed under MIT license.
+
+## Contributors ✨
+
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table align="center">
+  <tr>
+    <td align="center"><a href="https://farahelahmadi.me/"><img src="https://avatars.githubusercontent.com/u/70212296?v=4?s=180" width="180px;" alt=""/><br /><sub><b>Farah Ait Elahmadi</b></sub></a><br /><a href="https://github.com/ray0emma/Roomie/commits?author=ray0emma" title="Code">💻</a> </td>
+    <td align="center"><a href="https://github.com/bourigue"><img src="https://avatars.githubusercontent.com/u/96108341?v=4" width="180px;" alt=""/><br /><sub><b>Rachid Bourigue</b></sub></a><br /><a href="https://github.com/ray0emma/Roomie/commits?author=bourigue" title="Code">💻</a> </td>
+  </tr>
+</table>
+
+
