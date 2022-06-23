@@ -7,6 +7,7 @@ import 'package:roomie/resources/app_colors.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
 import 'package:roomie/views/Login/login.dart';
 import 'package:roomie/views/roomDetails/room.dart';
+import '../../Mapscard/mapsCard.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, String budget, String localisation,
@@ -56,7 +57,10 @@ Widget requestCard(String name, int age, String budget, String localisation,
                     shadowColor: Colors.transparent,
                     shape: StadiumBorder(),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(mapsCard());
+
+                  },
                   child: Icon(Icons.location_on_outlined,
                       color: AppColors.RED_COLOR),
                 ),
