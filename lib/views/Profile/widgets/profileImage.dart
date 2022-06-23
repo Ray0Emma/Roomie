@@ -22,7 +22,13 @@ Widget profileImage() {
           ),
         );
       } else {
-        return Container();
+        return Container(
+            width: double.infinity,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.PRIMARY_COLOR,
+              ),
+            ));
       }
     },
   );
