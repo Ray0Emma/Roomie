@@ -10,6 +10,7 @@ import 'package:roomie/resources/app_styles.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 
 import 'package:roomie/resources/app_colors.dart';
+import 'package:roomie/views/Profile/widgets/profileImage.dart';
 import 'package:roomie/views/roomDetails/widget/adresse.dart';
 import 'package:roomie/views/roomDetails/widget/character.dart';
 import 'package:roomie/views/roomDetails/widget/imagepost.dart';
@@ -41,23 +42,19 @@ class _rommDetailsState extends State<rommDetails> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(vertical: 11, horizontal: 30),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    size: 20,
-                    color: Colors.white,
-                  ),
+                  arrowBack(),
                   SizedBox(
                     width: 5,
                   ),
                   Text(
-                    "Roomie details",
+                    "Room details",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
-                        fontSize: 28),
+                        fontSize: 25),
                   )
                 ],
               ),
@@ -106,21 +103,27 @@ class _rommDetailsState extends State<rommDetails> {
                                                         usnapshotpost
                                                             .data["city"]),
                                                     Divider(
-                                                      thickness: 3,
+                                                      thickness: 1,
+                                                      color: Color.fromARGB(
+                                                          162, 177, 179, 179),
                                                     ),
                                                     characher(
-                                                        "Equipment",
+                                                        "Equipments",
                                                         usnapshotpost
                                                             .data["equipment"]),
                                                     Divider(
-                                                      thickness: 3,
+                                                      thickness: 1,
+                                                      color: Color.fromARGB(
+                                                          162, 177, 179, 179),
                                                     ),
                                                     characher(
-                                                        "Regulation",
+                                                        "Regulations",
                                                         usnapshotpost.data[
                                                             "regulation"]),
                                                     Divider(
-                                                      thickness: 3,
+                                                      thickness: 1,
+                                                      color: Color.fromARGB(
+                                                          162, 177, 179, 179),
                                                     ),
                                                     profileUser(
                                                         usnapshotUser
@@ -137,35 +140,43 @@ class _rommDetailsState extends State<rommDetails> {
                                                         usnapshotUser
                                                             .data["status"]),
                                                     Divider(
-                                                      thickness: 3,
+                                                      thickness: 1,
+                                                      color: Color.fromARGB(
+                                                          162, 177, 179, 179),
                                                     ),
                                                     characher(
                                                         "Languages",
                                                         usnapshotUser
                                                             .data["languages"]),
                                                     Divider(
-                                                      thickness: 3,
+                                                      thickness: 1,
+                                                      color: Color.fromARGB(
+                                                          162, 177, 179, 179),
                                                     ),
                                                     characher(
                                                         "Personality",
                                                         usnapshotUser.data[
                                                             "personality"]),
                                                     Divider(
-                                                      thickness: 3,
+                                                      thickness: 1,
+                                                      color: Color.fromARGB(
+                                                          162, 177, 179, 179),
                                                     ),
                                                     characher(
                                                         "LifeStyle",
                                                         usnapshotUser
                                                             .data["lifestyle"]),
                                                     Divider(
-                                                      thickness: 3,
+                                                      thickness: 1,
+                                                      color: Color.fromARGB(
+                                                          162, 177, 179, 179),
                                                     ),
                                                     characher(
                                                         "Hobbis",
                                                         usnapshotUser
                                                             .data["hobbis"]),
                                                     SizedBox(
-                                                      height: 10,
+                                                      height: 90,
                                                     ),
                                                   ],
                                                 ),
@@ -175,46 +186,62 @@ class _rommDetailsState extends State<rommDetails> {
                                         ),
                                         Positioned(
                                           bottom: 0,
-                                          child: Container(
-                                            width: 350,
-                                            height: 80,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Text(
-                                                  "${usnapshotpost.data["budget"]} DH/ month",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      fontSize: 20),
+                                          child: Column(
+                                            // crossAxisAlignment:
+                                            //     CrossAxisAlignment.stretch,
+                                            children: [
+                                              Container(
+                                                width: 360,
+                                                height: 80,
+                                                decoration:
+                                                    BoxDecoration(boxShadow: [
+                                                  BoxShadow(
+                                                    color: AppColors.GRAY_Forced
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 5,
+                                                    blurRadius: 7,
+                                                  )
+                                                ], color: Colors.white),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Text(
+                                                      "${usnapshotpost.data["budget"]} DH/ month",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                          fontSize: 20,
+                                                          color: AppColors
+                                                              .BLACK_COLOR),
+                                                    ),
+                                                    ElevatedButton.icon(
+                                                      onPressed: () {
+                                                        launch(
+                                                            "tel://${usnapshotUser.data["phone"]}");
+                                                      },
+                                                      icon: Icon(Icons.call),
+                                                      label: Text(
+                                                        "Call",
+                                                        style: TextStyle(
+                                                            fontSize: 20),
+                                                      ),
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              primary: AppColors
+                                                                  .PRIMARY_COLOR,
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          25,
+                                                                      vertical:
+                                                                          12)),
+                                                    )
+                                                  ],
                                                 ),
-                                                ElevatedButton.icon(
-                                                  onPressed: () {
-                                                    launch(
-                                                        "tel://${usnapshotUser.data["phone"]}");
-                                                  },
-                                                  icon: Icon(Icons.call),
-                                                  label: Text(
-                                                    "call",
-                                                    style:
-                                                        TextStyle(fontSize: 20),
-                                                  ),
-                                                  style: ElevatedButton
-                                                      .styleFrom(
-                                                          primary: AppColors
-                                                              .PRIMARY_COLOR,
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  horizontal:
-                                                                      25,
-                                                                  vertical:
-                                                                      12)),
-                                                )
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         )
                                       ],

@@ -50,8 +50,16 @@ Widget requestCard(String name, int age, String budget, String localisation,
                 subtitle: Text(
                   "$age years old",
                 ),
-                trailing: Icon(Icons.location_on_outlined,
-                    color: AppColors.RED_COLOR),
+                trailing: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColors.RED_COLOR.withOpacity(.1),
+                    shadowColor: Colors.transparent,
+                    shape: StadiumBorder(),
+                  ),
+                  onPressed: () {},
+                  child: Icon(Icons.location_on_outlined,
+                      color: AppColors.RED_COLOR),
+                ),
                 leading: Stack(children: [
                   CircleAvatar(
                     backgroundColor: Color(0xff00A3FF),
