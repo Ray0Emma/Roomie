@@ -22,13 +22,40 @@ List posts=List.empty(growable: true).obs;
 List users=List.empty(growable: true).obs;
 
 
-
   @override
   void onInit() {
     // print(Get.arguments);
-    getAllDataPost();
+
+print("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+    print(getAllDataPostByContent("Rabat"));
+print("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+
+getAllDataPost();
     super.onInit();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getData() async {
     FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
       event.docs.forEach((element) async {
@@ -68,21 +95,21 @@ List users=List.empty(growable: true).obs;
 
   }
   Future getAllDataPostByContent(String name) async {
-
+    List postfarah=[];
     await FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
       event.docs.forEach((element) async {
 
-        if(element.data()["addresse"].startsWith(name)){
+        if(element.data()["city"].contains(name)){
           var variable = await FirebaseFirestore.instance
               .collection('users')
               .doc(element.id)
               .get();
           print(variable.get("birthday"));
           users.add(variable);
-        posts.add(element);}
+          postfarah.add(element);}
       });
     });
-
+   return postfarah.toList();
   }
 
   calculateAge(String birthDateString) {

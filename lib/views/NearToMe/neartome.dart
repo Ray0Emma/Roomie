@@ -1,12 +1,17 @@
 import 'dart:async';
-import 'dart:ffi';
+
 import 'dart:typed_data';
 import 'dart:ui';
+import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:math';
+
+import '../../controllers/MapsController.dart';
 
 
 
@@ -16,18 +21,26 @@ class nearToMe extends StatefulWidget{
 }
 
 class _HomeState extends State<nearToMe> {
+  mapsControlller c = Get.find();
   GoogleMapController? mapController; //contrller for Google map
   //PolylinePoints polylinePoints = PolylinePoints();
   String googleAPiKey = "AIzaSyCaM5mZeujKjAt43V-QHOHtdd-d2_0jkeM";
   Set<Marker> markers = Set(); //markers for google map
   Map<PolylineId, Polyline> polylines = {}; //polylines to show direction
   LatLng startLocation = LatLng(32.3699229,-6.3150989);
-  LatLng endLocation = LatLng(27.6875436, 85.2751138);
+  LatLng endLocation = LatLng(32.3699229,-6.3150989);
   double distance = 0.0;
   BitmapDescriptor? myIcon;
   @override
-  List listromm=[{},{},{}];
+
+  CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
+  @override
+  void dispose() {
+    _customInfoWindowController.dispose();
+    super.dispose();
+  }
   initState(){
+
     BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), 'assets/Home.png')
         .then((onValue) {
@@ -35,10 +48,76 @@ class _HomeState extends State<nearToMe> {
     });
 
 
+    List list=[];
+    list= mapsControlller.instance.listPostionUser();
+
+      print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
+for(var i=0;i<list.length;i++){
+
+  print(list[i][1]);
+  markers.add(Marker( //add distination location marker
+      markerId: MarkerId(endLocation.toString()),
+      infoWindow: InfoWindow( //popup info
+        title: 'Destination Point ',
+        snippet: 'Destination Marker',
+
+      ),
+      position: LatLng(list[i][0],list[i][1]),
+      icon: BitmapDescriptor.defaultMarker
+  ));
+
+}
+  print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
+
+
+
     //getDirections(); //fetch direction polylines from Google API
     super.initState();
   }
-  /*getDirections() async {
+
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+        body: Stack(
+            children:[
+
+              GoogleMap(
+                zoomGesturesEnabled: true,
+                initialCameraPosition: CameraPosition(
+                  target: startLocation,
+                  zoom: 8.0,
+
+                ),
+                markers: markers,
+                //polylines: Set<Polyline>.of(polylines.values),
+                mapType: MapType.normal, //map type
+                onMapCreated: (controller) {
+                  setState(() {
+
+                    mapController = controller;
+
+
+
+
+
+                  });
+                },
+              ),
+
+              CustomInfoWindow(
+                controller: _customInfoWindowController,
+                height: 75,
+                width: 150,
+                offset: 50,
+              )
+
+            ]
+        )
+    );
+  }
+} /*getDirections() async {
     List<LatLng> polylineCoordinates = [];
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
@@ -94,47 +173,4 @@ class _HomeState extends State<nearToMe> {
             (1 - cos((lon2 - lon1) * p))/2;
     return 12742 * asin(sqrt(a));
   }*/
-  //final Uint8List markerIcon =  getBytesFromAsset('assets/markers/${levels.markerIcon}', 100);
-
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-        body: Stack(
-            children:[
-              GoogleMap(
-                zoomGesturesEnabled: true,
-                initialCameraPosition: CameraPosition(
-                  target: startLocation,
-                  zoom: 8.0,
-                ),
-                markers: markers,
-                //polylines: Set<Polyline>.of(polylines.values),
-                mapType: MapType.normal, //map type
-                onMapCreated: (controller) {
-                  setState(() {
-
-                    mapController = controller;
-
-                    markers.add(Marker( //add distination location marker
-                        markerId: MarkerId(endLocation.toString()),
-                        position: endLocation, //position of marker
-                        infoWindow: InfoWindow( //popup info
-                          title: 'Destination Point ',
-                          snippet: 'Destination Marker',
-
-                        ),
-                        icon: myIcon!
-                      //Icon for Marker
-                    )
-
-                    );
-
-                  });
-                },
-              ),
-
-            ]
-        )
-    );
-  }
-}
+//final Uint8List markerIcon =  getBytesFromAsset('assets/markers/${levels.markerIcon}', 100);
