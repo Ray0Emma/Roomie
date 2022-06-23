@@ -18,6 +18,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:roomie/views/Profile/widgets/profileImage.dart';
 import 'package:roomie/views/SignUp/signUp2.dart';
 import 'package:roomie/views/SignUp/signUp3.dart';
+import 'package:geocoding/geocoding.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -30,7 +31,7 @@ class AuthController extends GetxController {
   final picker = ImagePicker();
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
     // auth is comning from the constants.dart file but it is basically FirebaseAuth.instance.
     // Since we have to use that many times I just made a constant file and declared there

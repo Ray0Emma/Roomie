@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
 
@@ -31,6 +32,7 @@ class comandeContrller extends GetxController {
   List currentPosts = [];
   List infouser = [];
   List infopost = [];
+  List listAddress = [];
   String? imageUri;
   // the image who selected
   File? image;
@@ -191,6 +193,8 @@ class comandeContrller extends GetxController {
         print(variable.get("birthday"));
         infouser.add(variable);
         print("--------------------------------------------------------------");
+
+        // print(listAddress);
         if (FirebaseAuth.instance.currentUser != null) {
           if (element.id == FirebaseAuth.instance.currentUser!.uid) {
             currentPosts.add(element.data());
@@ -201,7 +205,13 @@ class comandeContrller extends GetxController {
         posts.add(element.data());
         print(getDataUer(element.id));
         print(element.data());
+        element.data().entries.forEach((e) async {
+          List<Location> locations =
+              await locationFromAddress(element.data()["addresse"][e]);
+          listAddress.add(locations);
+        });
       });
+      // print(listAddress);
       print("--------------------------------------------------------------");
     });
   }
