@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                                 stream: (name != "" && name != null)
                                     ? FirebaseFirestore.instance
                                     .collection('posts')
-                                    .where("addresse", isEqualTo: name)
+                                    .where("city", isEqualTo: name)
                                     .snapshots()
                                     : FirebaseFirestore.instance.collection("posts").snapshots(),
                                 builder: (context, snapshot) {
