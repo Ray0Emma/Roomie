@@ -119,14 +119,12 @@ for(var i=0;i<list.length;i++){
   }
 } /*getDirections() async {
     List<LatLng> polylineCoordinates = [];
-
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       googleAPiKey,
       PointLatLng(startLocation.latitude, startLocation.longitude),
       PointLatLng(endLocation.latitude, endLocation.longitude),
       travelMode: TravelMode.driving,
     );
-
     if (result.points.isNotEmpty) {
       result.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
@@ -134,7 +132,6 @@ for(var i=0;i<list.length;i++){
     } else {
       print(result.errorMessage);
     }
-
     //polulineCoordinates is the List of longitute and latidtude.
     double totalDistance = 0;
     for(var i = 0; i < polylineCoordinates.length-1; i++){
@@ -145,11 +142,9 @@ for(var i=0;i<list.length;i++){
           polylineCoordinates[i+1].longitude);
     }
     print(totalDistance);
-
     setState(() {
       distance = totalDistance;
     });
-
     //add to the list of poly line coordinates
     addPolyLine(polylineCoordinates);
   }*/
