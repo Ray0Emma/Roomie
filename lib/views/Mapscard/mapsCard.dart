@@ -1,31 +1,67 @@
-import 'dart:async';
-
-import 'dart:typed_data';
-import 'dart:ui';
-import 'package:custom_info_window/custom_info_window.dart';
-import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:math';
-
 import '../../controllers/MapsController.dart';
 
 
 
 class mapsCard extends StatefulWidget{
   @override
-  _HomeState createState() => _HomeState();
+  MapsCardState createState() => MapsCardState();
 }
 
-class _HomeState extends State<mapsCard> {
+class MapsCardState extends State<mapsCard> {
   mapsControlller c = Get.find();
+
+
+  late bool services;
+  Position ? position;
+  LocationPermission ? per;
+  var lat;
+  var long;
+  late  CameraPosition _kGooglePlex="" as CameraPosition;
+  Future getper ()async{
+    services=await Geolocator.isLocationServiceEnabled();
+    per=await Geolocator.checkPermission();
+
+    if(per==LocationPermission.always){
+      getLaLon();
+    }
+    return per;
+  }
+
+
+
+  Future <void> getLaLon()async{
+
+    position=await Geolocator.getCurrentPosition().then((value) => value);
+    lat=position?.latitude;
+    long=position?.longitude;
+
+    print("***********************************************************************************");
+    print(lat);
+    print("***********************************************************************************");
+
+    _kGooglePlex = CameraPosition(
+
+      target: LatLng(lat, long),
+      zoom: 15,
+    );
+
+
+
+    setState(() {
+    });
+
+  }
+
+  /*
   GoogleMapController? mapController; //contrller for Google map
   Set<Marker> markers = Set(); //markers for google map
-  LatLng startLocation = LatLng(32.3699229,-6.3150989);
-  LatLng endLocation = LatLng(32.3699229,-6.3150989);
+  LatLng startLocation = LatLng(32.3699225,-6.3150989);
+  LatLng endLocation = LatLng(32.3384162,-6.1934452);
   double distance = 0.0;
   BitmapDescriptor? myIcon;
 
@@ -61,7 +97,15 @@ class _HomeState extends State<mapsCard> {
     print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     super.initState();
   }
+*/
 
+
+  @override
+  void initState() {
+
+  getper ();
+  super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -70,18 +114,14 @@ class _HomeState extends State<mapsCard> {
 
               GoogleMap(
                 zoomGesturesEnabled: true,
-                initialCameraPosition: CameraPosition(
-                  target: startLocation,
-                  zoom: 8.0,
-
-                ),
-                markers: markers,
+                initialCameraPosition: _kGooglePlex,
+                //markers: markers,
                 //polylines: Set<Polyline>.of(polylines.values),
                 mapType: MapType.normal, //map type
                 onMapCreated: (controller) {
                   setState(() {
 
-                    mapController = controller;
+                   // mapController = controller;
 
 
 

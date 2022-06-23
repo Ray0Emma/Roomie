@@ -6,13 +6,15 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 
 class mapsControlller extends GetxController {
   late String idpost;
   static mapsControlller instance = Get.find();
   List listpostion=[];
   late Rx<User?> firebaseUser;
-
+  var lat;
+  var lang;
 
   //
 
