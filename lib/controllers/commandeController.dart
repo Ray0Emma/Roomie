@@ -205,11 +205,11 @@ class comandeContrller extends GetxController {
         posts.add(element.data());
         print(getDataUer(element.id));
         print(element.data());
-        element.data().entries.forEach((e) async {
-          List<Location> locations =
-              await locationFromAddress(element.data()["addresse"][e]);
-          listAddress.add(locations);
-        });
+        // element.data().entries.forEach((e) async {
+        //   List<Location> locations =
+        //       await locationFromAddress(element.data()["addresse"][e]);
+        //   listAddress.add(locations);
+        // });
       });
       // print(listAddress);
       print("--------------------------------------------------------------");
