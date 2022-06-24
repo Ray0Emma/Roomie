@@ -28,7 +28,8 @@ class comandeContrller extends GetxController {
   TextEditingController equipment = new TextEditingController();
   TextEditingController regulations = new TextEditingController();
   TextEditingController Addresse = new TextEditingController();
-  List posts = [];
+  RxList posts = [].obs;
+  int lengthPost = 0;
   List currentPosts = [];
   List infouser = [];
   List infopost = [];
@@ -186,6 +187,7 @@ class comandeContrller extends GetxController {
   getData() async {
     FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
       event.docs.forEach((element) async {
+        lengthPost++;
         var variable = await FirebaseFirestore.instance
             .collection('users')
             .doc(element.id)
@@ -202,18 +204,20 @@ class comandeContrller extends GetxController {
         }
 
         print(element.id);
-        posts.add(element.data());
+        posts.add(element.data().obs);
         print(getDataUer(element.id));
         print(element.data());
         // element.data().entries.forEach((e) async {
-        //   List<Location> locations =
-        //       await locationFromAddress(element.data()["addresse"][e]);
-        //   listAddress.add(locations);
+        List<Location> locations =
+            await locationFromAddress('n 42 lot erraddad beni mellal');
+        listAddress.add([locations[0].latitude, locations[0].longitude]);
         // });
       });
-      // print(listAddress);
+      print(listAddress);
       print("--------------------------------------------------------------");
     });
+
+    return posts;
   }
 
   Future getDataUer(userID) async {

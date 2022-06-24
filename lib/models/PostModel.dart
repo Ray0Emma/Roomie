@@ -1,6 +1,4 @@
-
-
-List citys=[
+List citys = [
   "El Jadida",
   "Khouribg",
   "Mohammedia",
@@ -21,6 +19,7 @@ List citys=[
   "Guercif",
   "Oulad Teima",
   "Ben Guerir",
+  "Beni Mellal",
   "Tifelt",
   "Lqliaa",
   "Taroudant",
@@ -61,7 +60,7 @@ List? equipment = [
     "display": "Private bathroom",
     "value": "Private bathroom",
   },
-   {
+  {
     "display": "Car park",
     "value": "Car park",
   },
@@ -73,11 +72,11 @@ List? equipment = [
     "display": "Cooking tools",
     "value": "Cooking tools",
   },
-    {
+  {
     "display": "Dishwasher",
     "value": "Dishwasher",
   },
-   {
+  {
     "display": "Terrace",
     "value": "Terrace",
   },
@@ -86,13 +85,10 @@ List? equipment = [
     "value": "Washing machine",
   },
   {
-
     "display": "Microwave",
     "value": "Microwave",
   },
-
 ];
-
 
 List? regulation = [
   {
@@ -111,5 +107,4 @@ List? regulation = [
     "display": "no parties",
     "value": "no parties",
   },
-  
 ];
