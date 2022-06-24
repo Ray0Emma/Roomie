@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -5,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:roomie/resources/app_colors.dart';
 import '../../controllers/MapsController.dart';
-
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 
 class mapsCard extends StatefulWidget{
@@ -29,17 +31,7 @@ List bbb=[];
   /// When the location services are not enabled or permissions
   /// are denied the `Future` will return an error.
 
-getxy(){
-/*List list=[];
-  var position=_determinePosition().then((value){
-   // lat=value.latitude;
-   // long=value.longitude;
-    list.add(lat);
-    list.add(long);
-    print("x-------------------"+value.longitude.toString()+"y---------------------"+value.latitude.toString());
-  });
-  return list;*/
-}
+
 
   GoogleMapController? mapController; //contrller for Google map
   Set<Marker> markers = Set(); //markers for google map
@@ -47,6 +39,7 @@ getxy(){
   LatLng endLocation = LatLng(32.3384162,-6.1934452);
   double distance = 0.0;
   BitmapDescriptor? myIcon;
+  List atherUser=[];
 
   @override
   initState(){
@@ -64,63 +57,77 @@ getxy(){
     print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
       markers.add(Marker( //add distination location marker
-          markerId: MarkerId(endLocation.toString()),
+          markerId: MarkerId(startLocation.toString()),
           infoWindow: InfoWindow( //popup info
             title: 'Destination Point ',
             snippet: 'Destination Marker',
 
           ),
-          position: LatLng(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1]),
+          position:LatLng(_originLatitude, _originLongitude),
           icon: BitmapDescriptor.defaultMarker
       ));
+    markers.add(Marker( //add distination location marker
+        markerId: MarkerId(endLocation.toString()),
+        infoWindow: InfoWindow( //popup info
+          title: 'Destination Point ',
+          snippet: 'Destination Marker',
 
+        ),
+        position: LatLng(_destLatitude, _destLongitude),
+        icon: BitmapDescriptor.defaultMarkerWithHue(90)
+    ));
+
+
+    mapsControlller.instance.getPolyline(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1],32.3384162,-6.1934452);
     print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     super.initState();
   }
-
+  double _originLatitude = 32.3699225, _originLongitude = -6.3150989;
+  double _destLatitude = 32.3384162, _destLongitude = -6.1934452;
 
 
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-        body: Stack(
-            children:[
+        body: GetBuilder<mapsControlller>(
+        builder: (mapscontrolller) =>Stack(
+        children:[
 
-              GoogleMap(
-                zoomGesturesEnabled: true,
-                markers:markers,
-                initialCameraPosition: CameraPosition(
+          GoogleMap(
+            polylines: Set<Polyline>.of(mapscontrolller.polylines.values),
+            zoomGesturesEnabled: true,
+            markers:markers,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(mapscontrolller.bbb[0],mapscontrolller.bbb[1]),
+              zoom: 8.0,
+            ),
+            //markers: markers,
+            //polylines: Set<Polyline>.of(polylines.values),
+            mapType: MapType.normal, //map type
+            onMapCreated: (controller) {
+              setState(() {
 
-                  target: LatLng(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1]),
-                  zoom: 8.0,
-                ),
-                //markers: markers,
-                //polylines: Set<Polyline>.of(polylines.values),
-                mapType: MapType.normal, //map type
-                onMapCreated: (controller) {
-                  setState(() {
+                mapController = controller;
+              });
+            },
+          ),
 
-                   mapController = controller;
-                  });
-                },
-              ),
-
-            Positioned(
-              bottom: 0,
-              child: Container(
-
-                height: 100,
-
-                decoration: BoxDecoration(
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: 100,
+              decoration: BoxDecoration(
                   color: AppColors.PRIMARY_COLOR
-                ),
-                child: Text("${mapsControlller.instance.bbb[0]}",style: TextStyle(),),),
-            )
-            ]
-        )
+              ),
+              child: Text("${mapsControlller.instance.bbb[0]}",style: TextStyle(),),),
+          )
+        ]
+    ))
     );
   }
+
+
 } /*getDirections() async {
     List<LatLng> polylineCoordinates = [];
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(

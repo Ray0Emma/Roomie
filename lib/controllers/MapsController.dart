@@ -1,6 +1,11 @@
 
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -14,12 +19,48 @@ class mapsControlller extends GetxController {
   List listpostion=[];
   late Rx<User?> firebaseUser;
   late bool services;
-
+   List hhhh=[];
   LocationPermission ? per;
   late LatLng currentPostion;
   double lat=8;
   double long=0;
  List bbb=[];
+ List autheruser=[].obs;
+
+  Map<PolylineId, Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+  PolylinePoints polylinePoints = PolylinePoints();
+  String googleAPiKey ="AIzaSyCaM5mZeujKjAt43V-QHOHtdd-d2_0jkeM";
+  addPolyLine() {
+    PolylineId id = PolylineId("poly");
+    Polyline polyline = Polyline(
+        polylineId: id, color: Colors.red, points: polylineCoordinates);
+    polylines[id] = polyline;
+
+  }
+  getPolyline(originLatitude,originLongitude,destLatitude,destLongitude) async {
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        googleAPiKey,
+        PointLatLng(originLatitude, originLongitude),
+        PointLatLng(destLatitude,destLongitude),
+        travelMode: TravelMode.driving,
+        wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]);
+    //if (result.points.isNotEmpty) {
+    // result.points.forEach((PointLatLng point) {
+    polylineCoordinates.add(LatLng(originLatitude, originLongitude));
+    polylineCoordinates.add(LatLng(destLatitude,destLongitude));
+    // });
+    //}
+    addPolyLine();
+    update();
+  }
+  getlonglat() async {
+    List<Location> locations = await locationFromAddress("Gronausestraat 710, Enschede");
+    autheruser.add(locations[0].latitude);
+    autheruser.add(locations[0].latitude);
+return autheruser;
+  }
+
   Future getper ()async{
     services=await Geolocator.isLocationServiceEnabled();
     per=await Geolocator.checkPermission();
@@ -53,6 +94,8 @@ class mapsControlller extends GetxController {
     print("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
     print(listPostionUser());
     _determinePosition();
+
+
 
     print("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 
