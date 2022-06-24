@@ -58,6 +58,7 @@ Widget requestCard(String name, int age, String budget, String localisation,
                     shape: StadiumBorder(),
                   ),
                   onPressed: () {
+
                     Get.to(mapsCard());
 
                   },

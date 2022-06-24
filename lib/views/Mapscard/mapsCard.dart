@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:roomie/resources/app_colors.dart';
 import '../../controllers/MapsController.dart';
 
-
+import 'package:geolocator/geolocator.dart';
 
 class mapsCard extends StatefulWidget{
   @override
@@ -19,45 +20,27 @@ class MapsCardState extends State<mapsCard> {
   late bool services;
   Position ? position;
   LocationPermission ? per;
-  var lat;
-  var long;
-  late  CameraPosition _kGooglePlex="" as CameraPosition;
-  Future getper ()async{
-    services=await Geolocator.isLocationServiceEnabled();
-    per=await Geolocator.checkPermission();
+  var lat=0;
+  var long=0;
+List bbb=[];
 
-    if(per==LocationPermission.always){
-      getLaLon();
-    }
-    return per;
-  }
+  /// Determine the current position of the device.
+  ///
+  /// When the location services are not enabled or permissions
+  /// are denied the `Future` will return an error.
 
+getxy(){
+/*List list=[];
+  var position=_determinePosition().then((value){
+   // lat=value.latitude;
+   // long=value.longitude;
+    list.add(lat);
+    list.add(long);
+    print("x-------------------"+value.longitude.toString()+"y---------------------"+value.latitude.toString());
+  });
+  return list;*/
+}
 
-
-  Future <void> getLaLon()async{
-
-    position=await Geolocator.getCurrentPosition().then((value) => value);
-    lat=position?.latitude;
-    long=position?.longitude;
-
-    print("***********************************************************************************");
-    print(lat);
-    print("***********************************************************************************");
-
-    _kGooglePlex = CameraPosition(
-
-      target: LatLng(lat, long),
-      zoom: 15,
-    );
-
-
-
-    setState(() {
-    });
-
-  }
-
-  /*
   GoogleMapController? mapController; //contrller for Google map
   Set<Marker> markers = Set(); //markers for google map
   LatLng startLocation = LatLng(32.3699225,-6.3150989);
@@ -80,9 +63,6 @@ class MapsCardState extends State<mapsCard> {
 
     print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
-    for(var i=0;i<list.length;i++){
-
-      print(list[i][1]);
       markers.add(Marker( //add distination location marker
           markerId: MarkerId(endLocation.toString()),
           infoWindow: InfoWindow( //popup info
@@ -90,22 +70,17 @@ class MapsCardState extends State<mapsCard> {
             snippet: 'Destination Marker',
 
           ),
-          position: LatLng(list[i][0],list[i][1]),
+          position: LatLng(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1]),
           icon: BitmapDescriptor.defaultMarker
       ));
-    }
+
     print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     super.initState();
   }
-*/
 
 
-  @override
-  void initState() {
 
-  getper ();
-  super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -114,24 +89,34 @@ class MapsCardState extends State<mapsCard> {
 
               GoogleMap(
                 zoomGesturesEnabled: true,
-                initialCameraPosition: _kGooglePlex,
+                markers:markers,
+                initialCameraPosition: CameraPosition(
+
+                  target: LatLng(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1]),
+                  zoom: 8.0,
+                ),
                 //markers: markers,
                 //polylines: Set<Polyline>.of(polylines.values),
                 mapType: MapType.normal, //map type
                 onMapCreated: (controller) {
                   setState(() {
 
-                   // mapController = controller;
-
-
-
-
-
+                   mapController = controller;
                   });
                 },
               ),
 
+            Positioned(
+              bottom: 0,
+              child: Container(
 
+                height: 100,
+
+                decoration: BoxDecoration(
+                  color: AppColors.PRIMARY_COLOR
+                ),
+                child: Text("${mapsControlller.instance.bbb[0]}",style: TextStyle(),),),
+            )
             ]
         )
     );
