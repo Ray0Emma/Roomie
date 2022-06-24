@@ -11,7 +11,7 @@ import '../../Mapscard/mapsCard.dart';
 import 'scrollImage.dart';
 
 Widget requestCard(String name, int age, String budget, String localisation,
-    int capacity, String profile, String imgpost, String idpost) {
+    int capacity, String profile, String imgpost, String idpost,String addresse) {
   return InkWell(
       onTap: () async {
         User? user;
@@ -59,7 +59,12 @@ Widget requestCard(String name, int age, String budget, String localisation,
                   ),
                   onPressed: () {
 
-                    Get.to(mapsCard());
+                    Get.to(() => mapsCard(), arguments: [
+                      {"first": addresse},
+
+                    ]);
+
+
 
                   },
                   child: Icon(Icons.location_on_outlined,

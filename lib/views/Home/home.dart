@@ -157,7 +157,9 @@ class _HomePageState extends State<HomePage> {
                                           homecontroller.users[index]
                                           ["profile"],
                                           data["imageUri"],
-                                          data["id_user"]);
+                                          data["id_user"],
+                                        data["addresse"],
+                                      );
 
                                     },
                                   );

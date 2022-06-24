@@ -19,7 +19,7 @@ class mapsControlller extends GetxController {
   List listpostion=[];
   late Rx<User?> firebaseUser;
   late bool services;
-   List hhhh=[];
+  dynamic argumentData = Get.arguments;
   LocationPermission ? per;
   late LatLng currentPostion;
   double lat=8;
@@ -36,8 +36,9 @@ class mapsControlller extends GetxController {
     Polyline polyline = Polyline(
         polylineId: id, color: Colors.red, points: polylineCoordinates);
     polylines[id] = polyline;
-
+    update();
   }
+
   getPolyline(originLatitude,originLongitude,destLatitude,destLongitude) async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleAPiKey,
@@ -54,51 +55,26 @@ class mapsControlller extends GetxController {
     addPolyLine();
     update();
   }
-  getlonglat() async {
-    List<Location> locations = await locationFromAddress("Gronausestraat 710, Enschede");
+  Future<List<Location>>  getPostionOfCartchose(addresse) async {
+
+    List<Location> locations = await locationFromAddress(addresse);
     autheruser.add(locations[0].latitude);
     autheruser.add(locations[0].latitude);
-return autheruser;
-  }
+    print(locations[0].latitude.toString());
+    print(autheruser[0]);
 
-  Future getper ()async{
-    services=await Geolocator.isLocationServiceEnabled();
-    per=await Geolocator.checkPermission();
-
-    if(per==LocationPermission.always){
-      getLaLon();
-    }
-    return per;
-  }
-
-
-
-  Future <void> getLaLon()async{
-
-   await Geolocator.getCurrentPosition().then((value){
-
-      lat=value.latitude;
-      long=value.longitude;
-    } );
-
-
-
-
-
-   update();
+return locations;
   }
 
   @override
   void onInit() {
-    // print(Get.arguments);
+   // print(argumentData[0]['first']);
     print("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
     print(listPostionUser());
     _determinePosition();
 
 
-
     print("///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-
     super.onInit();
   }
 

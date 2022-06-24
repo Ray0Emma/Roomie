@@ -18,12 +18,12 @@ class mapsCard extends StatefulWidget{
 class MapsCardState extends State<mapsCard> {
   mapsControlller c = Get.find();
 
-
+  var one;
   late bool services;
   Position ? position;
   LocationPermission ? per;
-  var lat=0;
-  var long=0;
+  var lat;
+  var long;
 List bbb=[];
 
   /// Determine the current position of the device.
@@ -37,48 +37,58 @@ List bbb=[];
   Set<Marker> markers = Set(); //markers for google map
   LatLng startLocation = LatLng(32.3699225,-6.3150989);
   LatLng endLocation = LatLng(32.3384162,-6.1934452);
-  double distance = 0.0;
+  var distance ;
   BitmapDescriptor? myIcon;
   List atherUser=[];
 
   @override
   initState(){
+    var one = Get.arguments;
+    print(one[0]["first"]);
+    mapsControlller.instance.getPostionOfCartchose(one[0]["first"]).then((value){
 
-    BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(), 'assets/Home.png')
-        .then((onValue) {
-      myIcon = onValue;
+      setState(() {
+        lat=value[0].latitude;
+        long=value[0].longitude;
+        markers.add(Marker( //add distination location marker
+            markerId: MarkerId(startLocation.toString()),
+            infoWindow: InfoWindow( //popup info
+              title: 'Destination Point ',
+              snippet: 'Destination Marker',
+
+            ),
+            position:LatLng(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1]),
+            icon: BitmapDescriptor.defaultMarker
+        ));
+        markers.add(Marker( //add distination location marker
+            markerId: MarkerId(endLocation.toString()),
+            infoWindow: InfoWindow( //popup info
+              title: 'Destination Point ',
+              snippet: 'Destination Marker',
+
+            ),
+            position: LatLng(lat, long),
+            icon: BitmapDescriptor.defaultMarkerWithHue(90)
+        ));
+        mapsControlller.instance.getPolyline(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1],lat,long);
+
+        distance=Geolocator.distanceBetween(mapsControlller.instance.bbb[0], mapsControlller.instance.bbb[1], lat, long);
+        distance=distance/1000;
+
+      });
+
+
     });
 
 
-    List list=[];
-    list= mapsControlller.instance.listPostionUser();
+
 
     print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
-      markers.add(Marker( //add distination location marker
-          markerId: MarkerId(startLocation.toString()),
-          infoWindow: InfoWindow( //popup info
-            title: 'Destination Point ',
-            snippet: 'Destination Marker',
-
-          ),
-          position:LatLng(_originLatitude, _originLongitude),
-          icon: BitmapDescriptor.defaultMarker
-      ));
-    markers.add(Marker( //add distination location marker
-        markerId: MarkerId(endLocation.toString()),
-        infoWindow: InfoWindow( //popup info
-          title: 'Destination Point ',
-          snippet: 'Destination Marker',
-
-        ),
-        position: LatLng(_destLatitude, _destLongitude),
-        icon: BitmapDescriptor.defaultMarkerWithHue(90)
-    ));
 
 
-    mapsControlller.instance.getPolyline(mapsControlller.instance.bbb[0],mapsControlller.instance.bbb[1],32.3384162,-6.1934452);
+
+
     print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     super.initState();
   }
@@ -117,10 +127,11 @@ List bbb=[];
             bottom: 0,
             child: Container(
               height: 100,
+
               decoration: BoxDecoration(
                   color: AppColors.PRIMARY_COLOR
               ),
-              child: Text("${mapsControlller.instance.bbb[0]}",style: TextStyle(),),),
+              child: Text(" Distance :${distance}  KM}",style: TextStyle(),),),
           )
         ]
     ))
