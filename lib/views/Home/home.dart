@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   homeController c = Get.find();
-  String name="";
+  String name = "";
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,8 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.symmetric(horizontal: 16.0),
                           child: DecoratedBox(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15), color: AppColors.GRAY_COLOR),
+                                borderRadius: BorderRadius.circular(15),
+                                color: AppColors.GRAY_COLOR),
                             child: Row(
                               children: [
                                 Expanded(
@@ -54,11 +55,10 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     keyboardType: TextInputType.text,
                                     maxLines: 1,
-                                    onChanged: (value){
-                                        setState(() {
-                                          name=value;
-                                        });
-
+                                    onChanged: (value) {
+                                      setState(() {
+                                        name = value;
+                                      });
                                     },
                                   ),
                                 ),
@@ -67,8 +67,7 @@ class _HomePageState extends State<HomePage> {
                                     Icons.search,
                                     color: AppColors.PRIMARY_COLOR_DARK,
                                   ),
-                                  onPressed: (){
-                                  },
+                                  onPressed: () {},
                                 ),
                               ],
                             ),
@@ -108,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                               const SizedBox(
                                 height: 30,
                               ),
-                             /* ListView.builder(
+                              /* ListView.builder(
                                   shrinkWrap: true,
                                   physics: BouncingScrollPhysics(),
                                   padding: EdgeInsets.symmetric(horizontal: 15),
@@ -128,42 +127,51 @@ class _HomePageState extends State<HomePage> {
                                         homecontroller.posts[i]["id_user"]);
                                   })*/
 
-                             StreamBuilder<QuerySnapshot>(
+                              StreamBuilder<QuerySnapshot>(
                                 stream: (name != "" && name != null)
                                     ? FirebaseFirestore.instance
-                                    .collection('posts')
-                                    .where("city", isEqualTo: name)
-                                    .snapshots()
-                                    : FirebaseFirestore.instance.collection("posts").snapshots(),
+                                        .collection('posts')
+                                        .where("city",
+                                            isGreaterThanOrEqualTo:
+                                                name.capitalizeFirst,
+                                            isLessThan:
+                                                '${name.capitalizeFirst}z')
+                                        .snapshots()
+                                    : FirebaseFirestore.instance
+                                        .collection("posts")
+                                        .snapshots(),
                                 builder: (context, snapshot) {
-                                  return (snapshot.connectionState == ConnectionState.waiting)
-                                      ? Center(child: CircularProgressIndicator())
+                                  return (snapshot.connectionState ==
+                                          ConnectionState.waiting)
+                                      ? Center(
+                                          child: CircularProgressIndicator())
                                       : ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: BouncingScrollPhysics(),
-                                    padding: EdgeInsets.symmetric(horizontal: 15),
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder: (context, index) {
-
-                                      DocumentSnapshot data = snapshot.data!.docs[index];
-                                      return  requestCard(
-                                          homecontroller.users[index]["name"],
-                                          homecontroller.calculateAge(
-                                              homecontroller.users[index]
-                                              ["birthday"]),
-                                          data["budget"],
-                                          "images",
-                                          data["capacity"],
-                                          homecontroller.users[index]
-                                          ["profile"],
-                                          data["imageUri"],
-                                          data["id_user"]);
-
-                                    },
-                                  );
+                                          shrinkWrap: true,
+                                          physics: BouncingScrollPhysics(),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          itemCount: snapshot.data!.docs.length,
+                                          itemBuilder: (context, index) {
+                                            DocumentSnapshot data =
+                                                snapshot.data!.docs[index];
+                                            return requestCard(
+                                                homecontroller.users[index]
+                                                    ["name"],
+                                                homecontroller.calculateAge(
+                                                    homecontroller.users[index]
+                                                        ["birthday"]),
+                                                data["budget"],
+                                                "images",
+                                                data["capacity"],
+                                                homecontroller.users[index]
+                                                    ["profile"],
+                                                data["imageUri"],
+                                                data["id_user"]);
+                                          },
+                                        );
                                 },
                               )
-                               /*
+                              /*
                               FutureBuilder(
                                 future: homecontroller.getAllDataPost(),
                                 builder:
@@ -186,12 +194,6 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 },
                               )*/
-
-
-
-
-
-
                             ],
                           ),
 

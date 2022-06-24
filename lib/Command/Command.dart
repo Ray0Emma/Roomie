@@ -533,7 +533,7 @@ class _commandState extends State<command> {
                                                                   comandecontroller
                                                                       .initialState(),
                                                                   comandecontroller
-                                                                      .getData()
+                                                                      .getData(),
                                                                 ],
                                                                 onError: (e) =>
                                                                     print(
@@ -541,22 +541,37 @@ class _commandState extends State<command> {
                                                               );
                                                           print(comandecontroller
                                                               .currentPosts);
+                                                          setState(() {});
                                                         });
                                                       },
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                        primary:
-                                                            AppColors.RED_COLOR,
-                                                        shape: StadiumBorder(),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                vertical: 16),
-                                                      ),
+                                                              elevation: 0,
+                                                              primary: AppColors
+                                                                  .RED_COLOR
+                                                                  .withOpacity(
+                                                                      .2),
+                                                              shape:
+                                                                  StadiumBorder(),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          16),
+                                                              side: BorderSide(
+                                                                width: 1.5,
+                                                                color: AppColors
+                                                                    .RED_COLOR,
+                                                              )),
                                                       child: Text(
                                                         "Delete",
                                                         style: TextStyle(
-                                                            fontSize: 20),
+                                                            fontSize: 20,
+                                                            color: AppColors
+                                                                .RED_COLOR),
                                                       ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
                                                     ),
                                                   ],
                                                 )
