@@ -34,7 +34,8 @@ class mapsControlller extends GetxController {
   addPolyLine() {
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
-        polylineId: id, color: Colors.red, points: polylineCoordinates);
+        polylineId: id, color: Colors.red, points: polylineCoordinates,width:3
+    );
     polylines[id] = polyline;
     update();
   }
@@ -45,7 +46,7 @@ class mapsControlller extends GetxController {
         PointLatLng(originLatitude, originLongitude),
         PointLatLng(destLatitude,destLongitude),
         travelMode: TravelMode.driving,
-        wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]);
+        );
     //if (result.points.isNotEmpty) {
     // result.points.forEach((PointLatLng point) {
     polylineCoordinates.add(LatLng(originLatitude, originLongitude));

@@ -75,6 +75,7 @@ List bbb=[];
         distance=Geolocator.distanceBetween(mapsControlller.instance.bbb[0], mapsControlller.instance.bbb[1], lat, long);
         distance=distance/1000;
 
+
       });
 
 
@@ -125,13 +126,22 @@ List bbb=[];
 
           Positioned(
             bottom: 0,
-            child: Container(
-              height: 100,
 
-              decoration: BoxDecoration(
-                  color: AppColors.PRIMARY_COLOR
-              ),
-              child: Text(" Distance :${distance}  KM}",style: TextStyle(),),),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  height: 80,
+                  width:300,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: AppColors.PRIMARY_COLOR,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight:Radius.circular(30) )
+                         ),
+                  child: Center(child: Text(" Distance :${distance.floor()}  KM",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w800),)),),
+              ],
+            ),
           )
         ]
     ))

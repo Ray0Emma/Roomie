@@ -57,12 +57,22 @@ Widget requestCard(String name, int age, String budget, String localisation,
                     shadowColor: Colors.transparent,
                     shape: StadiumBorder(),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    User? user;
+                    if (await FirebaseAuth.instance.currentUser == null) {
+                      // if the user is not found then the user is navigated to the Register Screen
+                      Get.offAll(() => const Register());
+                    } else {
+                      // if the user exists and logged in the the user is navigated to the Home Screen
+                      Get.to(() => mapsCard(), arguments: [
+                        {"first": addresse},
 
-                    Get.to(() => mapsCard(), arguments: [
-                      {"first": addresse},
+                      ]); //it should be room_details view
+                      print('from card');
+                    }
+                    print('request card');
+                    print(await FirebaseAuth.instance.currentUser?.email);
 
-                    ]);
 
 
 
