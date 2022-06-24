@@ -8,6 +8,7 @@ import 'package:roomie/resources/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:roomie/resources/firebase_auth_constants.dart';
 import 'package:roomie/views/Home/widgets/navigation.dart';
+import 'package:roomie/views/Profile/widgets/profileImage.dart';
 import 'package:roomie/views/SignUp/signup.dart';
 
 class Register extends StatefulWidget {
@@ -59,11 +60,7 @@ class _RegisterState extends State<Register> {
                 padding: EdgeInsets.symmetric(vertical: 11, horizontal: 30),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.arrow_back_ios,
-                      size: 20,
-                      color: Colors.white,
-                    ),
+                    arrowBack(),
                     SizedBox(
                       width: 5,
                     ),
