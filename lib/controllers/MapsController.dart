@@ -41,6 +41,7 @@ class mapsControlller extends GetxController {
   }
 
   getPolyline(originLatitude,originLongitude,destLatitude,destLongitude) async {
+    polylineCoordinates=[];
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleAPiKey,
         PointLatLng(originLatitude, originLongitude),
