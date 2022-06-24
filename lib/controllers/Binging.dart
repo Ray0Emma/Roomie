@@ -14,7 +14,7 @@ class Binding implements Bindings{
     Get.put(comandeContrller(),permanent: true);
     Get.put(roomeiDetails(),permanent: true);
     Get.put(homeController(),permanent: true);
-    Get.put(mapsControlller(),permanent: true);
+    Get.put(mapsControlller());
   }
 
 

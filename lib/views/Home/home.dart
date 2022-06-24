@@ -146,29 +146,32 @@ class _HomePageState extends State<HomePage> {
                                       ? Center(
                                           child: CircularProgressIndicator())
                                       : ListView.builder(
-                                          shrinkWrap: true,
-                                          physics: BouncingScrollPhysics(),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 15),
-                                          itemCount: snapshot.data!.docs.length,
-                                          itemBuilder: (context, index) {
-                                            DocumentSnapshot data =
-                                                snapshot.data!.docs[index];
-                                            return requestCard(
-                                                homecontroller.users[index]
-                                                    ["name"],
-                                                homecontroller.calculateAge(
-                                                    homecontroller.users[index]
-                                                        ["birthday"]),
-                                                data["budget"],
-                                                "images",
-                                                data["capacity"],
-                                                homecontroller.users[index]
-                                                    ["profile"],
-                                                data["imageUri"],
-                                                data["id_user"]);
-                                          },
-                                        );
+
+                                    shrinkWrap: true,
+                                    physics: BouncingScrollPhysics(),
+                                    padding: EdgeInsets.symmetric(horizontal: 15),
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) {
+
+                                      DocumentSnapshot data = snapshot.data!.docs[index];
+                                      return  requestCard(
+                                          homecontroller.users[index]["name"],
+                                          homecontroller.calculateAge(
+                                              homecontroller.users[index]
+                                              ["birthday"]),
+                                          data["budget"],
+                                          "images",
+                                          data["capacity"],
+                                          homecontroller.users[index]
+                                          ["profile"],
+                                          data["imageUri"],
+                                          data["id_user"],
+                                        data["addresse"],
+                                      );
+
+                                    },
+                                  );
+
                                 },
                               )
                               /*
