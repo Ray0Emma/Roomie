@@ -187,31 +187,34 @@ class comandeContrller extends GetxController {
   getData() async {
     FirebaseFirestore.instance.collection("posts").snapshots().listen((event) {
       event.docs.forEach((element) async {
-        lengthPost++;
-        var variable = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(element.id)
-            .get();
-        print(variable.get("birthday"));
-        infouser.add(variable);
-        print("--------------------------------------------------------------");
+        if (element != null) {
+          lengthPost++;
+          var variable = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(element.id)
+              .get();
+          print(variable.get("birthday"));
+          infouser.add(variable);
+          print(
+              "--------------------------------------------------------------");
 
-        // print(listAddress);
-        if (FirebaseAuth.instance.currentUser != null) {
-          if (element.id == FirebaseAuth.instance.currentUser!.uid) {
-            currentPosts.add(element.data());
+          // print(listAddress);
+          if (FirebaseAuth.instance.currentUser != null) {
+            if (element.id == FirebaseAuth.instance.currentUser!.uid) {
+              currentPosts.add(element.data());
+            }
           }
-        }
 
-        print(element.id);
-        posts.add(element.data().obs);
-        print(getDataUer(element.id));
-        print(element.data());
-        // element.data().entries.forEach((e) async {
-        List<Location> locations =
-            await locationFromAddress('n 42 lot erraddad beni mellal');
-        listAddress.add([locations[0].latitude, locations[0].longitude]);
-        // });
+          print(element.id);
+          posts.add(element.data().obs);
+          print(getDataUer(element.id));
+          print(element.data());
+          // element.data().entries.forEach((e) async {
+          List<Location> locations =
+              await locationFromAddress('n 42 lot erraddad beni mellal');
+          listAddress.add([locations[0].latitude, locations[0].longitude]);
+          // });
+        }
       });
       print(listAddress);
       print("--------------------------------------------------------------");

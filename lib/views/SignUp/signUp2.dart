@@ -209,7 +209,7 @@ class _SignUp2State extends State<SignUp2> {
                                         value: selectedcnieliv,
                                         items: listGender.map((list) {
                                           return DropdownMenuItem<String>(
-                                              value: list[0],
+                                              value: list,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(9.0),
@@ -263,10 +263,10 @@ class _SignUp2State extends State<SignUp2> {
                                   controller: textAbout,
                                   decoration: InputDecoration(
                                       hintText: "A little About You",
-                                      enabledBorder: enabledBorder,
-                                      focusedBorder: focusedBorder,
-                                      focusedErrorBorder: errorBorder,
-                                      errorBorder: errorBorder,
+                                      enabledBorder: enabledBorderAbout,
+                                      focusedBorder: focusedBorderAbout,
+                                      focusedErrorBorder: errorBorderAbout,
+                                      errorBorder: errorBorderAbout,
                                       suffixIcon: Icon(
                                         Icons.text_fields,
                                       )),
