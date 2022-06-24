@@ -146,7 +146,7 @@ class comandeContrller extends GetxController {
       String imgurl = await uploadFile2(this.image, context);
       var msg = await firebaseFirestore.collection('posts').doc(userID).set({
         'budget': this.budget.text,
-        'capacity': this.capacitycounter.toString(),
+        'capacity': this.capacitycounter,
         'city': this.selectedcnieliv,
         'equipment': this.Equipment,
         'regulation': this.Regulation,

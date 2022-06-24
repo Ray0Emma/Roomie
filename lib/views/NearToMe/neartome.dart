@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'dart:typed_data';
-import 'dart:ui';
+import 'dart:ui' as ui;
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,6 +10,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:roomie/controllers/HomeController.dart';
 import 'package:roomie/controllers/commandeController.dart';
 import 'dart:math';
 
@@ -49,6 +50,19 @@ class _nearToMeState extends State<nearToMe> {
     // list = mapsControlller.instance.listPostionUser();
 
     asyncTasks() async {
+      Future<Uint8List> getBytesFromAsset(String path, int width) async {
+        ByteData data = await rootBundle.load(path);
+        ui.Codec codec = await ui.instantiateImageCodec(
+            data.buffer.asUint8List(),
+            targetWidth: width);
+        ui.FrameInfo fi = await codec.getNextFrame();
+        return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+            .buffer
+            .asUint8List();
+      }
+
+      final Uint8List markerIcon =
+          await getBytesFromAsset('assets/images/home5.png', 100);
       await mapsControlller.instance.listPostionUser().then((value) => {
             setState(() {
               list = value
@@ -65,13 +79,14 @@ class _nearToMeState extends State<nearToMe> {
         markers.add(Marker(
             //add distination location marker
             markerId: MarkerId(LatLng(list[i][0], list[i][1]).toString()),
-            infoWindow: const InfoWindow(
+            infoWindow: InfoWindow(
               //popup info
-              title: 'Destination Point ',
-              snippet: 'Destination Marker',
+              title: "Roommate: ${homeController.instance.users[i]["name"]}",
+              snippet:
+                  "Budget: ${comandeContrller.instance.posts[i]["budget"]} DH/month",
             ),
             position: LatLng(list[i][0], list[i][1]),
-            icon: BitmapDescriptor.defaultMarker));
+            icon: BitmapDescriptor.fromBytes(markerIcon)));
 
         print([list[i][0], list[i][1]]);
       }

@@ -132,8 +132,10 @@ class _HomePageState extends State<HomePage> {
                                     ? FirebaseFirestore.instance
                                         .collection('posts')
                                         .where("city",
-                                            isLessThanOrEqualTo:
-                                                name.capitalizeFirst)
+                                            isGreaterThanOrEqualTo:
+                                                name.capitalizeFirst,
+                                            isLessThan:
+                                                '${name.capitalizeFirst}z')
                                         .snapshots()
                                     : FirebaseFirestore.instance
                                         .collection("posts")
