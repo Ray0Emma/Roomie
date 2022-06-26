@@ -14,7 +14,7 @@
 
 Roomie application makes finding roommates and rooms to share easy. It will manage offers and requests for co-rentals.
 
-we are using a map (googlemap api) to display the locations of nearby rooms . Roomie ses Firebase( FireStore/Storage) to manage its data.
+we are using a map (googlemap api) to display the locations of nearby rooms . Roomie uses Firebase( FireStore/Storage) to manage its data.
 
 A co-location offer can be made by a user of the application by creating an account and completing a form,
 
