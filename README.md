@@ -47,7 +47,7 @@ The application is built using [Flutter](https://flutter.dev/)
     flutter pub get
     ```
 
-## 📸 Roomie 
+## 📸 Roomie Prototypes
 
 ![Roomie Design](https://user-images.githubusercontent.com/70212296/175122869-51f7bfe6-a24d-4070-9d6a-7876d9b4d463.jpg)
 
